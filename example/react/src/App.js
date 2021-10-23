@@ -1,36 +1,63 @@
 import './App.css';
 import { 
-  getAppLocation,
+  resolveAppComponent,
   APP_LOCATION_CUSTOM_FIELD,
-  APP_LOCATION_APP_CONFIG
+  APP_LOCATION_APP_CONFIG,
+  APP_LOCATION_FLYOUT
  } from './agility-utils'
  
 import BasicCustomField from './BasicCustomField';
 import AppConfig from './AppConfig'
+import Flyout from './Flyout';
 
 function App() {
 
-  const appLocation = getAppLocation()
+  const Components = {
+    BasicCustomField,
+    AppConfig,
+    Flyout
+  }
 
-  const AppComponents = [
-    {
-      location: APP_LOCATION_CUSTOM_FIELD,
-      name: 'BasicCustomField',
-      Component: BasicCustomField,
-    },
-    {
-      location: APP_LOCATION_APP_CONFIG,
-      name: 'AppConfig',
-      Component: AppConfig
-    }
-  ]
+  const appConfig = {
+    name: 'Basic App',
+    version: '1',
+    params: [
+        { name: 'apiKey', label: 'API Key', type: 'string'}
+    ],
+    appComponents: [
+      {
+        location: APP_LOCATION_CUSTOM_FIELD,
+        label: 'Basic Custom Field',
+        name: 'BasicCustomField',
+        componentToRender: 'BasicCustomField',
+        params: [
+          { name: 'maxlength', label: 'Max Length', type: 'number'}
+        ]
+      },
+      {
+        location: APP_LOCATION_CUSTOM_FIELD,
+        label: 'Other Custom Field',
+        name: 'OtherCustomField',
+        componentToRender: 'BasicCustomField',
+        params: [
+          { name: 'maxlength', label: 'Max Length', type: 'number'}
+        ]
+      },
+      {
+        location: APP_LOCATION_APP_CONFIG,
+        name: 'AppConfig',
+        componentToRender: 'AppConfig'
+      },
+      {
+        location: APP_LOCATION_FLYOUT,
+        componentToRender: 'Flyout'
+      }
+    ]
+  };
 
-  // Select a component depending on a location in which the app is rendered.
-  const ComponentToRender = AppComponents.find((AppComponent) => {
-    return AppComponent.location === appLocation.location && AppComponent.name === appLocation.name;
-  });
-
-  return <ComponentToRender.Component />;
+  const ComponentToRender = Components[resolveAppComponent(appConfig)];
+  
+  return <ComponentToRender appConfig={appConfig} />;
 
 }
 
