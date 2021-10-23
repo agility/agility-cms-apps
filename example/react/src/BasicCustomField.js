@@ -43,6 +43,7 @@ function BasicCustomField() {
       size: null,
       appLocationName: 'ShowFlyout',
       onClose: (params) => {
+        //passes the parameters back from the app component that closed the flyout
         console.log(params);
       },
       fieldID,
