@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
-import { setAppConfig } from './agility-utils'
+import agilityAppSDK from '@agility/app-sdk'
 
 function AppConfig({ appConfig }) {
 
     const containerRef = useRef();
     useEffect(() => {
-        setAppConfig(appConfig);
+        agilityAppSDK.setAppConfig(appConfig);
     }, [appConfig]);
 
     return (

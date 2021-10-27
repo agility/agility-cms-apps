@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { initializeField, updateFieldValue, openFlyout, APP_LOCATION_CUSTOM_FIELD } from './agility-utils'
+import agilityAppSDK from '@agility/app-sdk'
 
 function BasicCustomField() {
 
@@ -10,10 +10,10 @@ function BasicCustomField() {
   const [configValues, setConfigValues] = useState({});
   const containerRef = useRef();
 
-  const location = APP_LOCATION_CUSTOM_FIELD;
+  const location = agilityAppSDK.APP_LOCATION_CUSTOM_FIELD;
 
   useEffect(() => {
-    initializeField({
+    agilityAppSDK.initializeField({
       location, 
       containerRef,
       //when field is ready, get the params (i.e. value and auth) from the CMS
@@ -33,12 +33,12 @@ function BasicCustomField() {
     //update the react state
     setValue(newVal);
     //notify Agility CMS of the new value
-    updateFieldValue({ value: newVal, location, fieldName, fieldID });
+    agilityAppSDK.updateFieldValue({ value: newVal, location, fieldName, fieldID });
   }
 
   const openCustomFlyout = () => {
     
-    openFlyout({
+    agilityAppSDK.openFlyout({
       title: 'Flyout Title',
       size: null,
       appLocationName: 'ShowFlyout',

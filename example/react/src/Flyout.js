@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { initializeField, closeFlyout, APP_LOCATION_FLYOUT } from './agility-utils'
+import agilityAppSDK from '@agility/app-sdk';
 
 function Flyout({ appConfig }) {
 
@@ -13,8 +13,8 @@ function Flyout({ appConfig }) {
     const [flyoutParams, setFlyoutParams] = useState({});
 
     useEffect(() => {
-        initializeField({
-            location: APP_LOCATION_FLYOUT,
+        agilityAppSDK.initializeField({
+            location: agilityAppSDK.APP_LOCATION_FLYOUT,
             containerRef,
             //when field is ready, get the params (i.e. value and auth) from the CMS
             onReady: (params) => {
@@ -32,7 +32,7 @@ function Flyout({ appConfig }) {
     }, []);
 
     const closeThisFlyout = () => {
-        closeFlyout({
+        agilityAppSDK.closeFlyout({
             fieldName,
             fieldID,
             params: {

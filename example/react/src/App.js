@@ -1,11 +1,7 @@
 import './App.css';
-import { 
-  resolveAppComponent,
-  APP_LOCATION_CUSTOM_FIELD,
-  APP_LOCATION_APP_CONFIG,
-  APP_LOCATION_FLYOUT
- } from './agility-utils'
- 
+
+import agilityAppSDK from '@agility/app-sdk'
+
 import BasicCustomField from './BasicCustomField';
 import AppConfig from './AppConfig'
 import Flyout from './Flyout';
@@ -26,7 +22,7 @@ function App() {
     ],
     appComponents: [
       {
-        location: APP_LOCATION_CUSTOM_FIELD,
+        location: agilityAppSDK.APP_LOCATION_CUSTOM_FIELD,
         label: 'Basic Custom Field',
         name: 'BasicCustomField',
         componentToRender: 'BasicCustomField',
@@ -35,7 +31,7 @@ function App() {
         ]
       },
       {
-        location: APP_LOCATION_CUSTOM_FIELD,
+        location: agilityAppSDK.APP_LOCATION_CUSTOM_FIELD,
         label: 'Other Custom Field',
         name: 'OtherCustomField',
         componentToRender: 'BasicCustomField',
@@ -44,20 +40,24 @@ function App() {
         ]
       },
       {
-        location: APP_LOCATION_APP_CONFIG,
+        location: agilityAppSDK.APP_LOCATION_APP_CONFIG,
         name: 'AppConfig',
         componentToRender: 'AppConfig'
       },
       {
-        location: APP_LOCATION_FLYOUT,
+        location: agilityAppSDK.APP_LOCATION_FLYOUT,
         componentToRender: 'Flyout'
       }
     ]
   };
 
-  const ComponentToRender = Components[resolveAppComponent(appConfig)];
+  const ComponentToRender = Components[agilityAppSDK.resolveAppComponent(appConfig)];
   
-  return <ComponentToRender appConfig={appConfig} />;
+  if(ComponentToRender) {
+    return <ComponentToRender appConfig={appConfig} />;
+  } else {
+    return <h2>Warning: App must be loaded within Agility CMS.</h2>
+  }
 
 }
 

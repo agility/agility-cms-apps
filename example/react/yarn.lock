@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@agility/app-sdk@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@agility/app-sdk/-/app-sdk-0.0.1.tgz#8bbdf886a612d98baf5af337268dc40caa90fde7"
+  integrity sha512-fyYfmy1zzvn/b7MuI+uUismF9ue9WBMl36vZnBCuI6pbky94k2saTqhX7jl60c9weAZ3Z64WstE+J0pK9m7ViA==
+
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
