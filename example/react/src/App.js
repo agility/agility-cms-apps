@@ -22,7 +22,7 @@ function App() {
     ],
     appComponents: [
       {
-        location: agilityAppSDK.APP_LOCATION_CUSTOM_FIELD,
+        location: agilityAppSDK.locations.APP_LOCATION_CUSTOM_FIELD,
         label: 'Basic Custom Field',
         name: 'BasicCustomField',
         componentToRender: 'BasicCustomField',
@@ -31,7 +31,7 @@ function App() {
         ]
       },
       {
-        location: agilityAppSDK.APP_LOCATION_CUSTOM_FIELD,
+        location: agilityAppSDK.locations.APP_LOCATION_CUSTOM_FIELD,
         label: 'Other Custom Field',
         name: 'OtherCustomField',
         componentToRender: 'BasicCustomField',
@@ -40,13 +40,14 @@ function App() {
         ]
       },
       {
-        location: agilityAppSDK.APP_LOCATION_APP_CONFIG,
+        location: agilityAppSDK.locations.APP_LOCATION_APP_CONFIG,
         name: 'AppConfig',
         componentToRender: 'AppConfig'
       },
       {
-        location: agilityAppSDK.APP_LOCATION_FLYOUT,
-        componentToRender: 'Flyout'
+        location: agilityAppSDK.locations.APP_LOCATION_FLYOUT,
+        componentToRender: 'Flyout',
+        name: 'Flyout1'
       }
     ]
   };

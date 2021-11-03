@@ -11,30 +11,30 @@ function Flyout({ appConfig }) {
     const [fieldLabel, setFieldLabel] = useState("");
     const [configValues, setConfigValues] = useState({});
     const [flyoutParams, setFlyoutParams] = useState({});
+    const [sdk, setSDK] = useState({})
 
     useEffect(() => {
-        agilityAppSDK.initializeField({
-            location: agilityAppSDK.APP_LOCATION_FLYOUT,
-            containerRef,
-            //when field is ready, get the params (i.e. value and auth) from the CMS
-            onReady: (params) => {
-                console.log('params', params);
-                //set the actual value of the field
-                setValue(params.fieldValue ? params.fieldValue : "");
-                setFieldID(params.fieldID);
-                setFieldName(params.fieldName);
-                setFieldLabel(params.fieldLabel);
-                setConfigValues(params.configValues);
-                setFlyoutParams(params.flyoutParams);
-            }
-        })
+        const init = async () => {
+            const fieldSDK = await agilityAppSDK.initializeField({
+                containerRef
+            })
+
+            setSDK(fieldSDK);
+
+            //set the actual value of the field
+            setValue(fieldSDK.fieldValue ? fieldSDK.fieldValue : "");
+            setFieldID(fieldSDK.fieldID);
+            setFieldName(fieldSDK.fieldName);
+            setFieldLabel(fieldSDK.fieldLabel);
+            setConfigValues(fieldSDK.configValues);
+            setFlyoutParams(fieldSDK.flyoutParams);
+        }
+        init();
 
     }, []);
 
     const closeThisFlyout = () => {
-        agilityAppSDK.closeFlyout({
-            fieldName,
-            fieldID,
+        sdk.closeFlyout({
             params: {
                 'somevalue': 'was set'
             }

@@ -5,7 +5,7 @@ function AppConfig({ appConfig }) {
 
     const containerRef = useRef();
     useEffect(() => {
-        agilityAppSDK.setAppConfig(appConfig);
+        agilityAppSDK.initializeAppConfig(appConfig);
     }, [appConfig]);
 
     return (

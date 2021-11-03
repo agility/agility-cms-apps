@@ -4,50 +4,48 @@ import agilityAppSDK from '@agility/app-sdk'
 function BasicCustomField() {
 
   const [value, setValue] = useState("");
-  const [fieldName, setFieldName] = useState("");
-  const [fieldID, setFieldID] = useState("");
   const [fieldLabel, setFieldLabel] = useState("");
   const [configValues, setConfigValues] = useState({});
+  const [sdk, setSDK] = useState({})
   const containerRef = useRef();
 
-  const location = agilityAppSDK.APP_LOCATION_CUSTOM_FIELD;
-
   useEffect(() => {
-    agilityAppSDK.initializeField({
-      location, 
-      containerRef,
-      //when field is ready, get the params (i.e. value and auth) from the CMS
-      onReady: (params) => {
-          //set the actual value of the field
-          setValue(params.fieldValue ? params.fieldValue : "");
-          setFieldID(params.fieldID);
-          setFieldName(params.fieldName);
-          setFieldLabel(params.fieldLabel);
-          setConfigValues(params.configValues);
-      }
-    })
+    const init = async () => {
+      const fieldSDK = await agilityAppSDK.initializeField({ containerRef });
+      setSDK(fieldSDK);
+      
+      //set the actual value of the field
+      setValue(fieldSDK.fieldValue ? fieldSDK.fieldValue : "");
+      setFieldLabel(fieldSDK.fieldLabel);
+      setConfigValues(fieldSDK.configValues);
 
-  }, [location]);
+      fieldSDK.subscribeToFieldValueChanges({
+        fieldName: 'Title',
+        onChange: ({fieldName, fieldValue}) => {
+          console.log(fieldName, fieldValue)
+        }
+      })
+    }
+    init();
+  }, []);
 
   const updateValue = (newVal) => {
     //update the react state
     setValue(newVal);
     //notify Agility CMS of the new value
-    agilityAppSDK.updateFieldValue({ value: newVal, location, fieldName, fieldID });
+    sdk.updateFieldValue({ fieldValue: newVal });
   }
 
   const openCustomFlyout = () => {
     
-    agilityAppSDK.openFlyout({
+    sdk.openFlyout({
       title: 'Flyout Title',
       size: null,
-      appLocationName: 'ShowFlyout',
+      name: 'Flyout1',
       onClose: (params) => {
         //passes the parameters back from the app component that closed the flyout
         console.log(params);
       },
-      fieldID,
-      fieldName,
       params: {
         key: 'value'
       }
