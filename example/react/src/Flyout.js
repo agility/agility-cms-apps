@@ -14,26 +14,21 @@ function Flyout({ appConfig }) {
     const [sdk, setSDK] = useState({})
 
     useEffect(() => {
-        const init = async () => {
-            const fieldSDK = await agilityAppSDK.initializeField({
-                containerRef
-            })
-
-            setSDK(fieldSDK);
+        agilityAppSDK.initializeFlyout({containerRef}).then((flyoutSDK) => {
+            setSDK(flyoutSDK);
 
             //set the actual value of the field
-            setValue(fieldSDK.fieldValue ? fieldSDK.fieldValue : "");
-            setFieldID(fieldSDK.fieldID);
-            setFieldName(fieldSDK.fieldName);
-            setFieldLabel(fieldSDK.fieldLabel);
-            setConfigValues(fieldSDK.configValues);
-            setFlyoutParams(fieldSDK.flyoutParams);
-        }
-        init();
-
-    }, []);
+            setValue(flyoutSDK.fieldValue ? flyoutSDK.fieldValue : "");
+            setFieldID(flyoutSDK.fieldID);
+            setFieldName(flyoutSDK.fieldName);
+            setFieldLabel(flyoutSDK.fieldLabel);
+            setConfigValues(flyoutSDK.configValues);
+            setFlyoutParams(flyoutSDK.flyoutParams);
+        })
+    }, [appConfig]);
 
     const closeThisFlyout = () => {
+        debugger;
         sdk.closeFlyout({
             params: {
                 'somevalue': 'was set'

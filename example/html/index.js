@@ -64,7 +64,6 @@ if(componentToRender === 'AppConfig') {
       
       //update CMS value when the input changes
       inputElem.addEventListener('change', function(e) {
-        debugger;
           sdk.updateFieldValue({ fieldValue: e.target.value })
       });
 

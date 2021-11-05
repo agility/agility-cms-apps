@@ -16,13 +16,15 @@ function App() {
 
   const appConfig = {
     name: 'Basic App',
+    desription: 'NEED description',
+    image: 'someimg',
     version: '1',
     params: [
         { name: 'apiKey', label: 'API Key', type: 'string'}
     ],
     appComponents: [
       {
-        location: agilityAppSDK.locations.APP_LOCATION_CUSTOM_FIELD,
+        location: agilityAppSDK.types.APP_LOCATION_CUSTOM_FIELD,
         label: 'Basic Custom Field',
         name: 'BasicCustomField',
         componentToRender: 'BasicCustomField',
@@ -31,7 +33,7 @@ function App() {
         ]
       },
       {
-        location: agilityAppSDK.locations.APP_LOCATION_CUSTOM_FIELD,
+        location: agilityAppSDK.types.APP_LOCATION_CUSTOM_FIELD,
         label: 'Other Custom Field',
         name: 'OtherCustomField',
         componentToRender: 'BasicCustomField',
@@ -40,18 +42,19 @@ function App() {
         ]
       },
       {
-        location: agilityAppSDK.locations.APP_LOCATION_APP_CONFIG,
+        location: agilityAppSDK.types.APP_LOCATION_APP_CONFIG,
         name: 'AppConfig',
         componentToRender: 'AppConfig'
       },
       {
-        location: agilityAppSDK.locations.APP_LOCATION_FLYOUT,
+        location: agilityAppSDK.types.APP_LOCATION_FLYOUT,
         componentToRender: 'Flyout',
         name: 'Flyout1'
       }
     ]
   };
 
+  //determine the React component we want to render based on what the CMS has requested...
   const ComponentToRender = Components[agilityAppSDK.resolveAppComponent(appConfig)];
   
   if(ComponentToRender) {

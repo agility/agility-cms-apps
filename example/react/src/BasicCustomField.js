@@ -10,28 +10,30 @@ function BasicCustomField() {
   const containerRef = useRef();
 
   useEffect(() => {
-    const init = async () => {
-      const fieldSDK = await agilityAppSDK.initializeField({ containerRef });
-      setSDK(fieldSDK);
-      
-      //set the actual value of the field
-      setValue(fieldSDK.fieldValue ? fieldSDK.fieldValue : "");
-      setFieldLabel(fieldSDK.fieldLabel);
-      setConfigValues(fieldSDK.configValues);
+      agilityAppSDK.initializeField({ containerRef }).then((fieldSDK) => {
 
-      fieldSDK.subscribeToFieldValueChanges({
-        fieldName: 'Title',
-        onChange: ({fieldName, fieldValue}) => {
-          console.log(fieldName, fieldValue)
-        }
-      })
-    }
-    init();
+        //set the SDK that we can use later...
+        setSDK(fieldSDK);
+      
+        //set the actual value of the field
+        setValue(fieldSDK.fieldValue);
+        setFieldLabel(fieldSDK.fieldLabel);
+        setConfigValues(fieldSDK.configValues);
+
+        fieldSDK.subscribeToFieldValueChanges({
+          fieldName: 'Title',
+          onChange: ({fieldName, fieldValue}) => {
+            //when the 'Title' changes, get notified, and do something...
+            console.log(fieldName, fieldValue);
+          }
+        })
+      });
   }, []);
 
   const updateValue = (newVal) => {
     //update the react state
     setValue(newVal);
+
     //notify Agility CMS of the new value
     sdk.updateFieldValue({ fieldValue: newVal });
   }
@@ -40,7 +42,7 @@ function BasicCustomField() {
     
     sdk.openFlyout({
       title: 'Flyout Title',
-      size: null,
+      size: agilityAppSDK.types.APP_FLYOUT_SIZE_LARGE,
       name: 'Flyout1',
       onClose: (params) => {
         //passes the parameters back from the app component that closed the flyout

@@ -3,16 +3,13 @@ import agilityAppSDK from '@agility/app-sdk'
 
 function AppConfig({ appConfig }) {
 
-    const containerRef = useRef();
     useEffect(() => {
+        //provide the CMS information about your app configuration
         agilityAppSDK.initializeAppConfig(appConfig);
     }, [appConfig]);
 
-    return (
-        <div className="AppConfig" ref={containerRef}>
-            <h1>App Config</h1>
-        </div>
-    );
+    //your AppConfig does not render any HTML, no need to output anything...
+    return null;
 }
 
 export default AppConfig;
