@@ -3,36 +3,31 @@
 var appConfig = {
     name: 'Basic App',
     version: '1',
-    params: [
+    configValues: [
         { name: 'apiKey', label: 'API Key', type: 'string'}
     ],
     appComponents: [
       {
-        location: agilityAppSDK.locations.APP_LOCATION_CUSTOM_FIELD,
+        location: agilityAppSDK.types.APP_LOCATION_CUSTOM_FIELD,
         label: 'Basic Custom Field',
         name: 'BasicCustomField',
-        componentToRender: 'BasicCustomField',
-        params: [
-          { name: 'maxlength', label: 'Max Length', type: 'number'}
-        ]
+        componentToRender: 'BasicCustomField'
       },
       {
-        location: agilityAppSDK.locations.APP_LOCATION_CUSTOM_FIELD,
+        location: agilityAppSDK.types.APP_LOCATION_CUSTOM_FIELD,
         label: 'Other Custom Field',
         name: 'OtherCustomField',
-        componentToRender: 'BasicCustomField',
-        params: [
-          { name: 'maxlength', label: 'Max Length', type: 'number'}
-        ]
+        componentToRender: 'BasicCustomField'
       },
       {
-        location: agilityAppSDK.locations.APP_LOCATION_APP_CONFIG,
+        location: agilityAppSDK.types.APP_LOCATION_APP_CONFIG,
         name: 'AppConfig',
         componentToRender: 'AppConfig'
       },
       {
-        location: agilityAppSDK.locations.APP_LOCATION_FLYOUT,
-        componentToRender: 'Flyout'
+        location: agilityAppSDK.types.APP_LOCATION_FLYOUT,
+        componentToRender: 'Flyout',
+        name: 'Flyout1'
       }
     ]
   };
@@ -92,8 +87,8 @@ if(componentToRender === 'AppConfig') {
     //Flyout (for Basic Custom Field)
     var flyoutContainer = document.getElementById('Flyout');
     flyoutContainer.style.display = 'block';
-
-    agilityAppSDK.initializeField({ containerRef: flyoutContainer }).then(function(sdk) {
+    
+    agilityAppSDK.initializeFlyout({ containerRef: flyoutContainer }).then(function(sdk) {
       //when communication is established with the CMS
       var fieldLabelElem = document.getElementById('FlyoutFieldLabel');
       var fieldNameElem = document.getElementById('FlyoutFieldName');
@@ -113,6 +108,6 @@ if(componentToRender === 'AppConfig') {
             }
         })
       });
-    })
+  })
 
 }
