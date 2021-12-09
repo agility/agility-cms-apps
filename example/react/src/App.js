@@ -17,7 +17,7 @@ function App() {
   const appConfig = {
     name: 'Basic App',
     version: '1',
-    params: [
+    configValues: [
         { name: 'apiKey', label: 'API Key', type: 'string'}        
     ],
     appComponents: [
@@ -25,19 +25,13 @@ function App() {
         location: agilityAppSDK.types.APP_LOCATION_CUSTOM_FIELD,
         label: 'Basic Custom Field',
         name: 'BasicCustomField',
-        componentToRender: 'BasicCustomField',
-        params: [
-          { name: 'maxlength', label: 'Max Length', type: 'number'}
-        ]
+        componentToRender: 'BasicCustomField'
       },
       {
         location: agilityAppSDK.types.APP_LOCATION_CUSTOM_FIELD,
         label: 'Other Custom Field',
         name: 'OtherCustomField',
-        componentToRender: 'BasicCustomField',
-        params: [
-          { name: 'maxlength', label: 'Max Length', type: 'number'}
-        ]
+        componentToRender: 'BasicCustomField'
       },
       {
         location: agilityAppSDK.types.APP_LOCATION_APP_CONFIG,
