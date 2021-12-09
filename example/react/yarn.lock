@@ -2,10 +2,12 @@
 # yarn lockfile v1
 
 
-"@agility/app-sdk@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@agility/app-sdk/-/app-sdk-0.0.1.tgz#8bbdf886a612d98baf5af337268dc40caa90fde7"
-  integrity sha512-fyYfmy1zzvn/b7MuI+uUismF9ue9WBMl36vZnBCuI6pbky94k2saTqhX7jl60c9weAZ3Z64WstE+J0pK9m7ViA==
+"@agility/app-sdk@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@agility/app-sdk/-/app-sdk-0.1.0.tgz#6c8a8861a91dfc04ae491e37c0a511b8e06783a1"
+  integrity sha512-J2O4QCSsTnFIbEJScEIkhjBAAjd6k1suOfBlRZ9pQFeTmpjcGucPRqmH+FOSoOrVl7lNJai7kXrbqZsvWAbm2Q==
+  dependencies:
+    regenerator-runtime "^0.13.9"
 
 "@babel/code-frame@7.10.4":
   version "7.10.4"
@@ -9222,6 +9224,11 @@ regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.7"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
+
+regenerator-runtime@^0.13.9:
+  version "0.13.9"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
+  integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
 
 regenerator-transform@^0.14.2:
   version "0.14.5"

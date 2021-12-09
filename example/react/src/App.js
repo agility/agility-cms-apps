@@ -7,20 +7,18 @@ import AppConfig from './AppConfig'
 import Flyout from './Flyout';
 
 function App() {
-
+  
   const Components = {
     BasicCustomField,
     AppConfig,
     Flyout
   }
-
+  
   const appConfig = {
     name: 'Basic App',
-    desription: 'NEED description',
-    image: 'someimg',
     version: '1',
     params: [
-        { name: 'apiKey', label: 'API Key', type: 'string'}
+        { name: 'apiKey', label: 'API Key', type: 'string'}        
     ],
     appComponents: [
       {
