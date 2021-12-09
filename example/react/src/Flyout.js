@@ -7,11 +7,12 @@ function Flyout({ appConfig }) {
 
     const [value, setValue] = useState("");
     const [fieldName, setFieldName] = useState("");
-    const [fieldID, setFieldID] = useState("");
     const [fieldLabel, setFieldLabel] = useState("");
-    const [configValues, setConfigValues] = useState({});
-    const [flyoutParams, setFlyoutParams] = useState({});
     const [sdk, setSDK] = useState({})
+
+    //const [fieldID, setFieldID] = useState("");
+    //const [configValues, setConfigValues] = useState({});
+    //const [flyoutParams, setFlyoutParams] = useState({});
 
     useEffect(() => {
         agilityAppSDK.initializeFlyout({containerRef}).then((flyoutSDK) => {
@@ -19,16 +20,17 @@ function Flyout({ appConfig }) {
 
             //set the actual value of the field
             setValue(flyoutSDK.fieldValue ? flyoutSDK.fieldValue : "");
-            setFieldID(flyoutSDK.fieldID);
             setFieldName(flyoutSDK.fieldName);
             setFieldLabel(flyoutSDK.fieldLabel);
-            setConfigValues(flyoutSDK.configValues);
-            setFlyoutParams(flyoutSDK.flyoutParams);
+
+            //You can also get access to this properties:
+            //setFieldID(flyoutSDK.fieldID);
+            //setConfigValues(flyoutSDK.configValues);
+            //setFlyoutParams(flyoutSDK.flyoutParams);
         })
     }, [appConfig]);
 
     const closeThisFlyout = () => {
-        debugger;
         sdk.closeFlyout({
             params: {
                 'somevalue': 'was set'

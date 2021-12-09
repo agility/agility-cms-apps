@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import agilityAppSDK from '@agility/app-sdk'
 
 function AppConfig({ appConfig }) {
