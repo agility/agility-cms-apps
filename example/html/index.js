@@ -20,11 +20,6 @@ var appConfig = {
         componentToRender: 'BasicCustomField'
       },
       {
-        location: agilityAppSDK.types.APP_LOCATION_APP_CONFIG,
-        name: 'AppConfig',
-        componentToRender: 'AppConfig'
-      },
-      {
         location: agilityAppSDK.types.APP_LOCATION_FLYOUT,
         componentToRender: 'Flyout',
         name: 'Flyout1'
@@ -37,7 +32,7 @@ var componentToRender = agilityAppSDK.resolveAppComponent(appConfig)
 //Determine what logic to run depending on the loaded component
 if(componentToRender === 'AppConfig') {
     //AppConfig
-    agilityAppSDK.initializeAppConfig(appConfig);
+    agilityAppSDK.setAppConfig(appConfig);
 } else if(componentToRender === 'BasicCustomField') {
     //BasicCustomField
     var fieldContainer = document.getElementById('BasicCustomField');

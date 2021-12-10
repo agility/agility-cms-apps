@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@agility/app-sdk@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@agility/app-sdk/-/app-sdk-0.1.4.tgz#c813fc66f247c1a8304268e9aef0110820226689"
-  integrity sha512-Z414TY07WrBcn2nFYl3rveczXgguldnMtP5Hpa55sgEYWY5ytx4BNZezCGHAqz4q9tPM2V09RyQIRbhhPO7+TA==
+"@agility/app-sdk@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@agility/app-sdk/-/app-sdk-0.2.1.tgz#c9ffb87db224027c775085c0d0f3584d89566ab9"
+  integrity sha512-eZF+VfHyUCN4OQHfvq9H84hteKf/tAn8smOMx6sEqr+wRyeZE9DBYYW8Z12zC2PqpL/XTvPlQYsusW3zR67e1Q==
   dependencies:
     regenerator-runtime "^0.13.9"
 

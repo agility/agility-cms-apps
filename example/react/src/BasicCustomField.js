@@ -14,7 +14,7 @@ function BasicCustomField() {
         
         //set the SDK that we can use later...
         setSDK(fieldSDK);
-      
+        
         //set the actual value of the field
         setValue(fieldSDK.fieldValue);
         setFieldLabel(fieldSDK.fieldLabel);
