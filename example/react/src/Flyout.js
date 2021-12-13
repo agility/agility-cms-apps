@@ -1,32 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import agilityAppSDK from '@agility/app-sdk';
+import agilityAppSDK from '@agility/app-sdk/src/index';
 
 function Flyout({ appConfig }) {
 
     const containerRef = useRef();
-
-    const [value, setValue] = useState("");
-    const [fieldName, setFieldName] = useState("");
-    const [fieldLabel, setFieldLabel] = useState("");
     const [sdk, setSDK] = useState({})
-
-    //const [fieldID, setFieldID] = useState("");
+    const [flyout, setFlyout] = useState({});
     //const [configValues, setConfigValues] = useState({});
-    //const [flyoutParams, setFlyoutParams] = useState({});
-
+    
     useEffect(() => {
         agilityAppSDK.initializeFlyout({containerRef}).then((flyoutSDK) => {
             setSDK(flyoutSDK);
-
-            //set the actual value of the field
-            setValue(flyoutSDK.fieldValue ? flyoutSDK.fieldValue : "");
-            setFieldName(flyoutSDK.fieldName);
-            setFieldLabel(flyoutSDK.fieldLabel);
+            setFlyout(flyoutSDK.flyout);
 
             //You can also get access to this properties:
-            //setFieldID(flyoutSDK.fieldID);
-            //setConfigValues(flyoutSDK.configValues);
-            //setFlyoutParams(flyoutSDK.flyoutParams);
+            //setConfigValues(flyoutSDK.configValues);    
+
         })
     }, [appConfig]);
 
@@ -41,10 +30,12 @@ function Flyout({ appConfig }) {
 
     return (
         <div className="Flyout" ref={containerRef}>
+            { sdk && sdk.initiator &&
             <div>
-                <div>This is a custom flyout for {fieldLabel}, {fieldName} who has a field value of {value}</div>
+                <div>This is a custom flyout {flyout.title} that was initialized by the {sdk.initiator.name} field.</div>
                 <button onClick={closeThisFlyout}>Close Flyout</button>
             </div>
+            }            
         </div>
     );
 }

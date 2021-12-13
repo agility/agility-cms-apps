@@ -50,7 +50,7 @@ if(componentToRender === 'AppConfig') {
       configValuesElem.innerText = JSON.stringify(sdk.configValues);
       
       //set the current value
-      inputElem.value = sdk.fieldValue;
+      inputElem.value = sdk.field.value;
       
       //update CMS value when the input changes
       inputElem.addEventListener('change', function(e) {
@@ -58,7 +58,7 @@ if(componentToRender === 'AppConfig') {
       });
 
       //set the fieldLabel to show
-      labelElem.innerText = sdk.fieldLabel;
+      labelElem.innerText = sdk.field.label;
 
       //add the click handler to open a flyout
       openFlyoutBtnElem.addEventListener('click', function(e) {
@@ -85,16 +85,12 @@ if(componentToRender === 'AppConfig') {
     
     agilityAppSDK.initializeFlyout({ containerRef: flyoutContainer }).then(function(sdk) {
       //when communication is established with the CMS
-      var fieldLabelElem = document.getElementById('FlyoutFieldLabel');
-      var fieldNameElem = document.getElementById('FlyoutFieldName');
-      var fieldValueElem = document.getElementById('FlyoutFieldValue');
-      var closeFlyoutBtnElem = document.getElementById('FlyoutCloseBtn');
+      var flyoutTitleElem = document.getElementById('FlyoutTitle');
+      var flyoutInitiatorElem = document.getElementById('FlyoutInitiator');
 
-      //set some values to show based on the field that executed this flyout
-      fieldLabelElem.innerText = sdk.fieldLabel;
-      fieldNameElem.innerText = sdk.fieldName;
-      fieldValueElem.innerText = sdk.fieldValue;
-
+      flyoutTitleElem.innerText = sdk.flyout.title;
+      flyoutInitiatorElem.innerText = sdk.initiator.name;
+      
       //when ready to close the flyout, close the flyout and pass-back some values to the field UI component that opened it
       closeFlyoutBtnElem.addEventListener('click', function(e) {
         sdk.closeFlyout({

@@ -1,6 +1,6 @@
 import './App.css';
 
-import agilityAppSDK from '@agility/app-sdk'
+import agilityAppSDK from '@agility/app-sdk/src/index'
 
 import BasicCustomField from './BasicCustomField';
 import Flyout from './Flyout';
@@ -38,7 +38,7 @@ function App() {
       }
     ]
   };
-
+  
   const componentRequested = agilityAppSDK.resolveAppComponent(appConfig);
 
   if(componentRequested === 'AppConfig') {

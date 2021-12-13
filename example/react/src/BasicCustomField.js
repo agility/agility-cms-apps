@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import agilityAppSDK from '@agility/app-sdk'
+import agilityAppSDK from '@agility/app-sdk/src/index'
 
 function BasicCustomField() {
 
@@ -16,8 +16,8 @@ function BasicCustomField() {
         setSDK(fieldSDK);
         
         //set the actual value of the field
-        setValue(fieldSDK.fieldValue);
-        setFieldLabel(fieldSDK.fieldLabel);
+        setValue(fieldSDK.field.value);
+        setFieldLabel(fieldSDK.field.label);
         setConfigValues(fieldSDK.configValues);
 
         fieldSDK.subscribeToFieldValueChanges({
@@ -58,7 +58,7 @@ function BasicCustomField() {
     <div className="BasicCustomField" ref={containerRef}>
       <label>
         {fieldLabel}
-        <input style={{display: 'block', width: '100%'}} type="text" value={value} onChange={e => updateValue(e.target.value)} />
+        <input style={{display: 'block', width: '100%'}} type="text" defaultValue={value} onChange={e => updateValue(e.target.value)} />
       </label>
       <p>API Key: {configValues.apiKey}</p>
       <button onClick={openCustomFlyout}>Open Flyout</button>
