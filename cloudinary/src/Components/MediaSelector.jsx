@@ -45,7 +45,7 @@ export default function MediaSelector({ appConfig }) {
 	const initCloudinary = () => {
 
 		const cloud_name = sdk.configValues.cloudName;
-		const api_key = "927841219782672"
+		const api_key = sdk.configValues.apiKey;
 
 		window.ml = window.cloudinary.openMediaLibrary({
 			cloud_name,

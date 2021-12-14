@@ -8,7 +8,7 @@ This uses the [@agility/apps-sdk - see here for docs](https://github.com/agility
 
 In order to use an App in Agility CMS, you must register this app witin your Organization in Agility CMS. Then, you can install this app within any Instance in your Organization.
 
-### [Register this App in Agility](https://manager.agilitycms.com/org/apps/create-app?name=Cloudinary%20App%20-%20HTML&url=https%3A%2F%2Fagility-cms-apps-basic-example-html.vercel.app%2F&description=This%20is%20an%20example%20app%20built%20using%20HTML%20and%20JavaScript.%20It's%20a%20good%20starting%20point%20for%20learning%20how%20to%20build%20custom%20apps.&icon=https%3A%2F%2Fstatic.agilitycms.com%2Fjs.png)
+### [Register this App in Agility](https://manager.agilitycms.com/org/apps/create-app?name=Cloudinary&url=https%3A%2F%2Fagility-cms-cloudinary-app.vercel.app%2F&description=Use%20images%20and%20videos%20from%20your%20Cloudinary%20media%20library%20in%20Agility%20CMS.&icon=https%3A%2F%2Fcdn.agilitycms.com%2Fcontent-manager%2Fpublic-app-icons%2Fcloudinary.svg)
 
 > **Note**: this uses a deployed version of this app that is publicly available.
 
