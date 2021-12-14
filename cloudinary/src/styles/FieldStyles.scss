@@ -1,0 +1,138 @@
+.field-row {
+	font-family: Muli, sans;
+	font-stretch: 90%;
+	padding-bottom: 5px;
+	label {
+		font-weight: 600;
+		margin-top: 3px;
+		margin-bottom: 0;
+		display: block;
+		font-size: 13px;
+		padding-bottom: 3px;
+
+		span.required {
+			padding-left: 5px;
+			color: #b12629;
+		}
+		.field-description {
+			padding-left: 5px;
+			font-size: 18px;
+			color: #cccccc;
+		}
+	}
+
+	.form-control {
+		background-color: #fff;
+		background-image: none;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		color: #262523;
+		display: block;
+		font-weight: 400;
+		font-family: Muli, sans-serif;
+		font-size: 13px;
+		height: 32px;
+		line-height: normal;
+		padding: 2px 8px;
+		transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+		width: 100%;
+		margin: 4px 0 3px;
+		&:focus {
+			outline: 0 none;
+			border-color: #66afe9;
+		}
+	}
+}
+
+.agility-field-panel {
+	border: 1px solid #ccc;
+	.panel-heading {
+		display: flex;
+		justify-content: space-between;
+		background-color: #fff;
+		padding: 6px 8px;
+
+		.panel-title {
+			margin: 0;
+			font-weight: 500;
+			color: #262523;
+			line-height: 25px;
+			font-size: 13px;
+			-ms-text-overflow: ellipsis;
+			-o-text-overflow: ellipsis;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		.top-buttons {
+			button {
+				margin-left: 5px;
+			}
+		}
+	}
+
+	.panel-body {
+		border-top: 1px solid #ccc;
+		padding: 8px;
+		.attachment-row {
+			display: flex;
+			position: relative;
+			.agility-attachment-thm {
+				display: block;
+				width: 33%;
+
+				img,
+				video {
+					width: 100%;
+					border: 1px solid #ccc;
+				}
+			}
+			.lbl-alt-text {
+				display: flex;
+				align-items: center;
+				span {
+					white-space: nowrap;
+				}
+				.agility-attachment-alt {
+					width: 100%;
+					margin-left: 5px;
+				}
+			}
+
+			.attachment-meta-data {
+				padding-left: 8px;
+				width: 67%;
+				font-weight: 400;
+				font-size: 13px;
+				> div {
+					> span:first-child {
+						font-weight: 600;
+						padding-right: 5px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.btn {
+	border-radius: 3px;
+	padding: 4px 8px;
+	font-size: 12px;
+	font-weight: 600;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+
+	&.btn-primary {
+		background-color: #4600a8;
+		border-color: #4600a8;
+		border-width: 1px !important;
+		color: #fff;
+		cursor: pointer;
+		&:hover {
+			background-color: #5800d4;
+			border-color: #5800d4;
+		}
+	}
+}
