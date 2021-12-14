@@ -17,4 +17,4 @@ Alternatively, you can `git clone` this repository and deploy this to your own w
 1. Clone the repository
 2. Deploy to a static host such as **Netlify** or **Vercel**
 3. Register the App within Agility CMS in your Organization - you must be an Organization Admin
-4. Install the App in your intance(s)
+4. Install the App in your instance(s)
