@@ -43,7 +43,7 @@ export default function MediaSelector({ appConfig }) {
 	 * Initialize the cloudinary media browser
 	 */
 	const initCloudinary = () => {
-
+		console.log("sdk.configValues", sdk.configValues)
 		const cloud_name = sdk.configValues.cloudName;
 		const api_key = sdk.configValues.apiKey;
 
