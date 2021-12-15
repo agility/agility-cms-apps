@@ -15,6 +15,7 @@ function App() {
   const appConfig = {
     name: 'Basic App',
     version: '1',
+    documentationLink: 'https://github.com/agility/agility-cms-apps/tree/main/example/react',
     configValues: [
         { name: 'apiKey', label: 'API Key', type: 'string'}        
     ],
