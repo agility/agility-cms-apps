@@ -92,7 +92,7 @@ if(componentToRender === 'AppConfig') {
       flyoutInitiatorElem.innerText = sdk.initiator.name;
       
       //when ready to close the flyout, close the flyout and pass-back some values to the field UI component that opened it
-      closeFlyoutBtnElem.addEventListener('click', function(e) {
+      document.getElementById("FlyoutCloseBtn").addEventListener('click', function(e) {
         sdk.closeFlyout({
             params: {
                 'somevalue': 'was set'
