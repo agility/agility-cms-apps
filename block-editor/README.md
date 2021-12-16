@@ -7,7 +7,7 @@ This is using Next.js so that we can support some server-side features (via API 
 ## Using this App
 In order to use an App in Agility CMS, you must register this app witin your Organization in Agility CMS. Then, you can install this app within any Instance in your Organization.
 
-### [Register this App in Agility](https://manager.agilitycms.com/org/apps/create-app?name=Block%20Editor&url=https%3A%2F%2Fagility-cms-apps-basic-example-html.vercel.app%2F&description=This%20is%20an%20example%20app%20built%20using%20HTML%20and%20JavaScript.%20It's%20a%20good%20starting%20point%20for%20learning%20how%20to%20build%20custom%20apps.&icon=https%3A%2F%2Fstatic.agilitycms.com%2Fjs.png)
+### [Register this App in Agility](https://manager.agilitycms.com/org/apps/create-app?name=Block%20Editor&url=https%3A%2F%2Fagility-cms-block-editor-app.vercel.app%2F&description=Add%20rich%20blocks%20of%20content%20(including%20paragraphs%2C%20headings%2C%20images%2C%20quotes%2C%20and%20more)%20that%20are%20stored%20as%20JSON.%20&icon=https%3A%2F%2Fcdn.agilitycms.com%2Fcontent-manager%2Fpublic-app-icons%2Fblock-editor.png)
 
 > **Note**: this uses a deployed version of this app that is publicly available.
 
@@ -17,7 +17,6 @@ Alternatively, you can `git clone` this repository and deploy this to your own w
 2. Deploy to a static host such as **Netlify** or **Vercel**
 3. Register the App within Agility CMS in your Organization - you must be an Organization Admin
 4. Install the App in your instance(s)
-
 
 
 ## Running this Locally
