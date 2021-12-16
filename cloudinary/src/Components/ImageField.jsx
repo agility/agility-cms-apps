@@ -1,6 +1,7 @@
 
 import { useEffect, useState, useRef } from 'react';
-import agilityAppSDK from '@agility/app-sdk'
+import agilityAppSDK from '@agility/app-sdk';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import numeral from 'numeral'
@@ -23,7 +24,6 @@ export default function ImageField() {
 			//set the SDK and field config that we can use later...
 			setSDK(fieldSDK);
 			setFieldConfig(fieldSDK.field);
-			console.log("field sdk", fieldSDK)
 			//set the actual value of the field
 			if (fieldSDK.field.value) {
 				try {

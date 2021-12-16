@@ -1,7 +1,7 @@
 
 
 import { useEffect, useRef, useState } from 'react';
-import agilityAppSDK from '@agility/app-sdk/src/index';
+import agilityAppSDK from '@agility/app-sdk';
 import useScript from 'react-script-hook';
 
 export default function MediaSelector({ appConfig }) {
@@ -21,6 +21,7 @@ export default function MediaSelector({ appConfig }) {
 	useEffect(() => {
 		//init the SDK in this component
 		agilityAppSDK.initializeFlyout(containerRef).then((flyoutSDK) => {
+
 			setSDK(flyoutSDK);
 
 			setSearch(flyoutSDK.flyout.params.search)
@@ -31,7 +32,7 @@ export default function MediaSelector({ appConfig }) {
 
 	useEffect(() => {
 		//only init the cloudinary ui once...
-		if (!initialized && !loading && sdk) {
+		if (!initialized && !loading && sdk.configValues) {
 			setInitialized(true)
 			initCloudinary()
 		}
@@ -43,7 +44,7 @@ export default function MediaSelector({ appConfig }) {
 	 * Initialize the cloudinary media browser
 	 */
 	const initCloudinary = () => {
-		console.log("sdk.configValues", sdk.configValues)
+
 		const cloud_name = sdk.configValues.cloudName;
 		const api_key = sdk.configValues.apiKey;
 
