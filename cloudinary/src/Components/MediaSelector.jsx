@@ -21,12 +21,9 @@ export default function MediaSelector({ appConfig }) {
 	useEffect(() => {
 		//init the SDK in this component
 		agilityAppSDK.initializeFlyout(containerRef).then((flyoutSDK) => {
-
 			setSearch(flyoutSDK.flyout.params.search)
-			setSDK(flyoutSDK);
-
 			setTransformations(flyoutSDK.flyout.params.transformations)
-
+			setSDK(flyoutSDK);
 		})
 	}, [appConfig]);
 
