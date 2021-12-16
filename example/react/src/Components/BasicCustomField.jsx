@@ -18,7 +18,7 @@ export default function BasicCustomField() {
 
 	useEffect(() => {
 		agilityAppSDK.initializeField({ containerRef }).then((fieldSDK) => {
-
+			
 			//set the SDK that we can use later...
 			setSDK(fieldSDK);
 
@@ -49,7 +49,10 @@ export default function BasicCustomField() {
 		sdk.updateFieldValue({ fieldValue: newVal });
 	}
 
-	const openCustomFlyout = () => {
+	const openCustomFlyout = async () => {
+
+		//retrieve the latest values of the content item - so we can pass to our flyout
+		const contentItem = await sdk.getContentItem();
 
 		sdk.openFlyout({
 			title: 'Flyout Title',
@@ -69,7 +72,8 @@ export default function BasicCustomField() {
 
 			},
 			params: {
-				key: 'value'
+				key: 'value', //example
+				contentItem: contentItem
 			}
 		})
 	}

@@ -14,6 +14,7 @@ function Flyout({ appConfig }) {
 
 	useEffect(() => {
 		agilityAppSDK.initializeFlyout({ containerRef }).then((flyoutSDK) => {
+			
 			setSDK(flyoutSDK);
 			setFlyout(flyoutSDK.flyout);
 
@@ -34,6 +35,10 @@ function Flyout({ appConfig }) {
 		sdk.closeFlyout({})
 	}
 
+	if(sdk && sdk.flyout) {
+		//access the parameters passed to your flyout
+		console.log('flyout params', sdk.flyout.params)
+	}
 
 	return (
 		<div className="flyout-panel" ref={containerRef}>
