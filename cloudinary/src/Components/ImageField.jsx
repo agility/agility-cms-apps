@@ -23,7 +23,7 @@ export default function ImageField() {
 			//set the SDK and field config that we can use later...
 			setSDK(fieldSDK);
 			setFieldConfig(fieldSDK.field);
-
+			console.log("field sdk", fieldSDK)
 			//set the actual value of the field
 			if (fieldSDK.field.value) {
 				try {
@@ -104,13 +104,15 @@ export default function ImageField() {
 						{!attachment && <span> No image is attached yet.</span>}
 						{attachment && <span> An image is attached to this item.</span>}
 					</div>
-					<div className="top-buttons">
-						{attachment &&
-							<button type="button" className="trash btn btn-primary" onClick={removeAttachment}>Remove</button>
-						}
+					{fieldConfig.readOnly !== true &&
+						<div className="top-buttons">
+							{attachment &&
+								<button type="button" className="trash btn btn-primary" onClick={removeAttachment}>Remove</button>
+							}
 
-						<button type="button" className="browse btn btn-primary" onClick={openMediaSelection}>Browse</button>
-					</div>
+							<button type="button" className="browse btn btn-primary" onClick={openMediaSelection}>Browse</button>
+						</div>
+					}
 				</div>
 				{attachment &&
 					<div className="panel-body" >
@@ -122,10 +124,18 @@ export default function ImageField() {
 							</a>
 
 							<div className="attachment-meta-data">
-								<label className="lbl-alt-text">
-									<span>Alt Text:</span>
-									<input type="text" className="form-control agility-attachment-alt" defaultValue={attachment?.context?.custom?.alt} onChange={(e) => setAltText(e.target.value)} />
-								</label>
+								{fieldConfig.readOnly !== true &&
+									<label className="lbl-alt-text">
+										<span>Alt Text:</span>
+										<input type="text" className="form-control agility-attachment-alt" defaultValue={attachment?.context?.custom?.alt} onChange={(e) => setAltText(e.target.value)} />
+									</label>
+								}
+								{fieldConfig.readOnly === true &&
+									<div>
+										<span>Alt Text:</span>
+										<span className="agility-attachment-alt"> {attachment?.context?.custom?.alt}</span>
+									</div>
+								}
 
 								<div>
 									<span>Type:</span>
