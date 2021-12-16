@@ -101,13 +101,15 @@ export default function VideoField() {
 						{!attachment && <span> No video is attached yet.</span>}
 						{attachment && <span> A video is attached to this item.</span>}
 					</div>
-					<div className="top-buttons">
-						{attachment &&
-							<button type="button" className="trash btn btn-primary" onClick={removeAttachment}>Remove</button>
-						}
+					{fieldConfig.readOnly !== true &&
+						<div className="top-buttons">
+							{attachment &&
+								<button type="button" className="trash btn btn-primary" onClick={removeAttachment}>Remove</button>
+							}
 
-						<button type="button" className="browse btn btn-primary" onClick={openMediaSelection}>Browse</button>
-					</div>
+							<button type="button" className="browse btn btn-primary" onClick={openMediaSelection}>Browse</button>
+						</div>
+					}
 				</div>
 				{attachment &&
 					<div className="panel-body" >
