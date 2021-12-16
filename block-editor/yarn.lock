@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@agility/app-sdk@^0.9.6":
-  version "0.9.6"
-  resolved "https://registry.yarnpkg.com/@agility/app-sdk/-/app-sdk-0.9.6.tgz#8dc032ccd0187ce3a5dc8d996c433381f73c34bd"
-  integrity sha512-slkwAgPKscJ23377JgjGvSL8T60yNFlyBEYx7vbTugfte1SZP4D3CBGdPEn1flebvZEy3w4KxZdS/GOsftXbUw==
+"@agility/app-sdk@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@agility/app-sdk/-/app-sdk-1.0.0.tgz#48c2b876ba35315c3270a852f2f8a1c0038fbf99"
+  integrity sha512-wOVUi1H05uGMraNejd3FAxhtai6NOi57XF25IHmsK5JNodfRXLKSW+RrbWLFZSdIxp5+QQQOFsuqAK2QZBY/VA==
   dependencies:
     regenerator-runtime "^0.13.9"
 
@@ -17,10 +17,10 @@
     axios "^0.21.1"
     axios-cache-adapter "^2.4.1"
 
-"@agility/content-management@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@agility/content-management/-/content-management-0.2.0.tgz#e3b17442a295784ca38e59c8e6f1bf3e86382c66"
-  integrity sha512-N83XOXiailCZ+/joDDhe46ByPz66tRE26wIVbCQwZBMOnNCBUYa1t/NJrvEJOqRdyrekPDNiKUo9DPBgF4mGZQ==
+"@agility/content-management@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@agility/content-management/-/content-management-0.3.0.tgz#66d6da623dceac4447cffabd09759a9fd28e91ca"
+  integrity sha512-vkv200ftysHuYpg64wnHK5yX9sL5wx/ly4y++hD5EZGhZnsg4BCykFtzTdmurTAQW8/qM7IB0T1MCGOuhJ792Q==
   dependencies:
     axios "^0.18.1"
     dotenv "^8.2.0"

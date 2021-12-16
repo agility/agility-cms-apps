@@ -22,22 +22,30 @@ import DragDrop from 'editorjs-drag-drop'
 
 
 
-const BlockEditor = () => {
+const BlockEditor = ({ appConfig }) => {
     
 	const containerRef = useRef()
+    const [editor, setEditor] = useState({})
 
     useEffect(() => {
+        //if running locally after a hot-module replacement, don't reinitialize everything...
+        if(editor && Object.keys(editor).length > 0) return;
+        
         //get the field ready to wait for messages from the parent
         agilityAppSDK.initializeField({ containerRef }).then((fieldSDK) => {
-            const auth = {
+            
+            const uploadImagePayload = {
                 websiteName: fieldSDK.websiteName,
-                securityKey: fieldSDK.configValues.securityKey
+                securityKey: fieldSDK.configValues.securityKey,
+                location: fieldSDK.configValues.dcLocation,
+                assetFolder: fieldSDK.configValues.assetFolder ? fieldSDK.configValues.assetFolder : ''
             };
-            //TODO: do we need this?
-            const custom = {};
+
+            console.log(fieldSDK)
+            
             const valueJS = fieldSDK.field.value ? JSON.parse(fieldSDK.field.value) : null;
             
-            const editor = new EditorJS({
+            const editorJS = new EditorJS({
                 autofocus: false, //setting this to true will not do anything because this is in an iframe
                 holder: document.querySelector('#editorjs'),
                 placeholder: "📝 Enter text, paste images/embed urls, or select a block to add here...",
@@ -60,7 +68,7 @@ const BlockEditor = () => {
                                 byFile: '/api/image/uploadByFile',
                                 byUrl: '/api/image/fetchByUrl'
                             },
-                            additionalRequestData: { ...auth, ...custom }
+                            additionalRequestData: {...uploadImagePayload}
                         }
                     },
                     raw: Raw,
@@ -81,18 +89,18 @@ const BlockEditor = () => {
                 },
                 onChange: () => {
         
-                    editor.save().then(outputValue => {
+                    editorJS.save().then(outputValue => {
                         const valueJSON = JSON.stringify(outputValue)
                         fieldSDK.updateFieldValue({ fieldValue: valueJSON })
                     })
         
                 },
                 onReady: () => {
-                    new DragDrop(editor);
-                    //const undo = new Undo({editor})
+                    new DragDrop(editorJS);
+                    //const undo = new Undo({editorJS})
         
                     if(valueJS && valueJS.blocks && valueJS.blocks.length > 0) {
-                        editor.render(valueJS);
+                        editorJS.render(valueJS);
                         //undo.initialize(fieldValue);
                     }
                 
@@ -100,8 +108,9 @@ const BlockEditor = () => {
         
             });
 
+            setEditor(editorJS);
         });
-    }, []);
+    }, [appConfig, editor]);
 
 	return (
 		<div style={{ background: "#fff", padding: '0 10px' }}>

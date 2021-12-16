@@ -1,98 +1,22 @@
-This is a custom field for [Editorjs](https://editorjs.io/) to be used in [Agility CMS](https://agilitycms.com). This is using Next.js so that we can support some server-side features (via API routes) such as uploading images to your Assets in [Agility CMS](https://agilitycms.com).
+# Agility CMS Block Editor App
 
-## Installation Script
-In order to use this field, you'll need to register it in your custom scripts file that is connected to your Agility CMS instance (via UI Extensions). You do not need to host your own version of this, but if you'd like to customize how it works, consider cloning this and deploying your own version to [Vercel](https://vercel.com).
+This is an App built using the [App SDK](https://github.com/agility/agility-cms-app-sdk) that enables [Editorjs](https://editorjs.io/) to be used as a `Custom Field` in [Agility CMS](https://agilitycms.com). 
 
-In your `js` file, add the following code snippet - you may already have other fields defined, so you would append this to the file:
-```javascript
-var BlockEditorCustomField = function() {
-    var self = this;
-    self.Label = "Block Editor JSON (Experimental)";
-    self.ReferenceName = "BlockEditorJSON";
-    self.Render = function (options) {
-        /// <summary>Function called whenever the form container this Custom Field Type is rendered or refreshed.</summary>
-        /// <param name="options" type="Object">
-        ///     <field name="$elem" type="jQueryElem">The .field-row jQuery Dom Element.</field>
-        ///     <field name="contentItem" type="ContentItem Object">The entire Content Item object including Values and their KO Observable properties of all other fields on the form.</field>
-        ///     <field name="fieldBinding" type="KO Observable">The value binding of thie Custom Field Type. Get and set this field's value using this property.</field>
-        ///     <field name="fieldSetting" type="Object">Object representing the field's settings such as 'Hidden', 'Label', and 'Description'</field>
-        ///     <field name="readonly" type="boolean">Represents if this field should be readonly or not.</field>
-        /// </param>
+This is using Next.js so that we can support some server-side features (via API routes) such as uploading images to your Assets in [Agility CMS](https://agilitycms.com).
 
-		var $pnl = $(".rt-field", options.$elem);
+## Using this App
+In order to use an App in Agility CMS, you must register this app witin your Organization in Agility CMS. Then, you can install this app within any Instance in your Organization.
 
-		if ($pnl.size() == 0) {
+### [Register this App in Agility](https://manager.agilitycms.com/org/apps/create-app?name=Block%20Editor&url=https%3A%2F%2Fagility-cms-apps-basic-example-html.vercel.app%2F&description=This%20is%20an%20example%20app%20built%20using%20HTML%20and%20JavaScript.%20It's%20a%20good%20starting%20point%20for%20learning%20how%20to%20build%20custom%20apps.&icon=https%3A%2F%2Fstatic.agilitycms.com%2Fjs.png)
 
-			var row = $(options.$elem).parents(".row")
-			$(".tab-CONTENT-tab", row).css("padding", 0)
-			
-			//uncomment below to hide sidebar and take the full width screen
-			// $(".col-lg-8", row).addClass("col-lg-12").removeClass("col-lg-8")
-			// $(".col-lg-4", row).addClass("hidden")
-			$(".tab-CONTENT-tab", row).css("padding", 0)
+> **Note**: this uses a deployed version of this app that is publicly available.
 
-			//var url = 'http://localhost:3000'; //for testing locally
-            var url = 'https://agilitycms-block-editor-custom-field.vercel.app/'; //uses a hosted, multi-tenanted endpoint for any customer, replace with your own deployed URL if you have your own version
-			var iframe = document.createElement('iframe');
-			iframe.className = "rt-field";
-			iframe.width = '100%';
-			iframe.height = '500px';
-			iframe.src = url;
-			iframe.onload = function() {
-				console.log('Block Editor *CMS* => Iframe Loaded')
-			}
-			options.$elem.html(iframe);
+Alternatively, you can `git clone` this repository and deploy this to your own website hosting provider.
 
-			var referenceName = ContentManager.ViewModels.Navigation.TopStackItem().item().ContentView().ReferenceName();
-
-			window.addEventListener("message", function (e) {
-
-				var messageType = e.data.type
-
-				switch (messageType) {
-					case 'fieldIsReady':
-						var config = ContentManager.ViewModels.Navigation.globalConfig();
-						console.log('Block Editor *CMS* => Sending Auth and fieldValue message');
-						iframe.contentWindow.postMessage({
-							message: {
-								auth: {
-									guid: config.Guid,
-									websiteName: config.WebsiteName,
-									securityKey: config.SecurityKey,
-									languageCode: ContentManager.ViewModels.Navigation.currentLanguageCode(),
-									location: 'USA', //or CANADA
-								},
-								fieldValue: ko.unwrap(options.fieldBinding),
-								custom: {
-									assetFolder: '/block-editor/' + referenceName.toLowerCase()
-								}
-							},
-							type: 'setInitialProps'
-						}, url)
-
-						break
-					case 'setNewValueFromCustomField':
-						options.fieldBinding(e.data.message);
-						break;
-					case 'setHeightCustomField':
-						iframe.height = e.data.message + "px"
-						break;
-
-					default:
-						//do nothing...
-						console.log("not handled", e.data)
-				}
-
-
-			}, false);
-
-		}
-
-    }
-}
-
-ContentManager.Global.CustomInputFormFields.push(new BlockEditorCustomField());
-```
+1. Clone the repository
+2. Deploy to a static host such as **Netlify** or **Vercel**
+3. Register the App within Agility CMS in your Organization - you must be an Organization Admin
+4. Install the App in your instance(s)
 
 
 

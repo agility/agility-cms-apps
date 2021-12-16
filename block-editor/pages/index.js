@@ -19,7 +19,9 @@ const appConfig = {
   version: '1.0.0',
   documentationLink: 'https://github.com/agility/agility-cms-apps/tree/main/block-editor',
   configValues: [
-      { name: 'securityKey', label: 'Agility CMS Security Key', type: 'string'}        
+      { name: 'securityKey', label: 'Agility CMS Security Key', type: 'string'},
+      { name: 'dcLocation', label: 'Data Center Location ("USA",  "Canada", or "Europe")', type: 'string'},        
+      { name: 'assetFolder', label: 'Asset Upload Folder Path (i.e. "images/block-editor")', type: 'string'}
   ],
   appComponents: [
     {

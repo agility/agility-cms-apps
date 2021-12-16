@@ -11,12 +11,12 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.post(async(req, res) => {
-    
+  
     //set up Agility CMS Management client
     const api = agilityMgmt.getApi({
-        location: req.body.location,
-        websiteName: req.body.websiteName,
-        securityKey: req.body.securityKey
+        location: req.body.location[0],
+        websiteName: req.body.websiteName[0],
+        securityKey: req.body.securityKey[0]
     });
     
     //parse the image from the request
@@ -33,11 +33,12 @@ handler.post(async(req, res) => {
     //build a unique filename with a timestamp
     const fileName = getNewFileName(image.originalFilename);
 
+    
     //upload the file to Agility CMS
     const uploadRes = await api.uploadMedia({
       fileName,
       fileContent,
-      mediaFolder: req.body?.assetFolder
+      mediaFolder: req.body.assetFolder ? req.body.assetFolder[0] : ''
     });
 
     console.log(`Image upload Response`, uploadRes);
