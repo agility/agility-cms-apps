@@ -1,23 +1,29 @@
 <html>
-    <head>
-        <script type="text/javascript" src="https://unpkg.com/@agility/app-sdk@0.9.4/dist/agility-cms-app-sdk.browser.js"></script>
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <div id="BasicCustomField" style="display: none;">
-            <label>
-              <span id="FieldLabel"></span>
-              <input id="FieldInput" style="display: block; width: 100%" type="text" />
-              <p id="ConfigValues"></p>
-              <button id="FlyoutOpenBtn">Open Flyout</button>
-            </label>
-        </div>
-        <div id="Flyout" style="display: none;">
-            <div>
-                <div>This is a custom flyout <span id="FlyoutTitle"></span> that was initialized by the <span id="FlyoutInitiator"></span> field.</div>
-                <button id="FlyoutCloseBtn">Close Flyout</button>
-            </div>
-        </div>
-        <script src="index.js"></script>
-    </body>
+	<head>
+		<script
+			type="text/javascript"
+			src="https://unpkg.com/@agility/app-sdk@1.0.0/dist/agility-cms-app-sdk.browser.js"
+		></script>
+		<link rel="stylesheet" href="index.css" />
+	</head>
+	<body>
+		<div id="BasicCustomField" style="display: none">
+			<label>
+				<span id="FieldLabel"></span>
+				<input id="FieldInput" style="display: block; width: 100%" type="text" />
+				<p id="ConfigValues"></p>
+				<button id="FlyoutOpenBtn">Open Flyout</button>
+			</label>
+		</div>
+		<div id="Flyout" style="display: none">
+			<div>
+				<div>
+					This is a custom flyout <span id="FlyoutTitle"></span> that was initialized by the
+					<span id="FlyoutInitiator"></span> field.
+				</div>
+				<button id="FlyoutCloseBtn">Close Flyout</button>
+			</div>
+		</div>
+		<script src="index.js"></script>
+	</body>
 </html>

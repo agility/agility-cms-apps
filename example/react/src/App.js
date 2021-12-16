@@ -2,8 +2,8 @@ import './App.css';
 
 import agilityAppSDK from '@agility/app-sdk'
 
-import BasicCustomField from './BasicCustomField';
-import Flyout from './Flyout';
+import BasicCustomField from './Components/BasicCustomField';
+import Flyout from './Components/Flyout';
 
 function App() {
 

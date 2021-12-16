@@ -1,0 +1,59 @@
+@import "./variables";
+
+.flyout-panel {
+	font-family: Muli, sans;
+	font-stretch: 80%;
+	display: flex;
+	flex-direction: column;
+
+	height: 100vh;
+	.flyout-loading {
+		text-align: center;
+		padding: 20px;
+		color: #ccc;
+	}
+	.flyout-body {
+		flex-grow: 1;
+
+		padding: 10px;
+		overflow: auto;
+	}
+
+	.flyout-actions {
+		background: gray;
+		padding: 20px;
+		box-sizing: border-box;
+		background-color: #f5f5f5;
+		border-top: 1px solid #ddd;
+
+		.btn {
+			margin-right: 10px;
+			padding: 10px 20px;
+			min-width: 100px;
+			color: #000;
+			font-weight: 600;
+			background-color: $button-colour;
+			border-radius: 5px;
+			text-align: center;
+			cursor: pointer;
+			padding: 10px 20px;
+			font-size: 0.95em;
+			line-height: 1.3em;
+			outline: none;
+			border: 0;
+			transition: background-color 0.1s;
+			&:hover,
+			&:focus {
+				background-color: $button-hover;
+			}
+			&.btn-primary {
+				color: #fff;
+				background-color: $primary-button-colour;
+				&:hover,
+				&:focus {
+					background-color: $primary-button-hover;
+				}
+			}
+		}
+	}
+}
