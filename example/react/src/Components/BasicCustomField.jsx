@@ -76,6 +76,7 @@ export default function BasicCustomField() {
 
 
 	if (fieldConfig) {
+
 		return (
 			<div className="field-row" ref={containerRef}>
 				<label>
@@ -84,7 +85,9 @@ export default function BasicCustomField() {
 					{fieldConfig.description &&
 						<FontAwesomeIcon icon={faInfoCircle} className='field-description' title={fieldConfig.description} />
 					}
-					<input className='form-control' type="text" defaultValue={value} onChange={e => updateValue(e.target.value)} />
+
+					<input className='form-control' readOnly={fieldConfig.readOnly} type="text" defaultValue={value} onChange={e => updateValue(e.target.value)} />
+
 				</label>
 
 				<div style={{ padding: 10, borderRadius: 10, backgroundColor: "#ebebeb", fontSize: "12px" }}>
