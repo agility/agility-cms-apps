@@ -6,6 +6,7 @@ This repository includes publicly available apps and their source code that Agil
 
 ### Apps built by Agility
 
+- [Formstack](https://github.com/agility/agility-cms-apps/tree/main/formstack) - Conmnect your Formstack account to Agility and select forms to embed into your website or application.
 - [Cloudinary Images and Videos](https://github.com/agility/agility-cms-apps/tree/main/cloudinary) - Connect your Cloudinary account to Agility and select images and videos.
 - [Block Editor (JSON)](https://github.com/agility/agility-cms-apps/tree/main/block-editor) - Add rich blocks of content (including paragraphs, headings, images, quotes, and more) that are stored as JSON.
 
