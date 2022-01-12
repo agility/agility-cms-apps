@@ -31,7 +31,7 @@ const Select = ({ forms, updateValue, value }) => {
         </>
       ) : (
         <p className="no-forms">
-          This App couldn't render any forms from Formstack. Log in to your
+          This App couldn{"'"}t render any forms from Formstack. Log in to your
           Formstack account to create a new form.
         </p>
       )}
