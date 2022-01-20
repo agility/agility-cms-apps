@@ -4,7 +4,6 @@ This is the reference implementation of Cloudinary image and video selection wit
 
 This uses the @agility/apps-sdk - see here for docs to facilitate communication with Agility CMS.
 
-
 ## Using this App
 
 In order to use an App in Agility CMS, you must register this app witin your Organization in Agility CMS. Then, you can install this app within any Instance in your Organization.
@@ -21,4 +20,3 @@ Alternatively, you can `git clone` this repository and deploy this to your own w
 2. Deploy to a static host such as Netlify or Vercel
 3. Register the App within Agility CMS in your Organization - you must be an Organization Admin
 4. Install the App in your instance(s)
-
