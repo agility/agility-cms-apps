@@ -1,12 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { APP_CONFIG } from "../common/config";
 
 const Select = ({ forms, updateValue, value }) => {
-  let formData;
-  if (value) {
-    formData = JSON.parse(value);
-  }
-
+  let formData = value ? JSON.parse(value) : null;
   return (
     <div className="select-container">
       {forms.length > 0 ? (
@@ -31,8 +28,7 @@ const Select = ({ forms, updateValue, value }) => {
         </>
       ) : (
         <p className="no-forms">
-          This App couldn{"'"}t render any forms from Formstack. Log in to your
-          Formstack account to create a new form.
+          This App couldn{"'"}t render any forms from {APP_CONFIG.NAME}. Log in to your {APP_CONFIG.NAME} account to create a new form.
         </p>
       )}
     </div>

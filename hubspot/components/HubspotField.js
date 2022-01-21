@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import agilityAppSDK from "@agility/app-sdk";
 import axios from "axios";
 import Select from "./Select";
-import EditForm from "./EditForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,11 +17,7 @@ export default function FormstackField() {
   const containerRef = useRef();
 
   // get form data
-  let formData;
-
-  if (value) {
-    formData = JSON.parse(value);
-  }
+  let formData = value ? JSON.parse(value) : null;
 
   // get form
   const form = forms.find((f) => f.guid === formData?.guid);
@@ -39,28 +34,29 @@ export default function FormstackField() {
 
   // fetch forms from formstack
   useEffect(() => {
-    const init = async () => {
+    (async () => {
       if (configValues.accessToken) {
         const { data } = await axios.get("/api/getForms", {
           params: { accessToken: configValues.accessToken },
         });
         setForms(data);
       }
-    };
-    init();
+    })();
   }, [configValues]);
 
   // update value
   const updateValue = (e) => {
     const formID = e.target.value;
-    const form = forms.find((f) => f.guid === formID);
-    const data = JSON.stringify({
+    const form = forms.find((form) => form.guid === formID);
+    let data = JSON.stringify({
       name: form?.name,
-      guid: form?.guid,
+      portalId: form?.portalId,
+      formId: form?.guid,
       url: form?.url,
     });
-    setValue(data && data !== "{}" ? data : "");
-    sdk.updateFieldValue({ fieldValue: data && data !== "{}" ? data : "" });
+    data = data && data !== "{}" ? data : "";
+    setValue(data);
+    sdk.updateFieldValue({ fieldValue: data });
   };
 
   if (fieldConfig) {
@@ -83,7 +79,6 @@ export default function FormstackField() {
         </label>
         <div className="control-select">
           <Select forms={forms} updateValue={updateValue} value={value} />
-          {value && value !== "" && <EditForm form={form} />}
         </div>
       </div>
     );

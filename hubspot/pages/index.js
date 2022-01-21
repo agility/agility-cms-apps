@@ -1,17 +1,16 @@
 import dynamic from "next/dynamic";
 import agilityAppSDK from "@agility/app-sdk";
 import { useEffect, useState } from "react";
+import { APP_CONFIG } from "../common/config";
 
 const HubspotField = dynamic(() => import("../components/HubspotField"));
 
-const Components = {
-  HubspotField,
-};
+const Components = { HubspotField };
 
-const appConfig = {
-  name: "Hubspot",
-  version: "1.0.0",
-  documentationLink: "https://agilitycms.com/docs/developers/hubspot",
+const AppConfig = {
+  name: APP_CONFIG.NAME,
+  version: APP_CONFIG.VERSION,
+  documentationLink: APP_CONFIG.DOCUMENTATION,
   configValues: [
     { name: "accessToken", label: "Hubspot Access Token", type: "string" },
   ],
@@ -29,19 +28,19 @@ export default function App() {
   const [componentRequested, setComponentRequested] = useState(null);
 
   useEffect(() => {
-    const component = agilityAppSDK.resolveAppComponent(appConfig);
+    const component = agilityAppSDK.resolveAppComponent(AppConfig);
     setComponentRequested(component);
   }, [componentRequested]);
 
   if (componentRequested === "AppConfig") {
     //provide the CMS information about your app configuration
-    agilityAppSDK.setAppConfig(appConfig);
+    agilityAppSDK.setAppConfig(AppConfig);
   } else {
     //determine the React component we want to render based on what the CMS has requested...
     const ComponentToRender = Components[componentRequested];
 
     if (ComponentToRender) {
-      return <ComponentToRender appConfig={appConfig} />;
+      return <ComponentToRender appConfig={AppConfig} />;
     }
   }
 

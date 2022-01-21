@@ -1,14 +1,13 @@
 import axios from "axios";
+import { APP_CONFIG } from "../../common/config";
 
 export default async function handler(req, res) {
   // get access token
-  const accessToken = req.query.accessToken;
+  const { accessToken } = req?.query;
 
   // if method is GET request and we have access token
   if (req.method === "GET" && accessToken) {
-    const { data } = await axios.get(
-      `https://api.hubapi.com/forms/v2/forms?hapikey=${accessToken}`
-    );
+    const { data } = await axios.get(`${APP_CONFIG.ENDPOINT+accessToken}`);
 
     res.status(200).json(data);
   } else {
