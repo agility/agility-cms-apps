@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import agilityAppSDK from "@agility/app-sdk";
 import axios from "axios";
+import EditForm from "./EditForm";
 import Select from "./Select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import AddForm from "./AddForm";
 
 export default function HubspotForm() {
   // set up state
@@ -19,8 +21,11 @@ export default function HubspotForm() {
   // get form data
   let formData = value ? JSON.parse(value) : null;
 
+  // get addFormId to use on add form link
+  const addFormId = forms.length && forms[0]?.portalId;
+
   // get form
-  const form = forms.find((f) => f.guid === formData?.guid);
+  const form = forms.find((f) => f.guid === formData?.formId);
 
   // initialize field
   useEffect(() => {
@@ -48,7 +53,12 @@ export default function HubspotForm() {
   const updateValue = (e) => {
     const formID = e.target.value;
     const form = forms.find((form) => form.guid === formID);
-    let data = JSON.stringify({...form});
+    const { portalId, guid, name } = form || {};
+    let data = JSON.stringify({
+      name,
+      portalId,
+      formId: guid
+    });
     data = data && data !== "{}" ? data : "";
     setValue(data);
     sdk.updateFieldValue({ fieldValue: data });
@@ -74,6 +84,8 @@ export default function HubspotForm() {
         </label>
         <div className="control-select">
           <Select forms={forms} updateValue={updateValue} value={value} />
+          {value && value !== "" && <EditForm form={form} />}
+          <AddForm addFormId={addFormId} />
         </div>
       </div>
     );

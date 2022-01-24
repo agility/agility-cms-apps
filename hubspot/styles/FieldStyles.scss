@@ -142,6 +142,8 @@
     border-width: 1px !important;
     color: #fff;
     cursor: pointer;
+    display: flex;
+    align-items: center;
     &:hover,
     &:focus {
       background-color: $primary-button-hover;
