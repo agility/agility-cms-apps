@@ -6,7 +6,7 @@ const AddForm = ({ addFormId }) => {
     <a 
       href={addUrl} 
       target="_blank" 
-      rel="noopener, noreferrer" 
+      rel="noopener noreferrer" 
       className="btn btn-primary edit-btn">
         Add Form
     </a>

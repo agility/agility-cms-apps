@@ -8,7 +8,7 @@ const EditForm = ({ form }) => {
     <a 
       href={editUrl} 
       target="_blank" 
-      rel="noopener, noreferrer" 
+      rel="noopener noreferrer" 
       className="btn btn-primary edit-btn">
         Edit Form
     </a>
