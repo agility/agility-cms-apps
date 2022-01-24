@@ -48,12 +48,7 @@ export default function FormstackField() {
   const updateValue = (e) => {
     const formID = e.target.value;
     const form = forms.find((form) => form.guid === formID);
-    let data = JSON.stringify({
-      name: form?.name,
-      portalId: form?.portalId,
-      formId: form?.guid,
-      url: form?.url,
-    });
+    let data = JSON.stringify({...form});
     data = data && data !== "{}" ? data : "";
     setValue(data);
     sdk.updateFieldValue({ fieldValue: data });
