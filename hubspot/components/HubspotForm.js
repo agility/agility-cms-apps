@@ -5,7 +5,7 @@ import Select from "./Select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
-export default function FormstackField() {
+export default function HubspotForm() {
   // set up state
   const [value, setValue] = useState("");
   const [fieldConfig, setFieldConfig] = useState(null);
@@ -32,7 +32,7 @@ export default function FormstackField() {
     });
   }, []);
 
-  // fetch forms from formstack
+  // fetch forms from hubspot
   useEffect(() => {
     (async () => {
       if (configValues.accessToken) {

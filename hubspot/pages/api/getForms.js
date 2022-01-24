@@ -7,7 +7,15 @@ export default async function handler(req, res) {
 
   // if method is GET request and we have access token
   if (req.method === "GET" && accessToken) {
-    const { data } = await axios.get(`${APP_CONFIG.ENDPOINT+accessToken}`);
+    const { data } = await axios.get(
+      `${APP_CONFIG.API_ENDPOINT}`,
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    );
 
     res.status(200).json(data);
   } else {

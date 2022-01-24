@@ -3,9 +3,9 @@ import agilityAppSDK from "@agility/app-sdk";
 import { useEffect, useState } from "react";
 import { APP_CONFIG } from "../common/config";
 
-const HubspotField = dynamic(() => import("../components/HubspotField"));
+const HubspotForm = dynamic(() => import("../components/HubspotForm"));
 
-const Components = { HubspotField };
+const Components = { HubspotForm };
 
 const AppConfig = {
   name: APP_CONFIG.NAME,
@@ -17,9 +17,9 @@ const AppConfig = {
   appComponents: [
     {
       location: agilityAppSDK.types.APP_LOCATION_CUSTOM_FIELD,
-      label: "Hubspot",
-      name: "Hubspot",
-      componentToRender: "HubspotField",
+      label: "Hubspot Form",
+      name: "HubspotForm",
+      componentToRender: "HubspotForm",
     },
   ],
 };
