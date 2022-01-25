@@ -25,7 +25,7 @@ export default function HubspotForm() {
   const addFormId = forms.length && forms[0]?.portalId;
 
   // get form
-  const form = forms.find((f) => f.guid === formData?.formId);
+  const form = forms.find((f) => f.formId === formData?.formId);
 
   // initialize field
   useEffect(() => {
@@ -34,7 +34,6 @@ export default function HubspotForm() {
       setValue(fieldSDK.field.value);
       setConfigValues(fieldSDK.configValues);
       setFieldConfig(fieldSDK.field);
-      console.log("INIT", fieldSDK.field.value)
     });
   }, []);
 
@@ -45,7 +44,9 @@ export default function HubspotForm() {
         const { data } = await axios.get("/api/getForms", {
           params: { accessToken: configValues.accessToken },
         });
-        setForms(data);
+        // ignore unecessary data then map guid to formID so users don't have to massage the data on client-side
+        const mappeFormData = data.map(form => ({name: form.name, portalId: form.portalId, formId: form.guid }));
+        setForms(mappeFormData);
       }
     })();
   }, [configValues]);
@@ -53,12 +54,12 @@ export default function HubspotForm() {
   // update value
   const updateValue = (e) => {
     const formID = e.target.value;
-    const form = forms.find((form) => form.guid === formID);
-    const { portalId, guid, name } = form || {};
+    const form = forms.find((form) => form.formId === formID);
+    const { portalId, formId, name } = form || {};
     let data = JSON.stringify({
       name,
       portalId,
-      formId: guid
+      formId
     });
     data = data && data !== "{}" ? data : "";
     console.log("SAVE", data)

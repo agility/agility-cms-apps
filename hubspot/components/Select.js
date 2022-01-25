@@ -5,24 +5,20 @@ import { APP_CONFIG } from "../common/config";
 const Select = ({ forms, updateValue, value }) => {
   let formData = value ? JSON.parse(value) : null;
 
-  console.log("SELECT", forms, formData)
-
   return (
     <div className="select-container">
       {forms.length > 0 ? (
         <>
           <div className="dropdown">
             <select
-              value={formData ? formData.formId : ""}
-              onChange={(e) => {
-                updateValue(e);
-              }}
+              value={formData?.formId}
+              onChange={updateValue}
               className="dropdown-toggle"
             >
               <option value="">Select a form...</option>
               {forms.map((form, index) => (
-                <option value={form.formId} key={index}>
-                  {form.name}
+                <option value={form?.formId} key={index}>
+                  {form?.name}
                 </option>
               ))}
             </select>
