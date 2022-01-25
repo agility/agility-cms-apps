@@ -55,14 +55,8 @@ export default function HubspotForm() {
   const updateValue = (e) => {
     const formID = e.target.value;
     const form = forms.find((form) => form.formId === formID);
-    const { portalId, formId, name } = form || {};
-    let data = JSON.stringify({
-      name,
-      portalId,
-      formId
-    });
+    let data = JSON.stringify(form);
     data = data && data !== "{}" ? data : "";
-    console.log("SAVE", data)
     setValue(data);
     sdk.updateFieldValue({ fieldValue: data });
   };
