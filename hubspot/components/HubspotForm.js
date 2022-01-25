@@ -34,6 +34,7 @@ export default function HubspotForm() {
       setValue(fieldSDK.field.value);
       setConfigValues(fieldSDK.configValues);
       setFieldConfig(fieldSDK.field);
+      console.log("INIT", fieldSDK.field.value)
     });
   }, []);
 
@@ -60,6 +61,7 @@ export default function HubspotForm() {
       formId: guid
     });
     data = data && data !== "{}" ? data : "";
+    console.log("SAVE", data)
     setValue(data);
     sdk.updateFieldValue({ fieldValue: data });
   };
