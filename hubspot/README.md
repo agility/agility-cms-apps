@@ -13,9 +13,11 @@ In order to use an App in Agility CMS, you must register this app within your Or
 1. Go to your Hubspot dashboard
 2. Click on settings (cog icon) next to your profile
 3. Find and collapse the `Integrations` menu on the left panel
-4. Click on `Private apps`and then `Create a private apps`
+4. Click on `Private apps`and then `Create a private app`
 5. Fill out the necessary fields then hit create
 6. You should now see your access token on the page you are on
+
+[Getting your HubSpot access token](https://agilitycms.com/docs/developers/hubspot#4UOxVKg7aH)
 
 ## Running this app
 
@@ -35,6 +37,8 @@ This is a app is running on [Next.js](https://nextjs.org/)
 3. Run the app with `npm run dev` OR `yarn dev`
 4. Your app should now be running on `localhost:3000`
 5. Install the App in your instance(s)
+
+Alternatively, you can install this app from this link:  [Register this App in Agility](https://manager.agilitycms.com/org/apps/create-app?name=Hubspot&url=https://agilitycms-hubspot-app.vercel.app/&description=Use%20forms%20from%20your%20Hubspotk%20account%20in%20Agility%20CMS.&icon=https%3A%2F%2Fcdn.agilitycms.com%2Fcontent-manager%2Fpublic-app-icons%2Fhubspot-logo.svg)
 
 ## Embedding the Hubspot app response
 
