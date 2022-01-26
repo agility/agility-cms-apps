@@ -1,6 +1,6 @@
 # Agility CMS Formstack App
 
-This is the reference implementation of Cloudinary image and video selection within Agility CMS.
+This is the reference implementation of Formstack form selection within Agility CMS.
 
 This uses the @agility/apps-sdk - see here for docs to facilitate communication with Agility CMS.
 
