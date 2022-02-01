@@ -56,7 +56,7 @@ export const SalesforceForm = (): JSX.Element => {
                 <div className="min-w-0 flex-1 text-sm">
                   <label htmlFor={`field-${field.id}`} className="font-medium text-gray-700 select-none flex">
                     <MenuIcon className="h-5 mr-3 cursor-pointer sortButton" />
-                    {field.name} {field.isSelected ? 'true' : 'false'}
+                    {field.name}
                   </label>
                 </div>
                 <div className="ml-3 flex items-center h-5">
