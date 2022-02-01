@@ -1,4 +1,3 @@
-//@ts-ignore
 import agilityAppSDK from "@agility/app-sdk";
 import React, { useState, useEffect } from "react"
 import { SalesforceForm } from "../components/SalesforceForm";
