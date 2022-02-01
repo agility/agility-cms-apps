@@ -1,5 +1,5 @@
 ---
-to: components/<%= h.capitalize(name) %>/<%= h.capitalize(name) %>.tsx
+to: src/components/<%= h.capitalize(name) %>/<%= h.capitalize(name) %>.tsx
 ---
 import React from "react";
 

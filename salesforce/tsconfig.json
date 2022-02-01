@@ -14,7 +14,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    // "sourceMap": true  // REMOVE AFTER TESTING
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "contstants/config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

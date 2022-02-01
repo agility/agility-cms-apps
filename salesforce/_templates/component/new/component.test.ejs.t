@@ -1,5 +1,5 @@
 ---
-to: components/<%= h.capitalize(name) %>/<%= h.capitalize(name) %>.test.tsx
+to: src/components/<%= h.capitalize(name) %>/<%= h.capitalize(name) %>.test.tsx
 ---
 import React from 'react';
 import { shallow } from 'enzyme'
