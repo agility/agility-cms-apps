@@ -37,7 +37,7 @@ export const SalesforceForm = (): JSX.Element => {
 
   useEffect(() => {
     // fetch data saved by sdk and populate the form builder
-    if (value) setForm(JSON.parse(value))
+    if (value) setForm(JSON.parse(value)?.formData)
   }, [value, setForm]);
 
   // include form action and OID in the data to save
@@ -78,7 +78,7 @@ export const SalesforceForm = (): JSX.Element => {
       <fieldset>
         <div className="mt-2 overflow-y-auto border-t border-b border-gray-200 divide-y divide-gray-200 max-h-96">
           <ReactSortable list={form} setList={setForm} handle=".sortButton" onEnd={handleReorder}>
-            {form.map((field) => (
+            {form?.map((field) => (
               <Checkbox
                 key={field.id}
                 id={field.id}
