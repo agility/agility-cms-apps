@@ -67,21 +67,22 @@ const renderFields = (param, index) => {
 
 
 const SalesforceLead = ({ module }) => {
+  // replace salesforceLead with the property name you set your custom field to
   const { fields: { salesforceLead = undefined } } = module;
   if (!salesforceLead) return null;
 
-  const { leadOID, actionURL, formData, retURL } = JSON.parse(salesforceLead);
+  const { leadOID, actionURL, formData, retURL, submitText } = JSON.parse(salesforceLead);
 
   return (
     <div className="form-container">
       <h1>{module.fields.title}</h1>
       <form action={actionURL} method="POST">
         <HiddenText name="oid" value={leadOID} />
-        <HiddenText name="retURL" value={retURL} />
+        <HiddenText name="retURL" value={retURL ? retURL : "http://agilitycms.com"} />
         {formData.map((field, index) => (
           renderFields(field, index)
         ))}
-        {formData.length && <input type="submit" value="Submit" />}
+        {formData.length && <input type="submit" value={submitText ? submitText : "Submit"} />}
       </form>
     </div>
   );
