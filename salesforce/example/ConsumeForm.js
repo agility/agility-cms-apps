@@ -71,7 +71,6 @@ const SalesforceLead = ({ module }) => {
   if (!salesforceLead) return null;
 
   const { leadOID, actionURL, formData, retURL } = JSON.parse(salesforceLead);
-  console.log(JSON.parse(salesforceLead));
 
   return (
     <div className="form-container">
