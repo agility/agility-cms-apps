@@ -7,6 +7,7 @@ import { useForm } from "../../hooks/useForm";
 import { actionURL } from "../../contstants/formData";
 import { Checkbox } from "../Checkbox";
 import { InputText } from "../InputText";
+import { Description } from "../Description";
 
 interface FieldConfig {
   label?: string,
@@ -15,7 +16,8 @@ interface FieldConfig {
   readOnly?: boolean
 }
 
-const DEFAULT_RETURNURL = 'https://www.agilitycms.com/';
+const DEFAULT_RETURN_URL = 'https://www.agilitycms.com/';
+const DEFAULT_SUBMIT_TEXT = 'Submit';
 
 export const SalesforceForm = (): JSX.Element => {
   // set up state
@@ -25,6 +27,7 @@ export const SalesforceForm = (): JSX.Element => {
   const [sdk, setSDK] = useState<any>({});
   const [form, setForm, updateForms] = useForm();
   const [retURL, setRetURL] = useState<string>('');
+  const [submitText, setSubmitText] = useState<string>('');
 
   // set ref
   const containerRef = useRef(null);
@@ -42,35 +45,32 @@ export const SalesforceForm = (): JSX.Element => {
   useEffect(() => {
     // fetch data saved by sdk and populate the form builder
     if (value) {
-      const {formData, retURL} = JSON.parse(value)
+      const {formData, retURL, submitText} = JSON.parse(value)
       setForm(formData);
-      setRetURL(retURL !== DEFAULT_RETURNURL ? retURL : '');
+      setRetURL(retURL !== '' ? retURL : '');
+      setSubmitText(submitText !== '' ? submitText : '');
     };
   }, [value, setForm]);
 
-  // include form action and OID in the data to save
+  // build form data payload on dependency change
   useEffect(() => {
     (()=> {
       let payload = {
         formData: form,
         leadOID: configValues?.leadOID,
         actionURL,
-        retURL
+        retURL,
+        submitText
       };
       // if there are no fields selected return a falsy value to trigger a required field error
       const shouldFormSave = form?.some((field: any) => field.isSelected === true);
       sdk.updateFieldValue && sdk.updateFieldValue({ fieldValue: shouldFormSave ? JSON.stringify(payload) : '' });
     })();
-  }, [form, retURL]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const returnURL = e.target.value;
-    setRetURL(returnURL !== '' ? returnURL : DEFAULT_RETURNURL);
-  }
+  }, [form, retURL, submitText]);
 
   return (
     <div className="field-row" ref={containerRef}>
-      <label className="flex text-sm">
+      <label className="flex mb-1 text-sm">
         <span>{fieldConfig?.label}</span>
         {fieldConfig?.required && <span className="pl-1 text-red-500">*</span>}
         {fieldConfig?.description &&
@@ -79,8 +79,10 @@ export const SalesforceForm = (): JSX.Element => {
           </small>
         }
       </label>
-      <div className="border-border border-[1px] py-2 px-3">
+      <div className="border-border border-[1px] pb-3 px-3">
         <fieldset>
+          <label className="inline-block pt-4 pr-2 text-sm font-bold">Available fields</label>
+          <Description text="Fields that will appear on your lead form" />
           <div className="pl-2 mt-2 overflow-y-auto border border-gray-200 divide-y divide-gray-200 max-h-96">
             <ReactSortable list={form} setList={setForm} handle=".sortButton" onEnd={() => setForm(form)}>
               {form?.map((field) => (
@@ -102,8 +104,19 @@ export const SalesforceForm = (): JSX.Element => {
           value={retURL}
           id="retURL"
           isDisabled={fieldConfig?.readOnly}
-          placeholder={DEFAULT_RETURNURL}
-          handleChange={handleInputChange}
+          placeholder={DEFAULT_RETURN_URL}
+          description="The return URL after submitting the form"
+          handleChange={setRetURL}
+        />
+        <InputText
+          type="text"
+          name="Submit text"
+          value={submitText}
+          id="submitText"
+          isDisabled={fieldConfig?.readOnly}
+          placeholder={DEFAULT_SUBMIT_TEXT}
+          description="Submit button text"
+          handleChange={setSubmitText}
         />
       </div>
     </div>
