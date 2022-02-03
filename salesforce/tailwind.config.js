@@ -11,7 +11,9 @@ module.exports = {
       colors: {
         cta: '#4600a8',
         ctaHover: '#5800d4',
-        white: '#fff'
+        white: '#fff',
+        border: '#cccccc',
+        borderActive: '#66afe9',
       }
     },
   },

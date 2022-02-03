@@ -6,6 +6,7 @@ import { InformationCircleIcon } from '@heroicons/react/solid'
 import { useForm } from "../../hooks/useForm";
 import { actionURL } from "../../contstants/formData";
 import { Checkbox } from "../Checkbox";
+import { InputText } from "../InputText";
 
 interface FieldConfig {
   label?: string,
@@ -14,6 +15,8 @@ interface FieldConfig {
   readOnly?: boolean
 }
 
+const DEFAULT_RETURNURL = 'https://www.agilitycms.com/';
+
 export const SalesforceForm = (): JSX.Element => {
   // set up state
   const [value, setValue] = useState('');
@@ -21,6 +24,7 @@ export const SalesforceForm = (): JSX.Element => {
   const [configValues, setConfigValues] = useState<{ leadOID: string } | null>(null);
   const [sdk, setSDK] = useState<any>({});
   const [form, setForm, updateForms] = useForm();
+  const [retURL, setRetURL] = useState<string>('');
 
   // set ref
   const containerRef = useRef(null);
@@ -37,32 +41,32 @@ export const SalesforceForm = (): JSX.Element => {
 
   useEffect(() => {
     // fetch data saved by sdk and populate the form builder
-    if (value) setForm(JSON.parse(value)?.formData)
+    if (value) {
+      const {formData, retURL} = JSON.parse(value)
+      setForm(formData);
+      setRetURL(retURL !== DEFAULT_RETURNURL ? retURL : '');
+    };
   }, [value, setForm]);
 
   // include form action and OID in the data to save
-  const parseSaveData = (formData: any): void => {
-    let payload = {
-      formData,
-      leadOID: configValues?.leadOID,
-      actionURL
-    };
-    // if there are no fields selected return a falsy value to trigger a required field error
-    const shouldFormSave = formData?.some((field: any) => field.isSelected === true);
-    sdk.updateFieldValue({ fieldValue: shouldFormSave ? JSON.stringify(payload) : '' });
-  };
+  useEffect(() => {
+    (()=> {
+      let payload = {
+        formData: form,
+        leadOID: configValues?.leadOID,
+        actionURL,
+        retURL
+      };
+      // if there are no fields selected return a falsy value to trigger a required field error
+      const shouldFormSave = form?.some((field: any) => field.isSelected === true);
+      sdk.updateFieldValue && sdk.updateFieldValue({ fieldValue: shouldFormSave ? JSON.stringify(payload) : '' });
+    })();
+  }, [form, retURL]);
 
-  const handleChange = (id: string) => {
-    // update the form with the selected item and save
-    updateForms(id);
-    parseSaveData(form);
-  };
-
-  const handleReorder = () => {
-    // update the form with the re-arranged list
-    setForm(form);
-    parseSaveData(form);
-  };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const returnURL = e.target.value;
+    setRetURL(returnURL !== '' ? returnURL : DEFAULT_RETURNURL);
+  }
 
   return (
     <div className="field-row" ref={containerRef}>
@@ -75,22 +79,33 @@ export const SalesforceForm = (): JSX.Element => {
           </small>
         }
       </label>
-      <fieldset>
-        <div className="mt-2 overflow-y-auto border-t border-b border-gray-200 divide-y divide-gray-200 max-h-96">
-          <ReactSortable list={form} setList={setForm} handle=".sortButton" onEnd={handleReorder}>
-            {form?.map((field) => (
-              <Checkbox
-                key={field.id}
-                id={field.id}
-                name={field.name}
-                isDisabled={fieldConfig?.readOnly}
-                isChecked={field.isSelected}
-                handleChange={() => handleChange(field.id)}
-              />
-            ))}
-          </ReactSortable>
-        </div>
-      </fieldset>
+      <div className="border-border border-[1px] py-2 px-3">
+        <fieldset>
+          <div className="pl-2 mt-2 overflow-y-auto border border-gray-200 divide-y divide-gray-200 max-h-96">
+            <ReactSortable list={form} setList={setForm} handle=".sortButton" onEnd={() => setForm(form)}>
+              {form?.map((field) => (
+                <Checkbox
+                  key={field.id}
+                  id={field.id}
+                  name={field.name}
+                  isDisabled={fieldConfig?.readOnly}
+                  isChecked={field.isSelected}
+                  handleChange={() => updateForms(field.id)}
+                />
+              ))}
+            </ReactSortable>
+          </div>
+        </fieldset>
+        <InputText
+          type="text"
+          name="Return URL"
+          value={retURL}
+          id="retURL"
+          isDisabled={fieldConfig?.readOnly}
+          placeholder={DEFAULT_RETURNURL}
+          handleChange={handleInputChange}
+        />
+      </div>
     </div>
   );
 }
