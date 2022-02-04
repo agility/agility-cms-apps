@@ -10,6 +10,7 @@ This repository includes publicly available apps and their source code that Agil
 - [Cloudinary Images and Videos](https://github.com/agility/agility-cms-apps/tree/main/cloudinary) - Connect your Cloudinary account to Agility and select images and videos.
 - [Block Editor (JSON)](https://github.com/agility/agility-cms-apps/tree/main/block-editor) - Add rich blocks of content (including paragraphs, headings, images, quotes, and more) that are stored as JSON.
 - [Hubspot (Form)](https://github.com/agility/agility-cms-apps/tree/hubspot-app) - Connect your Hubspot account to Agility and select and embed forms on your site.
+- [Salesforce (Lead)](https://github.com/agility/agility-cms-apps/tree/salesforce-app) - Build a web-to-lead form for your site and send it to your Salesforce dashboard.
 
 ### Example Apps
 
