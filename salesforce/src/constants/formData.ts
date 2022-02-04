@@ -13,6 +13,7 @@ const metaData = {
   salutations: {
     type: "select",
     options: [
+      "Mr.",
       "Ms.",
       "Mrs.",
       "Dr.",
