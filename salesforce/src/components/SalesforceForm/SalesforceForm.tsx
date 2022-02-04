@@ -4,7 +4,7 @@ import { ReactSortable } from "react-sortablejs";
 import { InformationCircleIcon } from '@heroicons/react/solid'
 
 import { useForm } from "../../hooks/useForm";
-import { actionURL } from "../../contstants/formData";
+import { actionURL } from "../../constants/formData";
 import { Checkbox } from "../Checkbox";
 import { InputText } from "../InputText";
 import { Description } from "../Description";
@@ -45,7 +45,7 @@ export const SalesforceForm = (): JSX.Element => {
   useEffect(() => {
     // fetch data saved by sdk and populate the form builder
     if (value) {
-      const {formData, retURL, submitText} = JSON.parse(value)
+      const { formData, retURL, submitText } = JSON.parse(value)
       setForm(formData);
       setRetURL(retURL !== '' ? retURL : '');
       setSubmitText(submitText !== '' ? submitText : '');
@@ -54,7 +54,7 @@ export const SalesforceForm = (): JSX.Element => {
 
   // build form data payload on dependency change
   useEffect(() => {
-    (()=> {
+    (() => {
       let payload = {
         formData: form,
         leadOID: configValues?.leadOID,
