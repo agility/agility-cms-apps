@@ -82,7 +82,7 @@ export const SalesforceForm = (): JSX.Element => {
       <div className="border-border border-[1px] pb-3 px-3">
         <fieldset>
           <label className="inline-block pt-4 pr-2 text-sm font-bold">Available fields</label>
-          <Description text="Fields that will appear on your lead form" />
+          <Description text="Choose the fields that will appear on your lead form" />
           <div className="pl-2 mt-2 overflow-y-auto border border-gray-200 divide-y divide-gray-200 max-h-96">
             <ReactSortable list={form} setList={setForm} handle=".sortButton" onEnd={() => setForm(form)}>
               {form?.map((field) => (
