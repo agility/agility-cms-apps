@@ -35,6 +35,10 @@ This is a app is running on [Next.js](https://nextjs.org/)
 4. Your app should now be running on `localhost:3000`
 5. Install the App in your instance(s)
 
+### [Register this App in Agility](https://manager.agilitycms.com/org/9fecfe6a/apps/create-app?name=Salesforce&url=https%3A%2F%2Fagilitycms-salesforce-app.vercel.app&description=Easily%20create%20lead%20forms%20on%20your%20website%20for%20your%20Salesforce%20account&icon=https%3A%2F%2Fcdn.agilitycms.com%2Fcontent-manager%2Fpublic-app-icons%2FSalesforce.com_logo.svg)
+
+
+
 ## Embedding the Salesforce app response
 
 Once you've installed and applied the app as custom field to your page, you can then use the sample component below to parse and build the form on your site. 

@@ -4,7 +4,7 @@ import { ReactSortable } from "react-sortablejs";
 import { InformationCircleIcon } from '@heroicons/react/solid'
 
 import { useForm } from "../../hooks/useForm";
-import { actionURL } from "../../contstants/formData";
+import { actionURL } from "../../constants/formData";
 import { Checkbox } from "../Checkbox";
 import { InputText } from "../InputText";
 import { Description } from "../Description";
@@ -45,7 +45,7 @@ export const SalesforceForm = (): JSX.Element => {
   useEffect(() => {
     // fetch data saved by sdk and populate the form builder
     if (value) {
-      const {formData, retURL, submitText} = JSON.parse(value)
+      const { formData, retURL, submitText } = JSON.parse(value)
       setForm(formData);
       setRetURL(retURL !== '' ? retURL : '');
       setSubmitText(submitText !== '' ? submitText : '');
@@ -54,7 +54,7 @@ export const SalesforceForm = (): JSX.Element => {
 
   // build form data payload on dependency change
   useEffect(() => {
-    (()=> {
+    (() => {
       let payload = {
         formData: form,
         leadOID: configValues?.leadOID,
@@ -82,7 +82,7 @@ export const SalesforceForm = (): JSX.Element => {
       <div className="border-border border-[1px] pb-3 px-3">
         <fieldset>
           <label className="inline-block pt-4 pr-2 text-sm font-bold">Available fields</label>
-          <Description text="Fields that will appear on your lead form" />
+          <Description text="Choose the fields that will appear on your lead form" />
           <div className="pl-2 mt-2 overflow-y-auto border border-gray-200 divide-y divide-gray-200 max-h-96">
             <ReactSortable list={form} setList={setForm} handle=".sortButton" onEnd={() => setForm(form)}>
               {form?.map((field) => (

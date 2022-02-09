@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { fields } from "../contstants/formData";
+import { fields } from "../constants/formData";
 
 /**
  * @description
@@ -12,7 +12,7 @@ export const useForm = () => {
 
   const updateForm = (id: string) => {
     const newForm = form.map(field => {
-      if(field.id === id){
+      if (field.id === id) {
         field.isSelected = !field.isSelected;
       }
       return field;
