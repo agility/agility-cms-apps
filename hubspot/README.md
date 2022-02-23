@@ -38,7 +38,7 @@ This is a app is running on [Next.js](https://nextjs.org/)
 4. Your app should now be running on `localhost:3000`
 5. Install the App in your instance(s)
 
-Alternatively, you can install this app from this link:  [Register this App in Agility](https://manager.agilitycms.com/org/apps/create-app?name=Hubspot&url=https://agilitycms-hubspot-app.vercel.app/&description=Use%20forms%20from%20your%20Hubspotk%20account%20in%20Agility%20CMS.&icon=https%3A%2F%2Fcdn.agilitycms.com%2Fcontent-manager%2Fpublic-app-icons%2Fhubspot-logo.svg)
+Alternatively, you can install this app from this link:  [Register this App in Agility](https://manager.agilitycms.com/org/apps/create-app?name=Hubspot&url=https://agilitycms-hubspot-app.vercel.app/&description=Use%20forms%20from%20your%20Hubspot%20account%20in%20Agility%20CMS.&icon=https%3A%2F%2Fcdn.agilitycms.com%2Fcontent-manager%2Fpublic-app-icons%2Fhubspot-logo.svg)
 
 ## Embedding the Hubspot app response
 
