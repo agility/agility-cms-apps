@@ -39,7 +39,7 @@ const BlockEditor = ({ appConfig }) => {
             setFieldSDK(fieldSDK)
 
         });
-    }, [appConfig, editor, isVisible]);
+    }, [appConfig]);
 
     useEffect(() => {
         if (!isVisible || !fieldSDK) return
