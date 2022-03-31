@@ -35,7 +35,6 @@ export default async function translate(req: NextApiRequest, res: NextApiRespons
 
 		try {
 			const [value] = await translate.translate(valueToTranslate, target);
-			console.log("TRANSLATED TO ", value)
 			values[key] = value
 		} catch (error) {
 			console.log("COULD NOT TRANSLATE", key, error)
