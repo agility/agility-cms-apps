@@ -14,7 +14,7 @@ export default async function detect(req: NextApiRequest, res: NextApiResponse<D
 	const projectId = req.body.configValues.google_projectID
 	const client_email = req.body.configValues.google_client_email
 	let private_key:string = req.body.configValues.google_private_key
-	private_key = private_key.replaceAll("\\n", "\n")
+	private_key = private_key.replace(/\\n/, "\n")
 
 	const translate = new Translate({
 		projectId,
