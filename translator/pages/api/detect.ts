@@ -14,7 +14,7 @@ export default async function detect(req: NextApiRequest, res: NextApiResponse<D
 	const projectId = req.body.configValues.google_projectID
 	const client_email = req.body.configValues.google_client_email
 	let private_key:string = req.body.configValues.google_private_key
-	private_key = private_key.replace(/\\n/, "\n")
+	private_key = private_key.replace(/\\n/g, "\n")
 
 	const translate = new Translate({
 		projectId,
@@ -32,7 +32,7 @@ export default async function detect(req: NextApiRequest, res: NextApiResponse<D
 
 		try {
 			const value = await translate.detect(valueToTranslate);
-
+console.log(value)
 			if (value[0].confidence === 1) {
 				detectedLanguage = value[0].language
 				break
