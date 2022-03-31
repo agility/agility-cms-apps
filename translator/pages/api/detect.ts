@@ -32,7 +32,7 @@ export default async function detect(req: NextApiRequest, res: NextApiResponse<D
 
 		try {
 			const value = await translate.detect(valueToTranslate);
-			console.log(value[0])
+
 			if (value[0].confidence === 1) {
 				detectedLanguage = value[0].language
 				break
