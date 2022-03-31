@@ -11,6 +11,7 @@
   "dependencies": {
     "@agility/app-sdk": "github:agility/agility-cms-app-sdk#feature/post-launch-updates",
     "@google-cloud/translate": "^6.3.1",
+    "axios": "^0.26.1",
     "next": "12.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"

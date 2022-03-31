@@ -6,10 +6,10 @@ const Translate = v2.Translate
 
 
 type Data = {
-	values: any
+	detectedLanguage: string | null
 }
 
-export default async function translate(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function detect(req: NextApiRequest, res: NextApiResponse<Data>) {
 
 	const projectId = req.body.configValues.google_projectID
 	const client_email = req.body.configValues.google_client_email
@@ -24,28 +24,28 @@ export default async function translate(req: NextApiRequest, res: NextApiRespons
 		}
 	});
 
-	// // The target language
-	const target = req.body.locale;
-
 
 	// // Translates some text into Russian
-	const values:any = {}
+	let detectedLanguage:string|null = null
 	for (let key in req.body.textValues) {
 		const valueToTranslate = req.body.textValues[key]
 
 		try {
-			const [value] = await translate.translate(valueToTranslate, target);
-			console.log("TRANSLATED TO ", value)
-			values[key] = value
+			const value = await translate.detect(valueToTranslate);
+			console.log(value[0])
+			if (value[0].confidence === 1) {
+				detectedLanguage = value[0].language
+				break
+			}
+
 		} catch (error) {
-			console.log("COULD NOT TRANSLATE", key, error)
-			values[key] = null
+			console.log("COULD NOT detect language", key, error)
 		}
 	}
 
 
 
-	res.status(200).json({ values })
+	res.status(200).json({ detectedLanguage })
 
 
 }
