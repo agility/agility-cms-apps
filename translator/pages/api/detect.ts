@@ -38,7 +38,6 @@ export default async function detect(
         break;
       }
     } catch (error: any) {
-      // console.log("COULD NOT detect language", key, error);
       if (error instanceof Error) {
         if (error.message.includes("PEM routines")) {
           res.status(403).json(error);

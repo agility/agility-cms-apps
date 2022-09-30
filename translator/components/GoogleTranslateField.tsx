@@ -139,7 +139,6 @@ export default function GoogleTranslateField() {
         );
       }
       if (error?.response.data.error_description) {
-        //   console.dir(error);
         setErrorMsg(
           `${error.response.status}: ${error.response.data.error_description}`
         );
