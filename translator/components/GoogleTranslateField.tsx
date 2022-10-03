@@ -84,7 +84,6 @@ export default function GoogleTranslateField() {
         setSelectedFields(
           fitlerTranslatableFields(fieldSDK.contentModel?.fields)
         );
-      console.log(fieldSDK.contentModel.fields);
       let languageCode: string = fieldSDK.locale;
       if (languageCode.length > 2)
         languageCode = languageCode.substring(0, 2).toLowerCase();
@@ -161,18 +160,15 @@ export default function GoogleTranslateField() {
 
     try {
       const item: ContentItem = await sdk.getContentItem();
-
       let body: any = {
         locale: locale.code,
         configValues,
         textValues: {},
       };
-
       //loop all the user selected field fields and pull out the text or html that are NOT hidden
       selectedFields.forEach((field) => {
         body.textValues[field.name] = item.values[field.name];
       });
-
       //send the request to our translation function....
       const res = await axios.post("/api/translate", body);
       let fieldsUpdateCount = 0;
