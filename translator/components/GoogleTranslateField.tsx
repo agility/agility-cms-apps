@@ -59,6 +59,17 @@ export default function GoogleTranslateField() {
   // set ref
   const containerRef = useRef(null);
 
+  // function to handle filtering contentModel fields
+  const fitlerTranslatableFields = (array: ContentField[]) => {
+    return array.filter(
+      (field: ContentField) =>
+        field.dataField &&
+        !field.hidden &&
+        (field.fieldType === "Text" ||
+          field.fieldType === "HTML" ||
+          field.fieldType === "LongText")
+    );
+  };
   // initialize field
   useEffect(() => {
     agilityAppSDK.initializeField({ containerRef }).then((fieldSDK: any) => {
@@ -68,24 +79,12 @@ export default function GoogleTranslateField() {
       setFieldConfig(fieldSDK.field);
       setContentItem(fieldSDK.contentItem);
       setContentModel(fieldSDK.contentModel);
-      setUserFields(
-        fieldSDK.contentModel?.fields.filter(
-          (f: ContentField) =>
-            f.dataField &&
-            !f.hidden &&
-            (f.fieldType === "Text" || f.fieldType === "HTML")
-        )
-      );
+      setUserFields(fitlerTranslatableFields(fieldSDK.contentModel?.fields));
       !selectedFields.length &&
         setSelectedFields(
-          fieldSDK.contentModel?.fields.filter(
-            (f: ContentField) =>
-              f.dataField &&
-              !f.hidden &&
-              (f.fieldType === "Text" || f.fieldType === "HTML")
-          )
+          fitlerTranslatableFields(fieldSDK.contentModel?.fields)
         );
-
+      console.log(fieldSDK.contentModel.fields);
       let languageCode: string = fieldSDK.locale;
       if (languageCode.length > 2)
         languageCode = languageCode.substring(0, 2).toLowerCase();
@@ -122,16 +121,9 @@ export default function GoogleTranslateField() {
       };
 
       //loop all the field fields and pull out the text or html that are NOT hidden
-      model?.fields
-        .filter(
-          (f) =>
-            f.dataField &&
-            !f.hidden &&
-            (f.fieldType === "Text" || f.fieldType === "HTML")
-        )
-        .forEach((field) => {
-          body.textValues[field.name] = item.values[field.name];
-        });
+      fitlerTranslatableFields(model?.fields).forEach((field) => {
+        body.textValues[field.name] = item.values[field.name];
+      });
 
       //send the request to our translation function....
       const res = await axios.post("/api/detect", body);
@@ -231,7 +223,7 @@ export default function GoogleTranslateField() {
           {userFields
             ? userFields.map((field) => (
                 <Checkbox
-                  label={field.name}
+                  label={field.label}
                   key={field.name}
                   isChecked={selectedFields.includes(field)}
                   onChange={() => handleFieldChange(field)}
