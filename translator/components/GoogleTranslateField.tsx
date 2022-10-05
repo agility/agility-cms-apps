@@ -223,7 +223,7 @@ export default function GoogleTranslateField() {
             )}
           </div>
           {userFields ? (
-            <fieldset className='grid gap-2 grid-cols-2'>
+            <fieldset className='grid gap-2'>
               {userFields.map((field) => (
                 <Checkbox
                   label={field.label}
@@ -236,7 +236,7 @@ export default function GoogleTranslateField() {
           ) : (
             setErrorMsg("Error getting fields")
           )}
-          <div className=''>
+          <div className='flex gap-3 justify-between items-end'>
             <Select
               value={locale?.code}
               onChange={(value: string) => changeLocale(value)}
@@ -251,17 +251,15 @@ export default function GoogleTranslateField() {
                 })),
               ]}
             />
-            <div>
-              <Button
-                onClick={() => translate()}
-                type='primary'
-                icon='TranslateIcon'
-                isDisabled={processing}
-                isLoading={processing}
-                title={!processing ? "Translate" : "Processing"}
-                label={!processing ? "Translate" : "Processing"}
-              />
-            </div>
+            <Button
+              onClick={() => translate()}
+              type='primary'
+              icon='TranslateIcon'
+              isDisabled={processing}
+              isLoading={processing}
+              title={!processing ? "Translate" : "Processing"}
+              label={!processing ? "Translate" : "Processing"}
+            />
           </div>
         </div>
       )}
