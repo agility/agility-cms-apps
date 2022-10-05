@@ -7,6 +7,8 @@ import numeral from "numeral";
 
 // import '../styles/FieldStyles.scss'
 import fileSizeFromBytes from "../util/fileSizeFromBytes";
+import { TextInput } from "@agility/plenum-ui";
+import { MetaRow } from "./MetaRow";
 
 export default function ImageField() {
   const containerRef = useRef();
@@ -86,8 +88,11 @@ export default function ImageField() {
   };
 
   return (
-    <div className='field-row' ref={containerRef}>
-      <label>
+    <div
+      className='border-l-[3px] pl-3 transition-all border-l-gray-300  focus-within:border-l-purple-600 hover:border-l-purple-600'
+      ref={containerRef}
+    >
+      {/* <label>
         <span>{fieldConfig.label}</span>
         {fieldConfig.required && <span className='required'>*</span>}
         {fieldConfig.description && (
@@ -97,7 +102,7 @@ export default function ImageField() {
             title={fieldConfig.description}
           />
         )}
-      </label>
+      </label> */}
 
       {/* <input className='form-control' type="text" defaultValue={value} onChange={e => updateValue(e.target.value)} /> */}
 
@@ -155,61 +160,44 @@ export default function ImageField() {
               </a>
 
               <div className='attachment-meta-data'>
-                {fieldConfig.readOnly !== true && (
-                  <label className='lbl-alt-text'>
-                    <span>Alt Text:</span>
-                    <input
-                      type='text'
-                      className='form-control agility-attachment-alt'
-                      defaultValue={attachment?.context?.custom?.alt}
-                      onChange={(e) => setAltText(e.target.value)}
-                    />
-                  </label>
-                )}
-                {fieldConfig.readOnly === true && (
-                  <div>
-                    <span>Alt Text:</span>
-                    <span className='agility-attachment-alt'>
-                      {" "}
-                      {attachment?.context?.custom?.alt}
-                    </span>
-                  </div>
-                )}
+                <TextInput
+                  type='text'
+                  label='Alt Text'
+                  className='form-control agility-attachment-alt'
+                  defaultValue={attachment?.context?.custom?.alt}
+                  onChange={(val) => setAltText(val)}
+                  isReadonly={fieldConfig.readOnly}
+                />
 
-                <div>
-                  <span>Type:</span>
-                  <span className='agility-attachment-type'>
-                    {" "}
-                    {attachment.resource_type} - {attachment.format}
-                  </span>
-                </div>
-
-                <div>
-                  <span>Size:</span>
-                  <span className='agility-attachment-size'>
-                    {fileSizeFromBytes(attachment.bytes)}
-                  </span>
-                </div>
-
-                <div>
-                  <span>Width:</span>
-                  <span>{numeral(attachment.width).format("0,0")}px</span>
-                </div>
-                <div>
-                  <span>Height:</span>
-                  <span>{numeral(attachment.height).format("0,0")}px</span>
-                </div>
-                <div>
-                  <span>URL:</span>
-                  <a
-                    className='agility-attachment-url'
-                    href={attachment.secure_url}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    {attachment.public_id}
-                  </a>
-                </div>
+                <MetaRow
+                  label='Type'
+                  value={`${attachment.resource_type} - ${attachment.format}`}
+                />
+                <MetaRow
+                  label={"Size"}
+                  value={fileSizeFromBytes(attachment.bytes)}
+                />
+                <MetaRow
+                  label={"Width"}
+                  value={`${numeral(attachment.width).format("0,0")}px`}
+                />
+                <MetaRow
+                  label={"Height"}
+                  value={`${numeral(attachment.height).format("0,0")}px`}
+                />
+                <MetaRow
+                  label={"URL"}
+                  value={
+                    <a
+                      className='block break-all text-purple-600 line-clamp-1 hover:underline'
+                      href={attachment.secure_url}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      {attachment.public_id}
+                    </a>
+                  }
+                />
               </div>
             </div>
           </div>
