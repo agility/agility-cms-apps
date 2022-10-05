@@ -252,14 +252,15 @@ export default function GoogleTranslateField() {
               ]}
             />
             <div>
-              <button
+              <Button
                 onClick={() => translate()}
-                className='rounded-md w-48 bg-gray-200 py-1 px-3 hover:bg-gray-300 focus:bg-gray-400 disabled:bg-gray-100 disabled:text-gray-400'
-                disabled={processing}
-              >
-                {!processing && "Translate"}
-                {processing && "Processing..."}
-              </button>
+                type='primary'
+                icon='TranslateIcon'
+                isDisabled={processing}
+                isLoading={processing}
+                title={!processing ? "Translate" : "Processing"}
+                label={!processing ? "Translate" : "Processing"}
+              />
             </div>
           </div>
         </div>
