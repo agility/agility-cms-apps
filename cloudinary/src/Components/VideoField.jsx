@@ -19,7 +19,6 @@ export default function VideoField() {
     agilityAppSDK.initializeField({ containerRef }).then((fieldSDK) => {
       //set the SDK that we can use later...
       setSDK(fieldSDK);
-
       //set the actual value of the field
       if (fieldSDK.field.value) {
         try {
@@ -78,7 +77,7 @@ export default function VideoField() {
       },
     });
   };
-
+  console.warn(sdk?.configValues?.Value);
   return (
     <div
       className='border-l-[3px] pl-3 transition-all border-l-gray-300  focus-within:border-l-purple-600 hover:border-l-purple-600'
@@ -98,7 +97,11 @@ export default function VideoField() {
               <div className='mt-2 flex w-full rounded border border-gray-300 flex-row gap-6 flex-wrap'>
                 <div className='relative flex-shrink 2xl:w-1/3 w-1/2  '>
                   <CloudinaryContext
-                    cloudName={sdk.configValues.cloudName}
+                    cloudName={
+                      sdk?.configValues?.Value
+                        ? sdk.configValues.Value
+                        : sdk?.configValues?.cloudName
+                    }
                     secure='true'
                   >
                     <Video
