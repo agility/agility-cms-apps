@@ -96,7 +96,7 @@ export default function VideoField() {
           {attachment ? (
             <div className='panel-body'>
               <div className='mt-2 flex w-full rounded border border-gray-300 flex-row gap-6 flex-wrap'>
-                <div className='relative flex-shrink 2xl:w-1/3 w  '>
+                <div className='relative flex-shrink 2xl:w-1/3 w-1/2  '>
                   <CloudinaryContext
                     cloudName={sdk.configValues.cloudName}
                     secure='true'
