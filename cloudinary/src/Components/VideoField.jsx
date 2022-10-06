@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import agilityAppSDK from "@agility/app-sdk";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import numeral from "numeral";
 
 import { Video, CloudinaryContext } from "cloudinary-react";
 
-// import '../styles/FieldStyles.scss'
-import fileSizeFromBytes from "../util/fileSizeFromBytes";
+import FieldHeader from "./FieldHeader";
+import BlankPrompt from "./BlankPrompt";
+import Metadata from "./Metadata";
 
 export default function VideoField() {
   const [fieldConfig, setFieldConfig] = useState({});
@@ -82,106 +80,46 @@ export default function VideoField() {
   };
 
   return (
-    <div className='field-row' ref={containerRef}>
-      <label>
-        <span>{fieldConfig.label}</span>
-        {fieldConfig.required && <span className='required'>*</span>}
-        {fieldConfig.description && (
-          <FontAwesomeIcon
-            icon={faInfoCircle}
-            className='field-description'
-            title={fieldConfig.description}
-          />
-        )}
-      </label>
-
-      {/* <input className='form-control' type="text" defaultValue={value} onChange={e => updateValue(e.target.value)} /> */}
+    <div
+      className='border-l-[3px] pl-3 transition-all border-l-gray-300  focus-within:border-l-purple-600 hover:border-l-purple-600'
+      ref={containerRef}
+    >
+      <FieldHeader
+        fieldConfig={fieldConfig}
+        attachment={attachment}
+        handleRemove={removeAttachment}
+        handleSelect={openMediaSelection}
+      />
 
       <div className='agility-field-panel'>
         <div className='panel-heading'>
-          <div className='panel-title'>
-            <img
-              src='/cloudinary.svg'
-              style={{ height: "1.8em", verticalAlign: "bottom" }}
-              alt='Cloudinary'
-            />
-            {!attachment && <span> No video is attached yet.</span>}
-            {attachment && <span> A video is attached to this item.</span>}
-          </div>
-          {fieldConfig.readOnly !== true && (
-            <div className='top-buttons'>
-              {attachment && (
-                <button
-                  type='button'
-                  className='trash btn btn-primary'
-                  onClick={removeAttachment}
-                >
-                  Remove
-                </button>
-              )}
+          {attachment ? (
+            <div className='panel-body'>
+              <div className='mt-2 flex w-full rounded border border-gray-300 flex-row gap-6 flex-wrap'>
+                <div className='relative flex-shrink 2xl:w-1/3 w  '>
+                  <CloudinaryContext
+                    cloudName={sdk.configValues.cloudName}
+                    secure='true'
+                  >
+                    <Video
+                      publicId={attachment.public_id}
+                      controls={true}
+                      className='border-[3px] transition-all border-gray-300  focus-within:border-purple-600 hover:border-purple-600'
+                    />
+                  </CloudinaryContext>
+                </div>
 
-              <button
-                type='button'
-                className='browse btn btn-primary'
-                onClick={openMediaSelection}
-              >
-                Browse
-              </button>
+                <Metadata
+                  attachment={attachment}
+                  isImage={false}
+                  fieldConfig={fieldConfig}
+                />
+              </div>
             </div>
+          ) : (
+            <BlankPrompt isImage={false} handleSelect={openMediaSelection} />
           )}
         </div>
-        {attachment && (
-          <div className='panel-body'>
-            <div className='attachment-row'>
-              <div className='agility-attachment-thm'>
-                <CloudinaryContext
-                  cloudName={sdk.configValues.cloudName}
-                  secure='true'
-                >
-                  <Video publicId={attachment.public_id} controls={true} />
-                </CloudinaryContext>
-              </div>
-
-              <div className='attachment-meta-data'>
-                <div>
-                  <span>Type:</span>
-                  <span className='agility-attachment-type'>
-                    {" "}
-                    {attachment.resource_type} - {attachment.format}
-                  </span>
-                </div>
-
-                <div>
-                  <span>Size:</span>
-                  <span className='agility-attachment-size'>
-                    {fileSizeFromBytes(attachment.bytes)}
-                  </span>
-                </div>
-
-                <div>
-                  <span>Width:</span>
-                  <span>{numeral(attachment.width).format("0,0")}px</span>
-                </div>
-                <div>
-                  <span>Height:</span>
-                  <span>{numeral(attachment.height).format("0,0")}px</span>
-                </div>
-
-                <div>
-                  <span>URL:</span>
-                  <a
-                    className='agility-attachment-url'
-                    href={attachment.secure_url}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    {attachment.public_id}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

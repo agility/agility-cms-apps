@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import agilityAppSDK from "@agility/app-sdk";
-import useScript from "react-script-hook";
-
+import useScript from "react-script-hook/lib/use-script";
 export default function MediaSelector({ appConfig }) {
   const containerRef = useRef();
 
