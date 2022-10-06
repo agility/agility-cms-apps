@@ -77,7 +77,6 @@ export default function VideoField() {
       },
     });
   };
-  console.warn(sdk?.configValues?.Value);
   return (
     <div
       className='border-l-[3px] pl-3 transition-all border-l-gray-300  focus-within:border-l-purple-600 hover:border-l-purple-600'
