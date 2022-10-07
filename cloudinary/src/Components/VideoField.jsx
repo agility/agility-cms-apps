@@ -96,11 +96,7 @@ export default function VideoField() {
               <div className='mt-2 flex w-full rounded border border-gray-300 flex-row gap-6 flex-wrap'>
                 <div className='relative flex-shrink 2xl:w-1/3 w-1/2  '>
                   <CloudinaryContext
-                    cloudName={
-                      sdk?.configValues?.Value
-                        ? sdk.configValues.Value
-                        : sdk?.configValues?.cloudName
-                    }
+                    cloudName={sdk?.configValues?.cloudName}
                     secure='true'
                   >
                     <Video
