@@ -82,7 +82,7 @@ export default function ImageField() {
       },
     });
   };
-
+  console.dir(attachment);
   return (
     <div
       className='border-l-[3px] pl-3 transition-all border-l-gray-300  focus-within:border-l-purple-600 hover:border-l-purple-600'
@@ -98,7 +98,7 @@ export default function ImageField() {
       <>
         {attachment ? (
           <div className='mt-2 flex w-full rounded border border-gray-300 flex-row gap-6 flex-wrap'>
-            <div className='relative'>
+            <div className='relative flex-shrink 2xl:w-1/3 w-1/2  '>
               <a
                 href={attachment.secure_url}
                 className='agility-attachment-thm'
@@ -111,7 +111,7 @@ export default function ImageField() {
                       ? attachment.derived[0].secure_url
                       : attachment.secure_url
                   }
-                  alt=''
+                  alt={attachment?.context?.custom?.alt}
                 />
                 <AttachmentOverlay isImage={true} />
                 <i className='fa fa-picture-o' aria-hidden='true'></i>
