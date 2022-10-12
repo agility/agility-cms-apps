@@ -109,7 +109,7 @@ export default function ImageField() {
           >
             <div
               className={`relative flex h-[270px] w-[275px] ${
-                width < 570 && "w-full"
+                width < 598 && "w-full"
               }`}
               style={{
                 background:
