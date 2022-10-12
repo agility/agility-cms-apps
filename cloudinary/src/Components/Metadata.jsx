@@ -1,6 +1,5 @@
 import React from "react";
 import fileSizeFromBytes from "../util/fileSizeFromBytes";
-import numeral from "numeral";
 import { TextInput } from "@agility/plenum-ui";
 import { MetaRow } from "./MetaRow";
 
@@ -11,7 +10,7 @@ const Metadata = ({
   isImage,
 }) => {
   return (
-    <div className='grow mx-6 font-muli'>
+    <div className='mx-6 w-full flex-1 font-muli'>
       {isImage && (
         <TextInput
           type='text'
@@ -27,7 +26,12 @@ const Metadata = ({
         value={`${attachment.resource_type} - ${attachment.format}`}
       />
       <MetaRow label={"Size"} value={fileSizeFromBytes(attachment.bytes)} />
-
+      {attachment.resource_type === "video" && (
+        <>
+          <MetaRow label={"Width"} value={attachment.width} />
+          <MetaRow label={"Height"} value={attachment.height} />
+        </>
+      )}
       <MetaRow
         label={"URL"}
         className={"border-b-0 border-b-transparent"}

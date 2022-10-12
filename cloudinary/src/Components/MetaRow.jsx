@@ -1,6 +1,6 @@
 import React from "react";
 
-export const MetaRow = ({ label, value, className }) => {
+export const MetaRow = ({ label, value, className = "" }) => {
   return (
     <div
       className={`my-2 flex w-full justify-between border-b border-b-gray-300 pb-2 ${

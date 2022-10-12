@@ -6,12 +6,16 @@ import FieldHeader from "./FieldHeader";
 import BlankPrompt from "./BlankPrompt";
 import Metadata from "./Metadata";
 import AttachmentOverlay from "./AttachmentOverlay";
+import { useAssetWidth } from "../hooks/useAssetWidth";
 
 export default function ImageField() {
-  const containerRef = useRef();
+  const containerRef = useRef(null);
   const [fieldConfig, setFieldConfig] = useState({});
   const [sdk, setSDK] = useState({});
   const [attachment, setAttachment] = useState(null);
+  const [width, setWidth] = useState(0);
+  const widthRef = useRef(0);
+  const assetRef = useRef(null);
 
   useEffect(() => {
     //when the SDK initializes us...
@@ -83,7 +87,8 @@ export default function ImageField() {
       },
     });
   };
-  console.dir(fieldConfig);
+
+  useAssetWidth(assetRef, widthRef, setWidth);
   return (
     <div
       className='border-l-[3px] pl-3 transition-all border-l-gray-300  focus-within:border-l-purple-600 hover:border-l-purple-600'
@@ -98,9 +103,14 @@ export default function ImageField() {
 
       <>
         {attachment ? (
-          <div className='mt-2 flex w-full rounded border border-gray-300 flex-row '>
+          <div
+            className='mt-2 flex w-full rounded border border-gray-300 flex-wrap flex-row'
+            ref={assetRef}
+          >
             <div
-              className={"relative flex h-[270px]  w-[275px]"}
+              className={`relative flex h-[270px] w-[275px] ${
+                width < 570 && "w-full"
+              }`}
               style={{
                 background:
                   "repeating-conic-gradient(#D9D9D9 0% 25%, transparent 0% 50%) 50% / 20px 20px",
@@ -108,7 +118,7 @@ export default function ImageField() {
             >
               <div
                 className={
-                  "border-0 bg-clip-border bg-center bg-no-repeat h-full w-full max-w-[275px] flex items-center justify-center bg-contain"
+                  "border-0 bg-clip-border bg-center bg-no-repeat h-full w-full max-w-[275px] mx-auto flex items-center justify-center bg-contain"
                 }
                 style={{
                   backgroundImage:
@@ -145,54 +155,4 @@ export default function ImageField() {
       </>
     </div>
   );
-}
-
-{
-  /* <div
-  className={classNames(
-    "relative",
-    isWide
-      ? "h-[270px] w-[275px]"
-      : "flex h-[270px] w-full items-center justify-center"
-  )}
-  style={{
-    background:
-      "repeating-conic-gradient(#D9D9D9 0% 25%, transparent 0% 50%) 50% / 20px 20px",
-  }}
->
-  <div
-    className={classNames(
-      " border-0 bg-clip-border bg-center bg-no-repeat",
-      "h-full w-full max-w-[275px]",
-      cover ? "bg-cover" : "bg-contain",
-      isLoading ? "flex items-center justify-center" : "",
-      isError ? "bg-gray-200 bg-opacity-75" : ""
-    )}
-    style={{
-      backgroundImage: imageUrl ? `url(${imageUrl})` : undefined,
-    }}
-  >
-    {isLoading && <Loader className='h-8 w-8 border-4' />}
-
-    {!isLoading && isError && (
-      <div className='flex h-full flex-col items-center justify-center'>
-        <IconWithShadow
-          tablerIcon='IconCloudOff'
-          shadowClassName='bg-gray-200'
-        />
-        <div className='mt-2 text-red-400'>Error loading image</div>
-      </div>
-    )}
-  </div>
-  {imageUrl && (
-    <div className='absolute bottom-0 left-0 flex w-full cursor-default items-center space-x-1 bg-gradient-to-b from-transparent to-gray-500 p-3 text-white transition-all hover:opacity-0'>
-      <DynamicIcons
-        icon={"CameraIcon"}
-        outline={false}
-        className='h-6 w-6 text-white'
-      />
-      <span>An image is attached to this item.</span>
-    </div>
-  )}
-</div>; */
 }

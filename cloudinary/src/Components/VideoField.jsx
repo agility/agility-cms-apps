@@ -6,6 +6,7 @@ import { Video, CloudinaryContext } from "cloudinary-react";
 import FieldHeader from "./FieldHeader";
 import BlankPrompt from "./BlankPrompt";
 import Metadata from "./Metadata";
+import AttachmentOverlay from "./AttachmentOverlay";
 
 export default function VideoField() {
   const [fieldConfig, setFieldConfig] = useState({});
@@ -94,7 +95,16 @@ export default function VideoField() {
           {attachment ? (
             <div className='panel-body'>
               <div className='mt-2 flex w-full rounded border border-gray-300 flex-row gap-6 flex-wrap'>
-                <div className='relative flex-shrink 2xl:w-1/3 w-1/2  '>
+                <div
+                  className={
+                    "relative flex h-[270px] max-w-[275px] items-center "
+                  }
+                  style={{
+                    background:
+                      "repeating-conic-gradient(#D9D9D9 0% 25%, transparent 0% 50%) 50% / 20px 20px",
+                  }}
+                >
+                  <AttachmentOverlay isImage={false} />
                   <CloudinaryContext
                     cloudName={sdk?.configValues?.cloudName}
                     secure='true'
