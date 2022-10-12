@@ -7,14 +7,19 @@ import FieldHeader from "./FieldHeader";
 import BlankPrompt from "./BlankPrompt";
 import Metadata from "./Metadata";
 import AttachmentOverlay from "./AttachmentOverlay";
+import { useAssetWidth } from "../hooks/useAssetWidth";
 
 export default function VideoField() {
   const [fieldConfig, setFieldConfig] = useState({});
 
   const [sdk, setSDK] = useState({});
-  const containerRef = useRef();
+  const containerRef = useRef(null);
+  const assetRef = useRef(null);
+  const [width, setWidth] = useState(0);
+  const widthRef = useRef(0);
 
   const [attachment, setAttachment] = useState(null);
+  useAssetWidth(assetRef, widthRef, setWidth);
 
   useEffect(() => {
     agilityAppSDK.initializeField({ containerRef }).then((fieldSDK) => {
@@ -94,20 +99,23 @@ export default function VideoField() {
         <div className='panel-heading'>
           {attachment ? (
             <div className='panel-body'>
-              <div className='mt-2 flex w-full rounded border border-gray-300 flex-row gap-6 flex-wrap'>
+              <div
+                className='mt-2 flex w-full rounded border border-gray-300 flex-wrap flex-row'
+                ref={assetRef}
+              >
                 <div
-                  className={
-                    "relative flex h-[270px] max-w-[275px] items-center "
-                  }
+                  className={`relative flex  w-[350px] ${
+                    width < 685 && "w-full"
+                  }`}
                   style={{
                     background:
                       "repeating-conic-gradient(#D9D9D9 0% 25%, transparent 0% 50%) 50% / 20px 20px",
                   }}
                 >
-                  <AttachmentOverlay isImage={false} />
                   <CloudinaryContext
                     cloudName={sdk?.configValues?.cloudName}
                     secure='true'
+                    className='flex items-center'
                   >
                     <Video
                       publicId={attachment.public_id}

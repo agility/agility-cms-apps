@@ -10,7 +10,7 @@ const Metadata = ({
   isImage,
 }) => {
   return (
-    <div className='mx-6 w-full flex-1 font-muli'>
+    <div className='mx-6 w-full flex-1 font-muli bg-white min-w-[275px]'>
       {isImage && (
         <TextInput
           type='text'
