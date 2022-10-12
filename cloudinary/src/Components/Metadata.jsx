@@ -27,14 +27,7 @@ const Metadata = ({
         value={`${attachment.resource_type} - ${attachment.format}`}
       />
       <MetaRow label={"Size"} value={fileSizeFromBytes(attachment.bytes)} />
-      <MetaRow
-        label={"Width"}
-        value={`${numeral(attachment.width).format("0,0")}px`}
-      />
-      <MetaRow
-        label={"Height"}
-        value={`${numeral(attachment.height).format("0,0")}px`}
-      />
+
       <MetaRow
         label={"URL"}
         className={"border-b-0 border-b-transparent"}
