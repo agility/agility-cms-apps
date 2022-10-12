@@ -21,6 +21,18 @@ const FieldHeader = ({
         {fieldConfig.required && (
           <span className='text-small text-red-600'>*</span>
         )}
+        {fieldConfig.description && (
+          <span
+            title={fieldConfig.description}
+            data-tooltip={fieldConfig.description}
+          >
+            <DynamicIcons
+              icon='InformationCircleIcon'
+              outline={true}
+              className='h-5 w-5 text-gray-400 transition-all hover:text-gray-500 ml-1'
+            />
+          </span>
+        )}
       </div>
 
       {fieldConfig.readOnly !== true && (
