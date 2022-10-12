@@ -126,19 +126,7 @@ export default function ImageField() {
                       ? `url(${attachment.derived[0].secure_url})`
                       : `url(${attachment.secure_url})`,
                 }}
-              >
-                {/* {isLoading && <Loader className='h-8 w-8 border-4' />}
-
-                {!isLoading && isError && (
-                  <div className='flex h-full flex-col items-center justify-center'>
-                    <IconWithShadow
-                      tablerIcon='IconCloudOff'
-                      shadowClassName='bg-gray-200'
-                    />
-                    <div className='mt-2 text-red-400'>Error loading image</div>
-                  </div>
-                )} */}
-              </div>
+              ></div>
               <AttachmentOverlay isImage={true} />
               <i className='fa fa-picture-o' aria-hidden='true'></i>
             </div>

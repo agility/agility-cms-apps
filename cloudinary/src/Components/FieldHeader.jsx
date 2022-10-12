@@ -1,30 +1,15 @@
 import React from "react";
-import { ButtonDropDown } from "@agility/plenum-ui";
+import { Button, ButtonDropDown } from "@agility/plenum-ui";
+import { DynamicIcons } from "./DynamicIcons";
+
 const FieldHeader = ({
   fieldConfig,
   attachment,
   handleRemove,
   handleSelect,
 }) => {
-  const DropDownIconElement = () => (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      fill='none'
-      viewBox='0 0 24 24'
-      strokeWidth='1.5'
-      stroke='currentColor'
-      className='w-6 h-6'
-    >
-      <path
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        d='M19.5 8.25l-7.5 7.5-7.5-7.5'
-      />
-    </svg>
-  );
-
   return (
-    <div className='flex w-full items-center justify-between pb-1'>
+    <div className='flex w-full items-center justify-between pb-1 font-muli'>
       <div className='flex items-center'>
         <img
           src='/cloudinary.svg'
@@ -43,22 +28,21 @@ const FieldHeader = ({
           {attachment ? (
             <ButtonDropDown
               button={{
-                icon: "FolderDownloadIcon",
+                icon: "CollectionIcon",
                 label: "Browse",
-                size: "base",
+                size: "sm",
                 onClick: () => handleSelect(),
                 type: "secondary",
               }}
               dropDown={{
-                IconElement: DropDownIconElement,
+                IconElement: () => (
+                  <DynamicIcons
+                    outline={false}
+                    icon='ChevronDownIcon'
+                    className='h-5 w-5 text-purple-600'
+                  />
+                ),
                 items: [
-                  [
-                    {
-                      icon: "UploadIcon",
-                      label: "Upload",
-                      onClick: () => {},
-                    },
-                  ],
                   [
                     {
                       icon: "TrashIcon",
@@ -71,26 +55,12 @@ const FieldHeader = ({
               }}
             />
           ) : (
-            <ButtonDropDown
-              button={{
-                icon: "FolderDownloadIcon",
-                label: "Browse",
-                size: "base",
-                onClick: () => handleSelect(),
-                type: "secondary",
-              }}
-              dropDown={{
-                IconElement: DropDownIconElement,
-                items: [
-                  [
-                    {
-                      icon: "UploadIcon",
-                      label: "Upload",
-                      onClick: () => {},
-                    },
-                  ],
-                ],
-              }}
+            <Button
+              icon='FolderDownloadIcon'
+              label='Browse'
+              size='sm'
+              onClick={() => handleSelect()}
+              type='secondary'
             />
           )}
         </div>

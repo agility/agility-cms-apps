@@ -6,7 +6,6 @@ import { Video, CloudinaryContext } from "cloudinary-react";
 import FieldHeader from "./FieldHeader";
 import BlankPrompt from "./BlankPrompt";
 import Metadata from "./Metadata";
-import AttachmentOverlay from "./AttachmentOverlay";
 import { useAssetWidth } from "../hooks/useAssetWidth";
 
 export default function VideoField() {
