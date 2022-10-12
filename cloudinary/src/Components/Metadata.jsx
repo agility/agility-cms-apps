@@ -11,7 +11,7 @@ const Metadata = ({
   isImage,
 }) => {
   return (
-    <div className='grow mx-4'>
+    <div className='grow mx-6 font-muli'>
       {isImage && (
         <TextInput
           type='text'
@@ -37,6 +37,7 @@ const Metadata = ({
       />
       <MetaRow
         label={"URL"}
+        className={"border-b-0 border-b-transparent"}
         value={
           <a
             className='block break-all text-purple-600 line-clamp-1 hover:underline'

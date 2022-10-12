@@ -2,7 +2,7 @@ import React from "react";
 
 const AttachmentOverlay = ({ isImage }) => {
   return (
-    <div className='absolute bottom-0 left-0 flex w-full cursor-default items-center space-x-1 bg-gradient-to-b from-transparent to-gray-500 p-3 text-white transition-all hover:opacity-0'>
+    <div className='absolute bottom-0 left-0 flex w-full cursor-default items-center space-x-1 bg-gradient-to-b from-transparent to-gray-500 text-white p-3 transition-all hover:opacity-0 text-sm'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 20 20'
