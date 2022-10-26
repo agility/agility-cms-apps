@@ -95,7 +95,7 @@ export default function GoogleTranslateField() {
       // and HIDE this if we do NOT need to translate it
       detectCurrentLanguage(fieldSDK, languageCode);
     });
-
+    if (!userFields.length) setErrorMsg("Error getting fields for this item");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -198,6 +198,7 @@ export default function GoogleTranslateField() {
       setSelectedFields([...selectedFields, field]);
     }
   };
+
   return (
     <div
       className='border-l-[3px] pl-3 transition-all border-l-gray-300 font-muli  focus-within:border-l-purple-600 hover:border-l-purple-600'
@@ -216,9 +217,9 @@ export default function GoogleTranslateField() {
           label={!processing ? "Translate" : "Processing"}
         />
       </header>
-      {(contentItem?.contentID || 0) > 0 ? (
-        <div className='border border-gray-300 rounded p-3 mt-2'>
-          {userFields ? (
+      {(contentItem?.contentID || 0) > 0 && (
+        <div className='border border-gray-300 rounded p-3 mt-2 focus-within:border-purple-600'>
+          {userFields.length && (
             <fieldset className='flex items-center justify-between flex-wrap'>
               <div>
                 <legend className='pb-1 text-sm'>
@@ -233,7 +234,6 @@ export default function GoogleTranslateField() {
                       <Checkbox
                         isChecked={selectedFields.includes(field)}
                         onChange={() => handleFieldChange(field)}
-                        // label={field.label}
                         label=''
                         id={field.name}
                       />
@@ -260,16 +260,7 @@ export default function GoogleTranslateField() {
                 />
               </div>
             </fieldset>
-          ) : (
-            <div>
-              {errorMsg} {setErrorMsg("Error getting fields")}
-            </div>
           )}
-        </div>
-      ) : (
-        <div>
-          {errorMsg}
-          {setErrorMsg("Error Getting Content Item")}
         </div>
       )}
     </div>
