@@ -261,11 +261,16 @@ export default function GoogleTranslateField() {
               </div>
             </fieldset>
           ) : (
-            setErrorMsg("Error getting fields")
+            <div>
+              {errorMsg} {setErrorMsg("Error getting fields")}
+            </div>
           )}
         </div>
       ) : (
-        <div>{setErrorMsg("Error Getting Content Item")}</div>
+        <div>
+          {errorMsg}
+          {setErrorMsg("Error Getting Content Item")}
+        </div>
       )}
     </div>
   );
