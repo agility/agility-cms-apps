@@ -216,8 +216,7 @@ export default function GoogleTranslateField() {
           label={!processing ? "Translate" : "Processing"}
         />
       </header>
-
-      {(contentItem?.contentID || 0) > 0 && (
+      {(contentItem?.contentID || 0) > 0 ? (
         <div className='border border-gray-300 rounded p-3 mt-2'>
           {userFields ? (
             <fieldset className='flex items-center justify-between flex-wrap'>
@@ -265,6 +264,8 @@ export default function GoogleTranslateField() {
             setErrorMsg("Error getting fields")
           )}
         </div>
+      ) : (
+        <div>{setErrorMsg("Error Getting Content Item")}</div>
       )}
     </div>
   );

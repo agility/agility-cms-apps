@@ -8,10 +8,10 @@
   dependencies:
     regenerator-runtime "^0.13.9"
 
-"@agility/plenum-ui@^1.3.33":
-  version "1.3.33"
-  resolved "https://registry.yarnpkg.com/@agility/plenum-ui/-/plenum-ui-1.3.33.tgz#86f3cb6a5f0ab7ee9a9caccd45fbc2b9c7cfb4d8"
-  integrity sha512-dqoZNBKSApSVKGz5wbWMF0ctAYpqL/g3IG4ZFyiM+0XwRlmfvQuBjLlK+fpYPPsjsoZUB16TMkmK1z+Osd7CGQ==
+"@agility/plenum-ui@^1.3.36":
+  version "1.3.36"
+  resolved "https://registry.yarnpkg.com/@agility/plenum-ui/-/plenum-ui-1.3.36.tgz#bd743f79c3c1aa9dbe065c10657ad5afccc262b7"
+  integrity sha512-SWnnEM4RY5RlVaChHxo+9brjj/iBwoM/31j6miGdgza3wkzt4UC80lzQFBNVWNFFgk5b5e+uHnbkjbevcSickw==
   dependencies:
     "@headlessui/react" "^1.6.4"
     "@heroicons/react" "^1.0.5"
