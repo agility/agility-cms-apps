@@ -1,6 +1,6 @@
 import "../styles/globals.css";
-import "@agility/plenum-ui/lib/tailwind.css";
 import type { AppProps } from "next/app";
+import "@agility/plenum-ui/lib/tailwind.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;

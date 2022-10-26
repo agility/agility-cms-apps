@@ -334,6 +334,11 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.0.8.tgz#be3e914e84eacf16dbebd311c0d0b44aa1174c64"
   integrity sha512-ZK5v4bJwgXldAUA8r3q9YKfCwOqoHTK/ZqRjSeRXQrBXWouoPnS4MQtgC4AXGiiBuUu5wxrRgTlv0ktmM4P1Aw==
 
+"@tabler/icons@^1.108.0":
+  version "1.108.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.108.0.tgz#95f20eed2d32aa60a0e992ad08f6e2fa213e6161"
+  integrity sha512-g5omegUgM1aaS+ICoJNNlFpxBGHPQq92Hs0w0pZLn1LzvMRc2H/3NO7A+G4idJwrJ6Nk8V7rnA9T8X2m4aGSaQ==
+
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"

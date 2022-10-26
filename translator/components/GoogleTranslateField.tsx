@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import agilityAppSDK from "@agility/app-sdk";
 import axios from "axios";
 import languages from "../data/locales.json";
-import { Checkbox, Select, Button } from "@agility/plenum-ui";
+import { Checkbox, Select, Button, Dropdown } from "@agility/plenum-ui";
+import { IconChevronDown } from "@tabler/icons";
 
 interface FieldConfig {
   label?: string;
@@ -199,68 +200,70 @@ export default function GoogleTranslateField() {
   };
   return (
     <div
-      className='border-l-[3px] pl-3 transition-all border-l-gray-300  focus-within:border-l-purple-600 hover:border-l-purple-600'
+      className='border-l-[3px] pl-3 transition-all border-l-gray-300 font-muli  focus-within:border-l-purple-600 hover:border-l-purple-600'
       ref={containerRef}
     >
-      {(contentItem?.contentID || 0) > 0 && !detected && (
-        <div className='text-xs'>Detecting current language...</div>
-      )}
-      {(contentItem?.contentID || 0) > 0 && needsTranslation && (
-        <div className='border border-gray-300 rounded p-3'>
-          <div className='flex items-center justify-between pb-2'>
-            <div className='text-base font-medium text-gray-700'>
-              GOOGLE TRANSLATE
-            </div>
-            {errorMsg && (
-              <div className='rounded  px-2.5 py-0.5 text-xs font-normal text-gray-800 bg-red-100'>
-                {errorMsg}{" "}
-              </div>
-            )}
-            {!errorMsg && msg && (
-              <div className='rounded  px-2.5 py-0.5 text-xs font-normal text-gray-800 bg-green-100'>
-                {msg}{" "}
-              </div>
-            )}
-          </div>
+      <header className='flex justify-between items-center w-full'>
+        <h2 className='text-gray-700'>Google Translate</h2>
+        <Button
+          onClick={() => translate()}
+          type='secondary'
+          icon='TranslateIcon'
+          size='sm'
+          isDisabled={processing}
+          isLoading={processing}
+          title={!processing ? "Translate" : "Processing"}
+          label={!processing ? "Translate" : "Processing"}
+        />
+      </header>
+
+      {(contentItem?.contentID || 0) > 0 && (
+        <div className='border border-gray-300 rounded p-3 mt-2'>
           {userFields ? (
-            <fieldset className='grid gap-2'>
-              {userFields.map((field) => (
-                <Checkbox
-                  label={field.label}
-                  key={field.name}
-                  isChecked={selectedFields.includes(field)}
-                  onChange={() => handleFieldChange(field)}
+            <fieldset className='flex items-center justify-between flex-wrap'>
+              <div>
+                <legend className='pb-1 text-sm'>
+                  Select the fields you wish to translate.
+                </legend>
+                <ul className='pt-3 grid grid-col-1 gap-4 auto-cols-max grid-flow-col'>
+                  {userFields.map((field) => (
+                    <li
+                      key={field.label}
+                      className=' items-center flex text-sm font-light'
+                    >
+                      <Checkbox
+                        isChecked={selectedFields.includes(field)}
+                        onChange={() => handleFieldChange(field)}
+                        // label={field.label}
+                        label=''
+                        id={field.name}
+                      />
+                      <label htmlFor={field.name}>{field.label}</label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <Select
+                  value={locale?.code}
+                  onChange={(value: string) => changeLocale(value)}
+                  id='selectLanguage'
+                  name='select'
+                  label='Select Language'
+                  options={[
+                    { label: "Select Locale", value: "" },
+                    ...languages.map((lang) => ({
+                      label: lang.name,
+                      value: lang.code,
+                    })),
+                  ]}
                 />
-              ))}
+              </div>
             </fieldset>
           ) : (
             setErrorMsg("Error getting fields")
           )}
-          <div className='flex gap-3 justify-between items-end'>
-            <Select
-              value={locale?.code}
-              onChange={(value: string) => changeLocale(value)}
-              id='selectLanguage'
-              name='select'
-              label='Select Language'
-              options={[
-                { label: "Select Locale", value: "" },
-                ...languages.map((lang) => ({
-                  label: lang.name,
-                  value: lang.code,
-                })),
-              ]}
-            />
-            <Button
-              onClick={() => translate()}
-              type='primary'
-              icon='TranslateIcon'
-              isDisabled={processing}
-              isLoading={processing}
-              title={!processing ? "Translate" : "Processing"}
-              label={!processing ? "Translate" : "Processing"}
-            />
-          </div>
         </div>
       )}
     </div>
