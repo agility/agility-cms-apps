@@ -56,6 +56,7 @@ export default function GoogleTranslateField() {
   const [needsTranslation, setNeedsTranslation] = useState(false);
   const [userFields, setUserFields] = useState<ContentField[]>([]);
   const [selectedFields, setSelectedFields] = useState<ContentField[]>([]);
+  const [languageCode, setLanguageCode] = useState<string>("");
 
   // set ref
   const containerRef = useRef(null);
@@ -88,14 +89,14 @@ export default function GoogleTranslateField() {
       let languageCode: string = fieldSDK.locale;
       if (languageCode.length > 2)
         languageCode = languageCode.substring(0, 2).toLowerCase();
-
+      setLanguageCode(languageCode);
       changeLocale(languageCode);
 
       //on load, we should be checking the language of the content against the current language
       // and HIDE this if we do NOT need to translate it
       detectCurrentLanguage(fieldSDK, languageCode);
     });
-    if (!userFields.length) setErrorMsg("Error getting fields for this item");
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -146,7 +147,6 @@ export default function GoogleTranslateField() {
       setDetected(true);
     }
   };
-
   const translate = async () => {
     if (!locale) {
       //TODO: show an error here...
@@ -207,11 +207,18 @@ export default function GoogleTranslateField() {
       <header className='flex justify-between items-center w-full'>
         <h2 className='text-gray-700'>Google Translate</h2>
         <Button
-          onClick={() => translate()}
+          onClick={() => {
+            console.log(locale.code);
+            translate();
+          }}
           type='secondary'
           icon='TranslateIcon'
           size='sm'
-          isDisabled={processing}
+          isDisabled={
+            processing ||
+            !selectedFields.length ||
+            (locale && locale.code === languageCode)
+          }
           isLoading={processing}
           title={!processing ? "Translate" : "Processing"}
           label={!processing ? "Translate" : "Processing"}
@@ -220,12 +227,23 @@ export default function GoogleTranslateField() {
       {(contentItem?.contentID || 0) > 0 && (
         <div className='border border-gray-300 rounded p-3 mt-2 focus-within:border-purple-600'>
           {userFields.length && (
-            <fieldset className='flex items-center justify-between flex-wrap'>
+            <fieldset className='flex items-center justify-between flex-wrap '>
               <div>
                 <legend className='pb-1 text-sm'>
                   Select the fields you wish to translate.
+                  {selectedFields.length === 0 ? (
+                    <p className='p-1 bg-red-200 text-red-500 w-max items-center justify-center rounded-sm'>
+                      At least one field must be selected to translate
+                    </p>
+                  ) : msg ? (
+                    <p className='p-1 bg-green-200 text-green-500 w-max rounded-sm'>
+                      {msg}
+                    </p>
+                  ) : (
+                    ""
+                  )}
                 </legend>
-                <ul className='pt-3 grid grid-col-1 gap-4 auto-cols-max grid-flow-col'>
+                <ul className='pt-3 flex gap-4 flex-wrap'>
                   {userFields.map((field) => (
                     <li
                       key={field.label}
@@ -237,7 +255,9 @@ export default function GoogleTranslateField() {
                         label=''
                         id={field.name}
                       />
-                      <label htmlFor={field.name}>{field.label}</label>
+                      <label className='-ml-1 mr-1' htmlFor={field.name}>
+                        {field.label}
+                      </label>
                     </li>
                   ))}
                 </ul>
