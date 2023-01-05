@@ -27,7 +27,7 @@ export default function VideoField() {
         try {
           const existingAttachment = JSON.parse(fieldSDK.field.value);
           setAttachment(existingAttachment);
-        } catch (error) {}
+        } catch (error) { }
       }
 
       setFieldConfig(fieldSDK.field);
@@ -50,7 +50,9 @@ export default function VideoField() {
         const asset = args?.params?.assets[0];
         if (!asset) return;
 
-        if (asset.resource_type !== "video") {
+        console.log("VIDEO", asset)
+
+        if (asset.__typename !== "Video") {
           alert("You can only select videos for this field.");
           return;
         }
@@ -63,21 +65,8 @@ export default function VideoField() {
         }, 100);
       },
       params: {
-        transformations: [
-          [
-            {
-              width: 306,
-              height: 230,
-              crop: "pad",
-              fetch_format: "jpg",
-              quality: "auto",
-            },
-          ],
-        ],
-        search: {
-          expression: "resource_type:video",
-        },
-      },
+        assetType: "VIDEO"
+      }
     });
   };
   return (
@@ -101,14 +90,19 @@ export default function VideoField() {
                 ref={assetRef}
               >
                 <div
-                  className={`relative flex  w-[350px] ${
-                    width < 685 && "w-full"
-                  }`}
+                  className={`relative flex  w-[350px] ${width < 685 && "w-full"
+                    }`}
                   style={{
                     background:
                       "repeating-conic-gradient(#D9D9D9 0% 25%, transparent 0% 50%) 50% / 20px 20px",
                   }}
                 >
+                  <video controls poster={attachment.files.thumbnail.url}
+                    className='border-[3px] transition-all border-gray-300  focus-within:border-purple-600 hover:border-purple-600 w-full'>
+
+                    <source src={attachment.previewUrls[0]} type="video/mp4" />
+                  </video>
+
                   {/* <CloudinaryContext
                     cloudName={sdk?.configValues?.cloudName}
                     secure='true'
@@ -120,7 +114,7 @@ export default function VideoField() {
                       className='border-[3px] transition-all border-gray-300  focus-within:border-purple-600 hover:border-purple-600'
                     />
                   </CloudinaryContext> */}
-                  <div>VIDEO HERE</div>
+
                 </div>
 
                 <Metadata

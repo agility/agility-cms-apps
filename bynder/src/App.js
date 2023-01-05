@@ -11,11 +11,10 @@ function App() {
   };
 
   const appConfig = {
-    name: "Cloudinary App",
+    name: "Bynder App",
     version: "1",
     configValues: [
-      { name: "cloudName", label: "Cloud Name", type: "string" },
-      { name: "apiKey", label: "Cloudinary API Key", type: "string" },
+      { name: "bynderurl", label: "Bynder URL", type: "string" }
     ],
     appComponents: [
       {

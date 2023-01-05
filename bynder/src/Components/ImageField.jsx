@@ -39,9 +39,7 @@ export default function ImageField() {
   };
 
   const setAltText = (alt) => {
-    if (!attachment.context) attachment.context = {};
-    if (!attachment.context.custom) attachment.context.custom = {};
-    attachment.context.custom.alt = alt;
+    attachment.alt = alt;
 
     setAttachment(attachment);
 
@@ -56,13 +54,18 @@ export default function ImageField() {
       name: "BynderMediaSelector",
       onClose: (args) => {
         //passes the parameters back from the app component that closed the flyout
+
+
+
         const asset = args?.params?.assets[0];
         if (!asset) return;
 
-        if (asset.resource_type !== "image") {
+        if (asset.__typename !== "Image") {
           alert("You can only select images for this field.");
           return;
         }
+
+        console.log("SELECTED", asset)
 
         removeAttachment();
         setTimeout(() => {
@@ -72,18 +75,7 @@ export default function ImageField() {
         }, 100);
       },
       params: {
-        //setup the transformation for the thumbnail that we'll show the user...
-        transformations: [
-          [
-            {
-              width: 306,
-              height: 230,
-              crop: "pad",
-              fetch_format: "auto",
-              quality: "auto",
-            },
-          ],
-        ],
+        assetType: "IMAGE"
       },
     });
   };
@@ -122,9 +114,9 @@ export default function ImageField() {
                 }
                 style={{
                   backgroundImage:
-                    attachment.derived?.length > 0
-                      ? `url(${attachment.derived[0].secure_url})`
-                      : `url(${attachment.secure_url})`,
+                    attachment.files?.thumbnail
+                      ? `url(${attachment.files.thumbnail.url})`
+                      : `url(${attachment.originalUrl})`,
                 }}
               ></div>
               <AttachmentOverlay isImage={true} />

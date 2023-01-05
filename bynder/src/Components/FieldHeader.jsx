@@ -12,9 +12,9 @@ const FieldHeader = ({
     <div className='flex w-full items-center justify-between pb-1 font-muli'>
       <div className='flex items-center'>
         <img
-          src='/cloudinary.svg'
+          src='/bynder.svg'
           style={{ height: "1.8em", verticalAlign: "bottom" }}
-          alt='Cloudinary'
+          alt='Bynder'
           className='mr-2'
         />
         {fieldConfig.label}{" "}

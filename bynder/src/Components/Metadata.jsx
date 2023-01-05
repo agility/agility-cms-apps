@@ -9,6 +9,9 @@ const Metadata = ({
   handleAltTextChange,
   isImage,
 }) => {
+
+  const orig = attachment && attachment.files ? attachment.files.original : null
+
   return (
     <div className='mx-6 w-full flex-1 font-muli bg-white min-w-[275px]'>
       {isImage && (
@@ -16,33 +19,37 @@ const Metadata = ({
           type='text'
           label='Alt Text'
           className='form-control agility-attachment-alt'
-          defaultValue={attachment?.context?.custom?.alt}
+          value={attachment?.alt || attachment?.name || ""}
           onChange={(val) => handleAltTextChange(val)}
           isReadonly={fieldConfig.readOnly}
         />
       )}
-      <MetaRow
+      {/* <MetaRow
         label='Type'
         value={`${attachment.resource_type} - ${attachment.format}`}
-      />
-      <MetaRow label={"Size"} value={fileSizeFromBytes(attachment.bytes)} />
-      {attachment.resource_type === "video" && (
-        <>
-          <MetaRow label={"Width"} value={attachment.width} />
-          <MetaRow label={"Height"} value={attachment.height} />
-        </>
-      )}
+      /> */}
+      <MetaRow label={"Size"} value={fileSizeFromBytes(orig?.fileSize)} />
+
+      <>
+        {orig?.width > 0 &&
+          <MetaRow label={"Width"} value={orig?.width} />
+        }
+        {orig?.height > 0 &&
+          <MetaRow label={"Height"} value={orig?.height} />
+        }
+      </>
+
       <MetaRow
         label={"URL"}
         className={"border-b-0 border-b-transparent"}
         value={
           <a
             className='block break-all text-purple-600 line-clamp-1 hover:underline'
-            href={attachment.secure_url}
+            href={attachment.originalUrl}
             target='_blank'
             rel='noreferrer'
           >
-            {attachment.public_id}
+            {attachment?.name || "Asset URL"}
           </a>
         }
       />

@@ -9,7 +9,7 @@ const BlankPrompt = ({ handleSelect, isImage }) => {
           No {isImage ? "image" : "video"} is attached yet
         </p>
         <p className='mb-2 block text-sm font-medium text-gray-600'>
-          Select one from your Cloudinary Cloud
+          Select one from your Bynder library.
         </p>
         <Button
           icon='FolderDownloadIcon'
