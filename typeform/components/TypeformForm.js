@@ -110,6 +110,7 @@ export default function TypeformForm() {
 
     setSelectedWorkspace(wkSpace);
     setSelectedForm(null);
+    sdk.updateFieldValue({ fieldValue: "" });
   };
 
   // update form value
@@ -123,7 +124,7 @@ export default function TypeformForm() {
     };
     form.workspace = selectedWorkspace;
     let data = JSON.stringify(form);
-    data = data && data !== "{}" ? data : "";
+    data = data && data !== "{}" && formID !== "" ? data : "";
     sdk.updateFieldValue({ fieldValue: data });
   };
 
