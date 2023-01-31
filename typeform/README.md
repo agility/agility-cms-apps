@@ -1,4 +1,4 @@
-# Agility CMS Typeform Form App
+# Agility CMS Typeform App
 
 This is the reference implementation of Typeform form selection within Agility CMS.
 
