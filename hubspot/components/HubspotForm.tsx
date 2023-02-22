@@ -57,7 +57,7 @@ export default function HubspotForm() {
   if (fieldConfig) {
     return (
       <div ref={containerRef}>
-        <div className="flex items-end gap-2">
+        <div className="flex xs:flex-col xs:items-start md:items-end md:flex-row gap-2">
          { forms.length > 0 ? 
             <>
               <Select
