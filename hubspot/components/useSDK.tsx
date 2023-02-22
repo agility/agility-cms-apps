@@ -44,7 +44,6 @@ const useSDK = (containerRef : MutableRefObject<HTMLElement>): readonly [
 
   useEffect(() => {
     agilityAppSDK.initializeField({ containerRef }).then((fieldSDK) => {
-      console.log(fieldSDK)
       setSDK(fieldSDK);
       setValue(fieldSDK.field.value);
       setConfigValues(fieldSDK.configValues);
