@@ -30,6 +30,7 @@ export default function App() {
   useEffect(() => {
     const component = agilityAppSDK.resolveAppComponent(AppConfig);
     setComponentRequested(component);
+    console.log('component Requested', component)
   }, [componentRequested]);
 
   if (componentRequested === "AppConfig") {
