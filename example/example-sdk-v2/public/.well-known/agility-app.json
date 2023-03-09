@@ -1,0 +1,47 @@
+{
+	"name": "example-app-sdk-v2",
+	"label": "Example App - SDK v2",
+	"description": "An Example App to show what the Agility App SDK V2 is capable of.  Also known as the Kitchen Sink example.",
+	"version": "1.0.0",
+	"offlineAccess": true,
+	"webhooks": true,
+	"capabilities": {
+		"fields": [
+			{
+				"name": "example-field",
+				"label": "Example Field",
+				"description": "An example field that shows a custom UI."
+			}
+		],
+		"popovers": [{
+			"name": "example-popover",
+			"label": "Example Popover Dialog",
+			"description": "An example popover dialog that can be invoked from the other capabilities of this app."
+		}],
+		"contentListSidebar": {
+			"description": "Shows example data or ui that could be useful on a content list."
+		},
+		"contentItemSidebar": {
+			"description": "Shows example data or ui that could be useful on a content item."
+		},
+		"pageSidebar": {
+			"description": "Shows example data or ui that could be useful on a page."
+		},
+		"contentDashboard": {
+			"description": "Shows data and analytics relavent to the Content section."
+		},
+		"pagesDashboard": {
+			"description": "Shows data and analytics relavent to the Pages section."
+		},
+		"sections": [{
+			"name": "customsection",
+			"label":"Custom Section 1",
+			"description": "A custom section."
+		}],
+		"items": [{
+			"name": "customitem",
+			"label": "Custom Item 1",
+			"description": "A custom item."
+		}]
+	}
+}

@@ -32,6 +32,7 @@ export default function HubspotForm() {
     agilityAppSDK.initializeField({ containerRef }).then((fieldSDK) => {
       setSDK(fieldSDK);
       setValue(fieldSDK.field.value);
+      console.log(fieldSDK.configValues)
       setConfigValues(fieldSDK.configValues);
       setFieldConfig(fieldSDK.field);
     });
@@ -84,6 +85,7 @@ export default function HubspotForm() {
           {value && value !== "" && <EditForm form={form} />}
           <AddForm addFormId={addFormId} />
         </div>
+        <div style={{height: 100}}> &nbsp;</div>
       </div>
     );
   } else {
