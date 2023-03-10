@@ -33,6 +33,9 @@
 		"pageSidebar": {
 			"description": "Shows example data or ui that could be useful on a page."
 		},
+		"homeDashboard": {
+			"description": "Shows data and analytics relavent to the entire site."
+		},
 		"contentDashboard": {
 			"description": "Shows data and analytics relavent to the Content section."
 		},
