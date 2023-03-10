@@ -1,10 +1,16 @@
 {
-	"name": "example-app-sdk-v2",
-	"label": "Example App - SDK v2",
+	"name": "Example App - SDK v2",
+	"documentationLink": "https://github.com/agility/agility-cms-apps/tree/main/example/example-sdk-v2",
 	"description": "An Example App to show what the Agility App SDK V2 is capable of.  Also known as the Kitchen Sink example.",
 	"version": "1.0.0",
-	"offlineAccess": true,
-	"webhooks": true,
+	"__sdkVersion": "2.0.0",
+	"configValues": [
+		{
+			"label": "Config Value 1",
+			"name": "configValue1",
+			"type": "string"
+		}
+	],
 	"capabilities": {
 		"fields": [
 			{
@@ -42,6 +48,8 @@
 			"name": "customitem",
 			"label": "Custom Item 1",
 			"description": "A custom item."
-		}]
+		}],
+		"offlineAccess": true,
+		"webhooks": true
 	}
 }
