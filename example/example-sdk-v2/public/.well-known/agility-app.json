@@ -11,6 +11,13 @@
 			"type": "string"
 		}
 	],
+	"connections": [
+		{
+			"name": "Agility API Offline Access",
+			"icon": "https://cdn.aglty.io/content-manager/images/logo-triangle-only-yellow.svg",
+			"url": "/oauth/agility-api-offline"
+		}
+	],
 	"capabilities": {
 		"fields": [
 			{
@@ -19,11 +26,13 @@
 				"description": "An example field that shows a custom UI."
 			}
 		],
-		"popovers": [{
-			"name": "example-popover",
-			"label": "Example Popover Dialog",
-			"description": "An example popover dialog that can be invoked from the other capabilities of this app."
-		}],
+		"popovers": [
+			{
+				"name": "example-popover",
+				"label": "Example Popover Dialog",
+				"description": "An example popover dialog that can be invoked from the other capabilities of this app."
+			}
+		],
 		"contentListSidebar": {
 			"description": "Shows example data or ui that could be useful on a content list."
 		},
@@ -42,16 +51,21 @@
 		"pagesDashboard": {
 			"description": "Shows data and analytics relavent to the Pages section."
 		},
-		"sections": [{
-			"name": "customsection",
-			"label":"Custom Section 1",
-			"description": "A custom section."
-		}],
-		"items": [{
-			"name": "customitem",
-			"label": "Custom Item 1",
-			"description": "A custom item."
-		}],
+		"sections": [
+			{
+				"name": "customsection",
+				"label": "Custom Section 1",
+				"description": "A custom section."
+			}
+		],
+		"items": [
+			{
+				"name": "customitem",
+				"label": "Custom Item 1",
+				"description": "A custom item."
+			}
+		],
+		"installHook": true,
 		"offlineAccess": true,
 		"webhooks": true
 	}
