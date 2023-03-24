@@ -9,6 +9,8 @@ export default function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
-	//TODO: perform any app install operations neccessary...
+	//TODO: perform any app uninstall operations neccessary...
+	//NOTE: this will be called as part of a "fire and forget operation"
+	console.log("UNINSTALL ACTION FIRED")
 	res.status(200).json({ status: 'OK' })
 }

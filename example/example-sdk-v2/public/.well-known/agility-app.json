@@ -19,6 +19,7 @@
 		}
 	],
 	"capabilities": {
+
 		"fields": [
 			{
 				"name": "example-field",
@@ -26,11 +27,11 @@
 				"description": "An example field that shows a custom UI."
 			}
 		],
-		"popovers": [
+		"modals": [
 			{
-				"name": "example-popover",
-				"label": "Example Popover Dialog",
-				"description": "An example popover dialog that can be invoked from the other capabilities of this app."
+				"name": "example-modal",
+				"label": "Example Modal Dialog",
+				"description": "An example modal dialog that can be invoked from the other capabilities of this app."
 			}
 		],
 		"contentListSidebar": {
@@ -51,6 +52,7 @@
 		"pagesDashboard": {
 			"description": "Shows data and analytics relavent to the Pages section."
 		},
+
 		"sections": [
 			{
 				"name": "customsection",
@@ -65,8 +67,8 @@
 				"description": "A custom item."
 			}
 		],
-		"installHook": true,
-		"offlineAccess": true,
-		"webhooks": true
+		"installScreen": true,
+		"uninstallHook": "/api/app-uninstall"
+
 	}
 }
