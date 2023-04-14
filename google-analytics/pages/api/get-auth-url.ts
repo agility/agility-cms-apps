@@ -16,8 +16,7 @@ export default function handler(
 
 	console.log("Gen url with state", req.body)
 
-	const redirectUrl = process.env.GOOGLE_REDIRECT_URI;
-
+	const redirectUrl = 'http://localhost:3000/oauth/google-api';
 
 	const oauth2Client = getOauth2Client()
 
