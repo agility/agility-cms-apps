@@ -1,4 +1,5 @@
-import { useAgilityAppSDK, updateConfigurationValue } from "@agility/app-sdk"
+import { useAgilityAppSDK, configMethods } from "@agility/app-sdk"
+import { useEffect } from "react"
 
 export default function HomeDashboard() {
 	const { initializing, appInstallContext, instance, locale } = useAgilityAppSDK()
@@ -11,8 +12,8 @@ export default function HomeDashboard() {
 			<div>
 				Set config val{" "}
 				<button
-					onClick={() => {
-						updateConfigurationValue({ key: "test", value: "test" })
+					onClick={async () => {
+						await configMethods.updateConfigurationValue({ key: "test", value: "test" })
 					}}
 				>
 					SUBMIT
