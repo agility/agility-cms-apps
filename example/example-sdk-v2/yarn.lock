@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@agility/app-sdk@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@agility/app-sdk/-/app-sdk-1.0.0.tgz#48c2b876ba35315c3270a852f2f8a1c0038fbf99"
+  integrity sha512-wOVUi1H05uGMraNejd3FAxhtai6NOi57XF25IHmsK5JNodfRXLKSW+RrbWLFZSdIxp5+QQQOFsuqAK2QZBY/VA==
+  dependencies:
+    regenerator-runtime "^0.13.9"
+
 "@agility/management-sdk@^0.1.13":
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/@agility/management-sdk/-/management-sdk-0.1.13.tgz#08dba879ae7517a22a556d60a3d66a28887c99f4"
@@ -1990,7 +1997,7 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-regenerator-runtime@^0.13.11:
+regenerator-runtime@^0.13.11, regenerator-runtime@^0.13.9:
   version "0.13.11"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==

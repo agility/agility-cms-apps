@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3020",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@agility/app-sdk": "^1.0.0",
     "@agility/management-sdk": "^0.1.13",
     "@types/node": "18.15.0",
     "@types/react": "18.0.28",
