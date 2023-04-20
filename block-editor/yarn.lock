@@ -17,10 +17,10 @@
     axios "^0.21.1"
     axios-cache-adapter "^2.4.1"
 
-"@agility/content-management@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@agility/content-management/-/content-management-0.3.0.tgz#66d6da623dceac4447cffabd09759a9fd28e91ca"
-  integrity sha512-vkv200ftysHuYpg64wnHK5yX9sL5wx/ly4y++hD5EZGhZnsg4BCykFtzTdmurTAQW8/qM7IB0T1MCGOuhJ792Q==
+"@agility/content-management@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@agility/content-management/-/content-management-0.5.0.tgz#67741853740a991a8f1917fac37dcf7e770d4d88"
+  integrity sha512-qF7Kv71ksWpP34eN95ps0cYdEWsi3e67VEeXNb+D1utOfl6MV+dGUiJk6QN7rP8+VkZb0fQnG14DCOyoSeVhAg==
   dependencies:
     axios "^0.18.1"
     dotenv "^8.2.0"
