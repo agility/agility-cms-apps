@@ -1,19 +1,22 @@
-import { useAgilityAppSDK, configMethods } from "@agility/app-sdk"
-import { useEffect } from "react"
+import { useAgilityAppSDK, configMethods, IAppConfigValue } from "@agility/app-sdk"
+import { useEffect, useState } from "react"
 
 export default function HomeDashboard() {
 	const { initializing, appInstallContext, instance, locale } = useAgilityAppSDK()
+	const [config, setConfig] = useState<IAppConfigValue>()
 
 	return (
 		<div>
 			<h1>Example App - Home Dashboard</h1>
 			<div>Initializing: {initializing.toString()}</div>
 			<div>Locale: {locale}</div>
+			<div>Config: {JSON.stringify(config)}</div>
 			<div>
 				Set config val{" "}
 				<button
 					onClick={async () => {
-						await configMethods.updateConfigurationValue({ key: "test", value: "test" })
+						const res = await configMethods.updateConfigurationValue({ key: "test", value: "test" })
+						setConfig(res)
 					}}
 				>
 					SUBMIT
