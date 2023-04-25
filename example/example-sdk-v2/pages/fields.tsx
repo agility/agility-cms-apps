@@ -1,20 +1,46 @@
 
-import { useAgilityAppSDK, contentItemMethods, openModal } from "@agility/app-sdk"
-import { useState } from "react"
+import { useElementHeight } from "@/hooks"
+import { useAgilityAppSDK, contentItemMethods, openModal, setHeight, setFieldValue } from "@agility/app-sdk"
+import { useEffect, useState } from "react"
+
 
 export default function ExampleField() {
-	const { initializing, appInstallContext, instance, locale } = useAgilityAppSDK()
+	const { initializing, appInstallContext, locale, field, contentItem: oci, contentModel } = useAgilityAppSDK()
   const [contentItem, setContentItem] = useState()
+  const [normalizedCI, setNormalizedCI] = useState()
   const [props, setProps] = useState()
+  const [setRef, height] = useElementHeight()
+
+  useEffect(() => {
+    setHeight(height)
+  }, [height])
+  
+  useEffect(() => {
+    setContentItem(oci)
+  }, [oci])
 
 	return (
-		<div>
+    <div ref={setRef}>
+      <p>{`The square height is ${height}px`}</p>
 			<h1>Example App - Fields Application</h1>
 			<div>Initializing: {initializing.toString()}</div>
 			<div>Locale: {locale}</div>
       <div>Context: {JSON.stringify(appInstallContext)}</div>
+      <div>Field: {JSON.stringify(field)}</div>
       <div>Content Item: {JSON.stringify(contentItem)}</div>
+      <div>Normalized Content Item: {JSON.stringify(normalizedCI)}</div>
+      <div>Content Model: {JSON.stringify(contentModel)}</div>
       <div>Props: {JSON.stringify(props) }</div>
+      <div>
+        Set Field Value {" "}
+				<button
+					onClick={async () => {
+            await setFieldValue({ value: "something" })
+					}}
+				>
+					SUBMIT
+				</button>
+      </div>
       <div>
 				Open Modal {" "}
 				<button
@@ -38,7 +64,7 @@ export default function ExampleField() {
 					onClick={async () => {
             const p = await contentItemMethods.getContentItem()
             console.log(`Setting content item`, p)
-						setContentItem(p)
+						setNormalizedCI(p as any)
 					}}
 				>
 					SUBMIT

@@ -1,5 +1,5 @@
 import { useAgilityAppSDK, configMethods, IAppConfigValue } from "@agility/app-sdk"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function HomeDashboard() {
 	const { initializing, appInstallContext, instance, locale } = useAgilityAppSDK()
