@@ -2,7 +2,7 @@ import { useAgilityAppSDK, configMethods, IAppConfigValue } from "@agility/app-s
 import { useState } from "react"
 
 export default function HomeDashboard() {
-	const { initializing, appInstallContext, instance, locale } = useAgilityAppSDK()
+	const { initializing, locale } = useAgilityAppSDK()
 	const [config, setConfig] = useState<IAppConfigValue>()
 
 	return (
@@ -15,7 +15,7 @@ export default function HomeDashboard() {
 				Set config val{" "}
 				<button
 					onClick={async () => {
-						const res = await configMethods.updateConfigurationValue({ key: "test", value: "test" })
+						const res = await configMethods.updateConfigurationValue({ name: "test", value: "test" })
 						setConfig(res)
 					}}
 				>
