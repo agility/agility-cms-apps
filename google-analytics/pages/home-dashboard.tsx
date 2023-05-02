@@ -1,155 +1,162 @@
-// @ts-nocheck
 import { useEffect, useState } from "react"
-import Script from "next/script"
-import handler from "./api/get-ga-home-dashboard"
 import axios from "axios"
-import { Client } from "@analytics/google-analytics"
-import { ReportData } from "./components/GoogleLineChart"
-import GoogleLineChart from "./components/GoogleLineChart"
-import GoogleLineChart2, { Report } from "./components/GoogleLineChart2"
+import LineChartComponent, { Report } from "./components/GoogleLineChart"
 import GoogleAnalyticsLogo from "./components/GoogleAnalyticsLogo"
 import DurationPicker from "./components/DurationPicker"
+import "@agility/plenum-ui/lib/tailwind.css"
+import GoogleAnalyticPane from "./components/GoogleAnalyticsPanel"
+import { CHART_DURATIONS } from "@/constants"
+import { useAgilityAppSDK, setHeight } from "@agility/app-sdk"
+import { IOAuthToken } from "./install"
+
+// function to get the cumulative number of users
+function getCumulativeUsers(report: Report) {
+	let cumulativeUsers = 0
+	report.data.rows.forEach((row) => {
+		cumulativeUsers += parseInt(row.metrics[0].values[0])
+	})
+	return cumulativeUsers
+}
+
+// function to get the cumulative number of new users
+function getCumulativeNewUsers(report: Report) {
+	let cumulativeNewUsers = 0
+	report.data.rows.forEach((row) => {
+		cumulativeNewUsers += parseInt(row.metrics[0].values[1])
+	})
+	return cumulativeNewUsers
+}
+
+// function to get the cumulative number of pageviews
+function getCumulativePageviews(report: Report) {
+	let cumulativePageviews = 0
+	report.data.rows.forEach((row) => {
+		cumulativePageviews += parseInt(row.metrics[0].values[2])
+	})
+	return cumulativePageviews
+}
+
+// function to get the cumulative session duration in seconds
+function getCumulativeSessionDuration(report: Report) {
+	let cumulativeSessionDuration = 0
+	report.data.rows.forEach((row) => {
+		cumulativeSessionDuration += parseInt(row.metrics[0].values[3])
+	})
+	return Math.round(cumulativeSessionDuration / 60)
+}
 
 export default function HomeDashboard() {
-	const [authUrl, setAuthUrl] = useState("")
-	const [duration, setDuration] = useState("7daysAgo")
-	const [reportData, setReportData] = useState<Report>(null)
+	const { appInstallContext } = useAgilityAppSDK()
+
+	const [duration, setDuration] = useState(CHART_DURATIONS["7daysAgo"])
+	const [reportData, setReportData] = useState<Report | null>(null)
 
 	const [isUserViewSelected, setIsUserViewSelected] = useState(true)
 	const [isNewUserViewSelected, setIsNewUserViewSelected] = useState(false)
 	const [isPageDurationViewSelected, setIsPageDurationViewSelected] = useState(false)
 	const [isPageViewSelected, setIsPageViewSelected] = useState(false)
 
+	const [cumulativeUsers, setCumulativeUsers] = useState(0)
+	const [cumulativeNewUsers, setCumulativeNewUsers] = useState(0)
+	const [cumulativePageviews, setCumulativePageviews] = useState(0)
+	const [cumulativeSessionDuration, setCumulativeSessionDuration] = useState(0)
+
+	const [oAuthToken, setOAuthToken] = useState<IOAuthToken | null>(null)
+	const [profileId, setProfileId] = useState<string | null>(null)
+
 	useEffect(() => {
-		//hard cord the token and property id for now
-		//load some data from ga using the token and property id
-		//
+		setHeight({height: 600})
 	}, [])
 
 	useEffect(() => {
-		axios({
-			method: "get",
-			url: "/api/get-auth-url"
-		})
-			.then((response) => {
-				console.log("amihere a")
-				console.log(response)
-			})
-			.catch((error) => {
-				console.log("should not be here a")
-				console.log(error)
-			})
-
-		return () => {}
-	}, [authUrl])
+		if (appInstallContext?.configuration["Google Analytics Account"]) {
+			const token = JSON.parse(appInstallContext.configuration["Google Analytics Account"]) as IOAuthToken
+			setOAuthToken(token)
+			setProfileId(appInstallContext.configuration["profileId"])
+		}
+	}, [appInstallContext])
 
 	useEffect(() => {
-		console.log("this is the useEffect that is supposed to load the data from the API")
-		//get the list of web properties from the API
+		if (!profileId || !duration || !oAuthToken) return
+
 		axios({
-			method: "get",
-			url: `/api/get-ga-home-dashboard?duration=${duration}`
+			method: "post",
+			url: `/api/get-ga-home-dashboard?profileId=${profileId}&duration=${duration}`,
+			data: { oAuthToken }
 		})
 			.then((response) => {
-				console.log("amihere")
-				console.log(response)
 				if (response?.data?.reports[0]) {
 					const data: Report = response.data.reports[0]
-					console.log("data", data)
 					setReportData(data)
 				}
 			})
 			.catch((error) => {
-				console.log("should not be here")
 				console.log(error)
 			})
+	}, [duration, oAuthToken, profileId])
 
-		return () => {}
-	}, [duration])
+	useEffect(() => {
+		if (!reportData) return
+
+		const cumulativeUsers = getCumulativeUsers(reportData)
+		const cumulativeNewUsers = getCumulativeNewUsers(reportData)
+		const cumulativePageviews = getCumulativePageviews(reportData)
+		const cumulativeSessionDuration = getCumulativeSessionDuration(reportData)
+
+		setCumulativeUsers(cumulativeUsers)
+		setCumulativeNewUsers(cumulativeNewUsers)
+		setCumulativePageviews(cumulativePageviews)
+		setCumulativeSessionDuration(cumulativeSessionDuration)
+	}, [reportData])
 
 	return (
-		<div class="overflow-hidden">
-			<div className="flex flex-row items-center pb-4">
-				<GoogleAnalyticsLogo />
-				<h1 class="ml-4 text-4xl font-medium text-gray-500">Analytics</h1>
-				<DurationPicker onChange={setDuration} />
+		<div className="overflow-hidden">
+			<div className="flex flex-row items-center justify-between pb-4">
+				<div className="left-element flex flex-row items-center">
+					<GoogleAnalyticsLogo />
+					<h1 className="ml-4 text-4xl font-medium text-gray-500">Analytics</h1>
+				</div>
+				<div className="right-element ml-auto items-center">
+					<DurationPicker onChange={setDuration} currentDuration={duration} />
+				</div>
 			</div>
-			<div class="my-4 flex justify-evenly">
+			<div className="mb-8 flex justify-between">
 				<GoogleAnalyticPane
 					title={"Users"}
-					dataDisplay={"51K"}
+					dataDisplay={`${cumulativeUsers}`}
 					isSelected={isUserViewSelected}
 					setSelected={setIsUserViewSelected}
 				/>
 				<GoogleAnalyticPane
 					title={"New users"}
-					dataDisplay={"2K"}
+					dataDisplay={`${cumulativeNewUsers}`}
 					isSelected={isNewUserViewSelected}
 					setSelected={setIsNewUserViewSelected}
 				/>
 				<GoogleAnalyticPane
 					title={"Page views"}
-					dataDisplay={"3K"}
+					dataDisplay={`${cumulativePageviews}`}
 					isSelected={isPageViewSelected}
 					setSelected={setIsPageViewSelected}
 				/>
 				<GoogleAnalyticPane
 					title={"Avg. engagement time"}
-					dataDisplay={"1.46s"}
+					dataDisplay={`${cumulativeSessionDuration}m`}
 					isSelected={isPageDurationViewSelected}
 					setSelected={setIsPageDurationViewSelected}
 				/>
 			</div>
 
 			{reportData ? (
-				<GoogleLineChart2
+				<LineChartComponent
 					reportData={reportData}
 					isUserViewSelected={isUserViewSelected}
 					isNewUserViewSelected={isNewUserViewSelected}
 					isPageViewSelected={isPageViewSelected}
 					isPageDurationViewSelected={isPageDurationViewSelected}
+					duration={duration}
 				/>
 			) : null}
-		</div>
-	)
-}
-
-interface IGoogleAnalyticPane {
-	title?: string
-	dataDisplay?: string
-	isSelected?: boolean
-	setSelected?: (value: boolean) => void
-}
-
-const panelInfoColor = (title) => {
-	switch (title) {
-		case "Users":
-			return "#4600AA"
-		case "New users":
-			return "#691AD8"
-		case "Page views":
-			return "#BC99EE"
-		case "Avg. engagement time":
-			return "#111827"
-	}
-
-	return "line-1"
-}
-
-const GoogleAnalyticPane: React.FC<IGoogleAnalyticPane> = ({ title, dataDisplay, isSelected, setSelected }) => {
-	const panelDataClass = `text-3xl text-${panelInfoColor(title)} pt-2`
-
-	console.log(panelDataClass)
-
-	return (
-		<div onClick={() => setSelected(!isSelected)} class="mx-2 h-32 w-64 cursor-pointer bg-white hover:bg-gray-100">
-			{isSelected ? <div class="h-1 w-full bg-agility-purple"></div> : <div class="h-1 w-full bg-white"></div>}
-			<div class="p-4">
-				<h1 class="text-xl text-dashboard-title">{title}</h1>
-				<h1 class="pt-2 text-3xl" style={{ color: panelInfoColor(title) }}>
-					{dataDisplay}
-				</h1>
-			</div>
 		</div>
 	)
 }

@@ -1,52 +1,91 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Line, Chart } from 'react-chartjs-2';
-import 'chart.js/auto'; // ADD THIS
+import { CHART_DURATIONS } from "@/constants"
+import React from "react"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
 
-interface Metric {
-  name: string;
-  type: string;
+
+export interface Report {
+	columnHeader: {
+		dimensions: string[]
+		metricHeader: {
+			metricHeaderEntries: {
+				name: string
+				type: string
+			}[]
+		}
+	}
+	data: {
+		rows: {
+			dimensions: string[]
+			metrics: {
+				values: string[]
+			}[]
+		}[]
+	}
 }
 
-interface Row {
-  dimensions: string[];
-  metrics: {
-    values: string[];
-  }[];
+interface Props {
+	reportData: Report,
+	isUserViewSelected: boolean,
+	isNewUserViewSelected: boolean,
+	isPageViewSelected: boolean,
+	isPageDurationViewSelected: boolean,
+	duration: string
 }
 
-export interface ReportData {
-  columnHeader: {
-    dimensions: string[];
-    metricHeader: {
-      metricHeaderEntries: Metric[];
-    };
-  };
-  data: {
-    rows: Row[];
-  };
+function formatDate(dateString: string) {
+	const year = dateString.substring(0, 4)
+	const month = dateString.substring(4, 6)
+	const day = dateString.substring(6, 8)
+	const date = new Date(`${year}-${month}-${day}`)
+	return date.toLocaleDateString("en-US", { month: "short", day: "numeric" }).replace(/\//g, "/")
 }
 
-const GoogleLineChart: React.FC<{ data: ReportData }> = ({ data }) => {
-  console.log('data', data)
-  const { rows } = data.data;
-  const labels = rows.map((row) => row.dimensions[0]);
-  const metrics = data.columnHeader.metricHeader.metricHeaderEntries.map((metric) => metric.name);
-  const datasets = metrics.map((metric, index) => ({
-    label: metric,
-    data: rows.map((row) => Number(row.metrics[0].values[index])),
-    borderColor: `rgb(${75 + index * 50}, ${192 - index * 25}, ${192 - index * 25})`,
-    fill: false,
-  }));
+function formatMonth(monthString: string): string | null {
+	const monthMap: { [key: string]: string } = {
+	  '01': 'Jan',
+	  '02': 'Feb',
+	  '03': 'Mar',
+	  '04': 'Apr',
+	  '05': 'May',
+	  '06': 'Jun',
+	  '07': 'Jul',
+	  '08': 'Aug',
+	  '09': 'Sep',
+	  '10': 'Oct',
+	  '11': 'Nov',
+	  '12': 'Dec'
+	};
+  
+	const abbreviation = monthMap[monthString];
+  
+	return abbreviation || null;
+  }
 
-  const chartData = {
-    labels,
-    datasets,
-  };
-  const ref = useRef();
+const LineChartComponent: React.FC<Props> = ({ reportData, isNewUserViewSelected, isUserViewSelected, isPageDurationViewSelected, isPageViewSelected, duration }) => {
+	const data = reportData.data.rows.map((row) => {
+		return {
+			date: duration === CHART_DURATIONS["365daysAgo"] ? formatMonth(row.dimensions[0]) : formatDate(row.dimensions[0]),
+			users: parseInt(row.metrics[0].values[0]),
+			newUsers: parseInt(row.metrics[0].values[1]),
+			pageViews: parseInt(row.metrics[0].values[2]),
+			avgSessionDuration: Math.round(parseFloat(row.metrics[0].values[3])/60),
+		}
+	})
 
-  return <div  style={{height:'400px'}}>
-      <Line ref={ref} data={chartData} style={{maxHeight:'400px'}} />;
-  </div> 
-};
+	return (
+		<ResponsiveContainer width={"96%"} height={360} >
+			<LineChart data={data}>
+				<XAxis dataKey="date" tickSize={0} tickMargin={16} />
+				<YAxis axisLine={{ stroke: "transparent" }} tickSize={0} tickMargin={16} />
+				<CartesianGrid horizontal vertical={false} stroke="#eee" />
+				<Tooltip />
+				{isUserViewSelected ? <Line type="linear" dataKey="users" stroke="#4600AA" dot={false} strokeWidth={3} /> : null}
+				{isNewUserViewSelected ? <Line type="linear" dataKey="newUsers" stroke="#691AD8" dot={false} strokeWidth={3} /> : null}
+				{isPageViewSelected ? <Line type="linear" dataKey="pageViews" stroke="#BC99EE" dot={false} strokeWidth={3} /> : null}q
+				{isPageDurationViewSelected ? <Line type="linear" dataKey="avgSessionDuration" stroke="#111827" dot={false} strokeWidth={3} /> : null}
+			</LineChart>
+		</ResponsiveContainer>
+	)
+}
 
-export default GoogleLineChart;
+export default LineChartComponent

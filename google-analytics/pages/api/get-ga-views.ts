@@ -5,35 +5,35 @@ import {	google } from 'googleapis';
 import { getAuthenticatedClient } from '@/lib/get-authenticated-client';
 import { IOAuthToken } from '../install';
 
-
-
 type Data = {
 	id: string
 	name: string
-	accountId: string
 }
 
 export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data[]>
-) {
+) { 
 
 	const accountId = `${req.query.accountId}` || ""
+    const propertyId = `${req.query.propertyId}` || ""
+
 	const oauthToken: IOAuthToken = req.body.oAuthToken
+
 	const oauth2Client = getAuthenticatedClient()
 	oauth2Client.setCredentials(oauthToken)
 	const analytics = google.analytics('v3');
 
+    const profiles = await analytics.management.profiles.list({
+        auth: oauth2Client,
+        accountId: accountId,
+        webPropertyId: propertyId
+      });
 
-	const properties = await analytics.management.webproperties.list({
-		auth: oauth2Client,
-		accountId
-	})
-	const retVal = properties?.data?.items?.map((property) => {
+	const retVal = profiles?.data?.items?.map((property) => {
 		return {
 			id: property.id || "",
-			name: property.name || "",
-			accountId: property.accountId || ""
+			name: property.name || ""
 		}
 	}) || []
 

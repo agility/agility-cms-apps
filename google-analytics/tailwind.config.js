@@ -13,7 +13,7 @@ module.exports = {
       colors: {
         'agility-purple': '#7933dd',
         'dashboard-title': '#111827',
-        'line-1': '#4600AA',
+        'line': '#4600AA',
         'line-2': '#691AD8',
         'line-3': '#BC99EE',
         'line-4': '#111827',
