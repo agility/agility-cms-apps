@@ -1,0 +1,79 @@
+import { openModal, useAgilityAppSDK, contentItemMethods, refresh, assetsMethods } from "@agility/app-sdk"
+import { useState } from "react"
+
+export default function ContentListSidebar() {
+	const { initializing, locale } = useAgilityAppSDK()
+	const [selected, setSelectedItems] = useState<any>([])
+	return (
+    <div>
+			<h1>Example App - ContentListSidebar Application</h1>
+			<div>Initializing: {initializing.toString()}</div>
+			<div>Locale: {locale}</div>
+			<div>Selected: {JSON.stringify(selected)}</div>
+			<div>
+				Select Assets {" "}
+				<button
+					onClick={() => {
+           assetsMethods.selectAssets({ title: "Hi", singleSelectOnly: false, callback: (v: any) => console.log("hi 3")})
+					}}
+				>
+					SUBMIT
+				</button>
+			</div>
+			<div>
+				Refresh {" "}
+				<button
+					onClick={() => {
+           refresh()
+					}}
+				>
+					SUBMIT
+				</button>
+			</div>
+			<div>
+				Add Listener to Selected Items {" "}
+				<button
+					onClick={async () => {
+           contentItemMethods.addSelectedItemListener({ onChange: (s) => setSelectedItems(s)})
+					}}
+				>
+					SUBMIT
+				</button>
+			</div>
+			<div>
+				Remove Listener to Selected Items {" "}
+				<button
+					onClick={async () => {
+           contentItemMethods.removeSelectedItemListener()
+					}}
+				>
+					SUBMIT
+				</button>
+			</div>
+			<div>
+				Open Modal {" "}
+				<button
+					onClick={async () => {
+            openModal({ 
+              title: "Tester Content List Sidebar", 
+              callback: (props: any) => {}
+            })
+					}}
+				>
+					SUBMIT
+				</button>
+			</div>
+      <div>
+				Get Selected Items {" "}
+				<button
+					onClick={async () => {
+            const s = await contentItemMethods.getSelectedItems()
+						setSelectedItems(s)
+					}}
+				>
+					SUBMIT
+				</button>
+			</div>
+		</div>
+	)
+}
