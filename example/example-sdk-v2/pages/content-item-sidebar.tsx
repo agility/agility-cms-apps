@@ -4,15 +4,15 @@ import { useEffect, useState } from "react"
 export default function ContentItemSidebar() {
 	const { initializing, locale, contentItem } = useAgilityAppSDK()
   const [normalizedCI, setNormalizedCI] = useState<IContentItem | null>()
-  const [heading, setHeading] = useState()
+  const [title, setTitle] = useState()
 
   useEffect(() => {
-    setHeading(contentItem?.values.Heading)
-  }, [contentItem, contentItem?.values.Heading])
+    setTitle(contentItem?.values.Title)
+  }, [contentItem, contentItem?.values.Title])
 
 	return (
     <div>
-      <p> Heading: {heading}</p>
+      <p> Title: {title}</p>
 			<h1>Example App - ContentItemSidebar Application</h1>
 			<div>Initializing: {initializing.toString()}</div>
 			<div>Locale: {locale}</div>
@@ -28,20 +28,20 @@ export default function ContentItemSidebar() {
 				</button>
 			</div>
       <div>
-        Add Field Listener to Heading {" "}
+        Add Field Listener to Title {" "}
         <button
             onClick={async () => {
-              await contentItemMethods.addFieldListener({ fieldName: "Heading", onChange: (t) => setHeading(t) })
+              await contentItemMethods.addFieldListener({ fieldName: "Title", onChange: (t) => setTitle(t) })
             }}
           >
             SUBMIT
         </button>
       </div>
       <div>
-        Remove Field Listener to Heading {" "}
+        Remove Field Listener to Title {" "}
         <button
             onClick={async () => {
-              await contentItemMethods.removeFieldListener({ fieldName: "Heading" })
+              await contentItemMethods.removeFieldListener({ fieldName: "Title" })
             }}
           >
             SUBMIT
