@@ -5,73 +5,91 @@ export default function ContentListSidebar() {
 	const { initializing, locale } = useAgilityAppSDK()
 	const [selected, setSelectedItems] = useState<any>([])
 	return (
-    <div>
+		<div>
 			<h1>Example App - ContentListSidebar Application</h1>
 			<div>Initializing: {initializing.toString()}</div>
 			<div>Locale: {locale}</div>
 			<div>Selected: {JSON.stringify(selected)}</div>
 			<div>
-				Select Assets {" "}
+				Select Assets{" "}
 				<button
+					className="btn"
 					onClick={() => {
-           assetsMethods.selectAssets({ title: "Hi", singleSelectOnly: false, callback: (v: any) => console.log("hi 3")})
+						assetsMethods.selectAssets({
+							title: "Hi",
+							singleSelectOnly: false,
+							callback: (v: any) => console.log("hi 3")
+						})
 					}}
 				>
-					SUBMIT
+					GO
 				</button>
 			</div>
 			<div>
-				Refresh {" "}
+				Refresh{" "}
 				<button
+					className="btn"
 					onClick={() => {
-           refresh()
+						refresh()
 					}}
 				>
-					SUBMIT
+					GO
 				</button>
 			</div>
 			<div>
-				Add Listener to Selected Items {" "}
+				Add Listener to Selected Items{" "}
 				<button
+					className="btn"
 					onClick={async () => {
-           contentItemMethods.addSelectedItemListener({ onChange: (s) => setSelectedItems(s)})
+						contentItemMethods.addSelectedItemListener({ onChange: (s) => setSelectedItems(s) })
 					}}
 				>
-					SUBMIT
+					GO
 				</button>
 			</div>
 			<div>
-				Remove Listener to Selected Items {" "}
+				Remove Listener to Selected Items{" "}
 				<button
+					className="btn"
 					onClick={async () => {
-           contentItemMethods.removeSelectedItemListener()
+						contentItemMethods.removeSelectedItemListener()
 					}}
 				>
-					SUBMIT
+					GO
 				</button>
 			</div>
 			<div>
-				Open Modal {" "}
+				Open Modal{" "}
 				<button
+					className="btn"
 					onClick={async () => {
-            openModal({ 
-              title: "Tester Content List Sidebar", 
-              callback: (props: any) => {}
-            })
+						openModal({
+							title: "Example Modal",
+							name: "example-modal",
+							props: {
+								hi: "there",
+								dt: new Date()
+							},
+							callback: (result: any) => {
+								console.log("CLOSED MODAL", result)
+								alert("Returned from modal: " + JSON.stringify(result))
+							}
+						})
 					}}
 				>
-					SUBMIT
+					GO
 				</button>
 			</div>
-      <div>
-				Get Selected Items {" "}
+			<div>
+				Get Selected Items{" "}
 				<button
+					className="btn"
 					onClick={async () => {
-            const s = await contentItemMethods.getSelectedItems()
+						const s = await contentItemMethods.getSelectedItems()
 						setSelectedItems(s)
 					}}
 				>
-					SUBMIT
+					GO
 				</button>
 			</div>
 		</div>

@@ -1,10 +1,12 @@
-# Agility CMS Apps
+# Agility CMS Apps - v1 SDK
 
 This repository includes publicly available apps and their source code that Agility CMS maintains.
 
-> This uses the [@agility/apps-sdk - see here for docs](https://github.com/agility/agility-cms-app-sdk) to facilitate communication with Agility CMS.
+> This uses V1 of the [@agility/apps-sdk - see here for docs](https://github.com/agility/agility-cms-app-sdk) to facilitate communication with Agility CMS, with the exception of the `/example/example-sdk-v2` folder.
 
-### Apps built by Agility
+To learn more about Apps in Agility, visit https://agilitycms.com/docs/apps
+
+### Apps built by Agility on V1 SDK
 
 - [Formstack](https://github.com/agility/agility-cms-apps/tree/main/formstack) - Conmnect your Formstack account to Agility and select forms to embed into your website or application.
 - [Cloudinary Images and Videos](https://github.com/agility/agility-cms-apps/tree/main/cloudinary) - Connect your Cloudinary account to Agility and select images and videos.
