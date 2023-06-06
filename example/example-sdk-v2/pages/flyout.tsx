@@ -13,12 +13,12 @@ export default function ExampleField() {
       <div>Instance: {JSON.stringify(instance)}</div>
 			<div>
 				Select Assets {" "}
-				<button
+				<button className="btn"
 					onClick={() => {
            assetsMethods.selectAssets({ title: "Hi", singleSelectOnly: false, callback: (v: any) => console.log("hi 3")})
 					}}
 				>
-					SUBMIT
+					GO
 				</button>
 			</div>
 		</div>
