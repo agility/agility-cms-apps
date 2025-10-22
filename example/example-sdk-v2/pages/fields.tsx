@@ -5,14 +5,14 @@ import { useEffect, useState } from "react"
 
 export default function ExampleField() {
 	const { initializing, locale, field, contentItem } = useAgilityAppSDK()
-  const [normalizedCI, setNormalizedCI] = useState()
-  const [title, setTitle] = useState()
-  const elemRef = useResizeHeight()
+	const [normalizedCI, setNormalizedCI] = useState()
+	const [title, setTitle] = useState()
+	const elemRef = useResizeHeight()
 
 
-  useEffect(() => {
-    setTitle(contentItem?.values.Title)
-  }, [contentItem?.values.Title])
+	useEffect(() => {
+		setTitle(contentItem?.values.Title)
+	}, [contentItem?.values.Title])
 
 	return (
 		<div ref={elemRef}>
@@ -43,7 +43,7 @@ export default function ExampleField() {
 				<button
 					className="btn"
 					onClick={() => {
-						setVisibility({ fieldID: field!.id, visibility: false })
+						setVisibility({ fieldName: field!.name, visibility: false })
 					}}
 				>
 					GO
