@@ -281,6 +281,7 @@ pages/
       └── agility-api-offline.tsx   # OAuth flow
 components/
   └── CommonDashboard.tsx            # Shared dashboard component
+
 ```
 
 ## Key Takeaways
